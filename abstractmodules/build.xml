@@ -1,0 +1,86 @@
+<project name="Comp" default="dist" basedir=".">
+
+	<property name="javasrc" location="${basedir}/src/impl"/>
+	<property name="testsrc" location="${basedir}/src/test"/>
+	<property name="build" location="${basedir}/build"/>
+	<property name="bindist" location="${basedir}/bin"/>
+	<property name="deploy" location="${basedir}/deploy"/>
+	<property name="lib" location="${basedir}/lib"/>
+	<property name="buildstats" location="${basedir}/buildstats"/>
+	<property name="version" value="1.0"/>
+	
+	<path id="project.class.path">
+		<pathelement path="${javasrc}"/>
+		<pathelement path="${testsrc}"/>
+		<pathelement path="${lib}/junit.jar"/>
+	</path>
+	
+	<target name="clean" description="clean up">
+		<delete dir="${bindist}"/>
+		<delete dir="${deploy}"/>
+		<delete dir="${build}"/>
+		<delete dir="${buildstats}"/>
+		<delete file="junitresults.txt"/>
+	</target>
+	
+	<target name="init" depends="clean">
+		<tstamp/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${buildstats}"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="${javasrc}:${testsrc}" destdir="${build}">
+			<classpath refid="project.class.path"/>
+		</javac>
+	</target>
+	
+	<target name="dist" depends="compile">
+		<mkdir dir="${bindist}"/>		
+		<jar jarfile="${bindist}/loan-${version}.jar" basedir="${build}" includes = "com/extensiblejava/loan/** com/extensiblejava/calculator/**" excludes="com/extensiblejava/calculator/test/**"/>
+		<jar jarfile="${bindist}/calc-test-${version}.jar" basedir="${build}" includes="com/extensiblejava/calculator/test/**"/>		
+		<jar jarfile="${bindist}/applicant-${version}.jar" basedir="${build}" includes="com/extensiblejava/applicant/**"/>
+		
+		<delete dir="${build}"/>
+		<junit printsummary="yes" haltonfailure="yes">
+			<classpath>
+				<pathelement path="${bindist}/calc-test-${version}.jar"/>
+				<pathelement path="${bindist}/applicant-${version}.jar"/>
+				<pathelement path="${bindist}/loan-${version}.jar"/>
+				<pathelement path="${lib}/junit.jar"/>
+			</classpath>
+			<test name="com.extensiblejava.calculator.test.AllTests" outfile="junitresults">
+				<formatter type="plain"/>
+			</test>
+		</junit>
+	</target>
+	
+	<target name="analyzer" depends="dist">
+
+        <taskdef name="jaranalyzer" classname="com.kirkk.analyzer.textui.JarAnalyzerTask">
+            <classpath>
+                <pathelement path="${lib}/jaranalyzer-1.2.jar"/>
+                <pathelement path="${lib}/lib/bcel-5.2.jar"/>
+                <pathelement path="${lib}/lib/jakarta-regexp-1.3.jar"/>
+                <pathelement path="${lib}/lib"/>
+            </classpath>
+        </taskdef>
+
+        <jaranalyzer srcdir="${bindist}" destfile="${buildstats}/dependencies.xml" 
+				summaryclass="com.kirkk.analyzer.textui.XMLUISummary" />
+				
+		<style in="${buildstats}/dependencies.xml" 
+		       out="${buildstats}/dependencies.html"
+			style="${lib}/jaranalyzer.xsl">	
+		</style>
+
+		<style in="${buildstats}/dependencies.xml" 
+		    out="${buildstats}/dependencies.grph"
+			style="${lib}/jaranalyzer2dot.xsl">	
+		</style>
+
+		<exec executable="/Applications/Graphviz.app/Contents/MacOS/dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./buildstats/dependencies.grph -o ./buildstats/dependencies.png"/></exec>
+
+	</target>
+	
+</project>

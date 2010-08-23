@@ -1,0 +1,1 @@
+java -cp ./build;./lib/commons-collections.jar;./lib/commons-logging.jar;./lib/log4j-1.2.12.jar;./lib/spring-beans.jar;./lib/spring-context.jar;./lib/spring-core.jar;./lib/xml-apis.jar com.extensiblejava.main.Main

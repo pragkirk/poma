@@ -1,0 +1,84 @@
+<project name="HelloWorld" default="test" basedir=".">
+
+  <!-- set global properties for this build -->
+  <property name="src" location="./src"/>
+  <property name="lib" location="./lib"/>
+  <property name="test" location="./test"/>
+  <property name="build" location="./build"/>
+  <property name="dist" location="./dist"/>
+
+  <target name="clean"
+          description="clean up" >
+      <!-- Delete the ${build} and ${dist} directory trees -->
+      <delete dir="${build}"/>
+      <delete dir="${dist}"/>
+  </target>
+  
+  <target name="init" depends="clean">
+    <!-- Create the time stamp -->
+    <mkdir dir="${build}"/>
+    <mkdir dir="${dist}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}:${test}" destdir="${build}">
+		<classpath>
+			<pathelement location="${lib}"/>
+			<!-- ><pathelement location="${lib}/spring-core.jar"/>
+			<pathelement location="${lib}/spring-context.jar"/>
+			<pathelement location="${lib}/spring-beans.jar"/> -->
+			
+			<pathelement location="${lib}/org.springframework.beans-3.0.0.RELEASE.jar"/>
+			<pathelement location="${lib}/org.springframework.context-3.0.0.RELEASE.jar"/> 
+			<pathelement location="${lib}/org.springframework.core-3.0.0.RELEASE.jar"/>
+			<!-- ><pathelement location="${lib}/org.springframework.context.support-3.0.0.RELEASE.jar"/> -->
+			<pathelement location="${lib}/log4j-1.2.13.jar"/>
+			<pathelement location="${lib}/commons-collections.jar"/>
+			<pathelement location="${lib}/commons-logging.jar"/>
+			<pathelement location="${lib}/xml-apis.jar"/>
+			<pathelement location="${lib}/junit.jar"/>
+		</classpath>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <copy file="${src}/com/extensiblejava/main/AppContext.xml" todir="${build}/com/extensiblejava/main"/>
+    <copy file="${src}/com/extensiblejava/main/Resource.properties" todir="${build}/com/extensiblejava/main"/>
+    <copy file="${test}/com/extensiblejava/main/test/TestContext.xml" todir="${build}/com/extensiblejava/main/test"/>
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/Reuse.jar" basedir="${build}" excludes="com/extensiblejava/main/test/**"/>
+    <jar jarfile="${dist}/TestReuse.jar" basedir="${build}" includes="com/extensiblejava/main/test/**"/>
+  </target>
+  
+  <target name="test" depends="dist">
+	  <junit printsummary="yes" haltonfailure="yes">
+			<classpath>
+				<pathelement path="${dist}/Reuse.jar"/>
+				<pathelement path="${dist}/TestReuse.jar"/>
+				<pathelement path="${lib}/junit.jar"/>
+				<!-- ><pathelement location="${lib}/spring-core.jar"/>
+				<pathelement location="${lib}/spring-context.jar"/>
+				<pathelement location="${lib}/spring-beans.jar"/> -->
+				<pathelement location="${lib}/org.springframework.beans-3.0.0.RELEASE.jar"/>
+				<pathelement location="${lib}/org.springframework.context-3.0.0.RELEASE.jar"/> 
+				<pathelement location="${lib}/org.springframework.core-3.0.0.RELEASE.jar"/>
+				<pathelement location="${lib}/org.springframework.context.support-3.0.0.RELEASE.jar"/>
+				<pathelement location="${lib}/org.springframework.asm-3.0.0.RELEASE.jar"/>
+				<pathelement location="${lib}/org.springframework.aop-3.0.0.RELEASE.jar"/>
+				<pathelement location="${lib}/org.springframework.expression-3.0.0.RELEASE.jar"/>
+				<pathelement location="${lib}/log4j-1.2.13.jar"/>
+				<pathelement location="${lib}/commons-collections.jar"/>
+				<pathelement location="${lib}/commons-logging.jar"/>
+				<pathelement location="${lib}/xml-apis.jar"/>
+				<pathelement location="${lib}/junit.jar"/>
+			</classpath>
+			<test name="com.extensiblejava.main.test.AllTests" outfile="junitresults">
+				<formatter type="plain"/>
+			</test>
+		</junit>
+  </target>
+
+</project>

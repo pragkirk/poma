@@ -1,0 +1,1 @@
+We have now taken the reference to the properties file out of Reuse.jar and moved it to the AppContext.xml Spring configuration file. This allows the TestConfiguration.java file to use the TestContext.xml and completely configure the component externally.
