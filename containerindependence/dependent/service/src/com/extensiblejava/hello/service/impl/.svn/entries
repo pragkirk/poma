@@ -1,0 +1,41 @@
+8
+
+dir
+28
+https://kcode.googlecode.com/svn/trunk/osgi/HelloWorld/service/src/com/extensiblejava/hello/service/impl
+https://kcode.googlecode.com/svn
+
+
+
+2008-03-18T23:53:52.482914Z
+11
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+HelloServiceImpl.java
+file
+
+
+
+
+2008-12-03T01:22:46.000000Z
+87663dde76e5f9381f147b0aa483175b
+2008-03-18T23:53:52.482914Z
+11
+pragkirk
+has-props
+

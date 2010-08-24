@@ -1,0 +1,41 @@
+8
+
+dir
+28
+https://kcode.googlecode.com/svn/trunk/osgi/HelloWorld/client/src/com/extensiblejava/hello/client
+https://kcode.googlecode.com/svn
+
+
+
+2008-03-18T23:53:52.482914Z
+11
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+HelloConsumer.java
+file
+
+
+
+
+2008-12-03T01:22:50.000000Z
+8c0e98e09bb463b34f6905a15611d6d4
+2008-03-18T23:53:52.482914Z
+11
+pragkirk
+has-props
+

@@ -1,0 +1,44 @@
+8
+
+dir
+28
+https://kcode.googlecode.com/svn/trunk/osgi/HelloWorldSpring/service/META-INF
+https://kcode.googlecode.com/svn
+
+
+
+2008-03-19T03:54:31.257700Z
+14
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+spring
+dir
+
+Manifest.mf
+file
+
+
+
+
+2008-12-03T01:22:50.000000Z
+7c6c4bc83c14ec1c69c93c527354ee7d
+2008-03-19T03:54:31.257700Z
+14
+pragkirk
+has-props
+

@@ -12,6 +12,7 @@
       <!-- Delete the ${build} and ${dist} directory trees -->
       <delete dir="${build}"/>
       <delete dir="${dist}"/>
+	  <delete file="junitresults.txt"/>
   </target>
   
   <target name="init" depends="clean">

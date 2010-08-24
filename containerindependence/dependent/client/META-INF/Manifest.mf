@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Hello Service Consumer
+Bundle-SymbolicName: helloconsumer
+Bundle-Version: 1.0.0
+Bundle-Activator: com.extensiblejava.hello.client.HelloConsumer
+Import-Package: org.osgi.framework, org.osgi.util.tracker, com.extensiblejava.hello.service

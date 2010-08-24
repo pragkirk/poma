@@ -1,0 +1,33 @@
+<project name="OSGi Hello World Spring Service" default="dist.service" basedir=".">
+
+	<property name="service.src" location="${basedir}/src"/>
+	<property name="service.build" location="${basedir}/build"/>
+	<property name="bin" location="${basedir}/bin"/>
+	<property name="version" value="1.0"/>
+	
+	<target name="clean" description="clean up">
+		<delete dir="${bin}"/>
+		<delete dir="${service.build}"/>
+	</target>
+	
+	<target name="init" depends="clean">
+		<tstamp/>
+		<mkdir dir="${service.build}"/>
+		<mkdir dir="${bin}"/>
+	</target>
+	
+	<target name="compile.service" depends="init">
+		<javac srcdir="${service.src}" destdir="${service.build}">
+			<classpath>
+				<pathelement path="${service.src}"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="dist.service" depends="compile.service">
+			<jar jarfile="${bin}/service.jar" basedir="${service.build}" manifest="${basedir}/META-INF/Manifest.mf">
+				<fileset dir="${basedir}" excludes="build/** src/** build.xml"/>
+			</jar>
+	</target>
+		
+</project>

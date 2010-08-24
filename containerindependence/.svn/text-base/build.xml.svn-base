@@ -1,0 +1,32 @@
+<!-- Builds both client and service. Projects can also be built indpendently using the build files in each project's directory. -->
+<project name="OSGi Hello World Spring" default="usage" basedir=".">
+	<target name="build.all">
+		<ant antfile="./service/build.xml" inheritall="false"/>
+		<ant antfile="./client/build.xml" inheritall="false" />
+	</target>
+	
+	<target name="clean.all">
+		<ant antfile="./service/build.xml" target="clean" inheritall="false"/>
+		<ant antfile="./client/build.xml" target="clean" inheritall="false" />
+	</target>
+	
+	<target name="usage">
+	
+		<echo message=""/>
+		<echo message="Master HelloWorldSpring OSGi Build Script"/>
+		<echo message="-----------------------------------------"/>
+		<echo message=""/>
+		<echo message="Among the available targets are:"/>
+		<echo message=""/>
+		<echo message="  clean.all    --> Clean the spec, service, service2, and client project directories"/>
+		<echo message="  build.all    --> Build the spec, service, service2, and client projects."/>
+		<echo message=""/>
+		<echo message="To run individual builds:"/>
+		<echo message=""/>
+		<echo message="  Service  -> run the build.xml in the service project directory"/>
+		<echo message="  Client   -> run the build.xml in the client project directory"/>
+		<echo message=""/>
+		<echo message="-----------------------------------------"/>
+	
+	</target>
+</project>

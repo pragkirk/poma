@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/14/trunk/osgi/HelloWorldSpring/client/META-INF/spring
+END
+helloconsumer-osgi.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/14/trunk/osgi/HelloWorldSpring/client/META-INF/spring/helloconsumer-osgi.xml
+END
+helloconsumer.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/14/trunk/osgi/HelloWorldSpring/client/META-INF/spring/helloconsumer.xml
+END

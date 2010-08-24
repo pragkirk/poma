@@ -1,0 +1,54 @@
+8
+
+dir
+28
+https://kcode.googlecode.com/svn/trunk/osgi/HelloWorldSpring/service/META-INF/spring
+https://kcode.googlecode.com/svn
+
+
+
+2008-03-19T03:54:31.257700Z
+14
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+helloservice-osgi.xml
+file
+
+
+
+
+2008-12-03T01:22:50.000000Z
+edf5f6399ed54363cd94b49ba8be91b5
+2008-03-19T03:54:31.257700Z
+14
+pragkirk
+has-props
+
+helloservice.xml
+file
+
+
+
+
+2008-12-03T01:22:50.000000Z
+7d972980f430e19ba60a5f49ff5ff34f
+2008-03-19T03:54:31.257700Z
+14
+pragkirk
+has-props
+
