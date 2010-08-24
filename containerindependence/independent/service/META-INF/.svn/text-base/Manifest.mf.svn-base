@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Hello Service
-Bundle-SymbolicName: helloservice
-Bundle-Version: 1.0.0
-Export-Package: com.extensiblejava.hello.service
