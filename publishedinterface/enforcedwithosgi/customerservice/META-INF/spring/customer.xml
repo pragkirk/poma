@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean name="customerService" class="com.extensiblejava.customer.impl.DefaultCustomer">
+	<constructor-arg type="java.lang.String" value="Jon Doe"/>
+	<constructor-arg><ref bean="orderBuilder"/></constructor-arg>
+  </bean>
+
+  <bean name="orderBuilder" class="com.extensiblejava.order.impl.DefaultOrderBuilder"/>
+
+<!-- maybe i can't instantiate same DefaultCustomer class twice??? -->
+<bean name="customerService3" class="com.extensiblejava.customer.impl.DefaultCustomer">
+	<constructor-arg type="java.lang.String" value="Bill Doe"/>
+	<constructor-arg><ref bean="orderBuilder3"/></constructor-arg>
+  </bean>
+
+  <bean name="orderBuilder3" class="com.extensiblejava.order.impl.SpecialOrderBuilder"/>
+
+</beans>
