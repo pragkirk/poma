@@ -1,0 +1,13 @@
+Testsuite: com.extensiblejava.customer.test.CustomerTest
+Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0.962 sec
+------------- Standard Output ---------------
+ ---------- Jon Doe
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+log4j:WARN No appenders could be found for logger (org.springframework.context.support.ClassPathXmlApplicationContext).
+log4j:WARN Please initialize the log4j system properly.
+------------- ---------------- ---------------
+
+Testcase: testCustomerLoad took 0.845 sec
+Testcase: testCustomerOrderLoad took 0.059 sec
+Testcase: testPlaceOrder took 0.054 sec

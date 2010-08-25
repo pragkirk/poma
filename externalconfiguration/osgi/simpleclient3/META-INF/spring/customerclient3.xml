@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean name="customerClient3" class="com.extensiblejava.customer.client3.CustomerClient3"
+  		init-method="start" destroy-method="stop">
+  		<property name="customerService3" ref="customerService3"/>
+  </bean>
+
+</beans>
