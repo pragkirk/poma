@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Better Calculator
-Bundle-SymbolicName: bettercalculator
-Bundle-Version: 1.0.0
-Import-Package: com.extensiblejava.customer,com.extensiblejava.customer.impl,com.extensiblejava.order,com.extensiblejava.order.impl,com.extensiblejava.calculator
