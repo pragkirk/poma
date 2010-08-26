@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>spring-osgi-integration-test-bundles</artifactId>
+        <groupId>org.springframework.osgi.iandt</groupId>
+        <version>1.2.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.springframework.osgi.iandt</groupId>
+    <artifactId>proxy.destruction</artifactId>
+    <packaging>jar</packaging>
+    <name>Spring OSGi Test Bundle: Spring context service reference destruction test bundle</name>
+    <description>An OSGi bundle that tests the destruction of a proxy when the referring application context is closed</description>
+    <url>http://www.springframework.org/osgi</url>
+
+    <dependencies> 
+        <dependency>
+            <groupId>org.springframework.osgi.iandt</groupId>
+            <artifactId>simple.service</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
+

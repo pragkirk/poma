@@ -1,0 +1,5 @@
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.config.with.dots
+Bundle-Name: Configuration File with Dots
+Bundle-Vendor: Spring Framework

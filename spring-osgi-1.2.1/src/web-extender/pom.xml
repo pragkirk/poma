@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<project>
+  <parent>
+    <artifactId>spring-osgi</artifactId>
+    <groupId>org.springframework.osgi</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi</groupId>
+  <artifactId>spring-osgi-web-extender</artifactId>
+  <packaging>bundle</packaging>
+  <url>http://www.springframework.org/osgi</url>
+  <name>Spring OSGi Web Extender</name>
+  <description>
+  Spring/OSGi web extender. Detects war bundles and deploys them into the configured web container.
+  </description>
+  
+  
+  <properties>
+    <javadoc.loc>${basedir}/../docs/src/javadoc</javadoc.loc>
+	
+
+    <spring.osgi.export>!*</spring.osgi.export>
+    
+  	<spring.osgi.private.pkg>
+		org.springframework.osgi.web.extender.internal*,
+		org.springframework.osgi.extender.internal.util*
+	</spring.osgi.private.pkg>
+
+	<spring.osgi.symbolic.name>${symName.prefix}.web.extender</spring.osgi.symbolic.name>
+	
+	<spring.osgi.import.pkg>
+		org.apache.commons.logging,
+		org.springframework.osgi.web.deployer.tomcat;version=${spring.osgi.import.version};resolution:=optional,
+		org.springframework.osgi.web.deployer.jetty;version=${spring.osgi.import.version};resolution:=optional
+	</spring.osgi.import.pkg>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-web</artifactId>
+    </dependency>
+    <!-- used for getting Counter util in -->
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-extender</artifactId>
+	  <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-mock</artifactId>
+      <scope>test</scope>
+    </dependency>
+   </dependencies>
+
+</project>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="var" path="M2_REPO/knopflerfish/framework/2.2.0/framework-2.2.0.jar" sourcepath="/KF_SRC"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/resources"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/osgi/org.eclipse.osgi/3.2.2/org.eclipse.osgi-3.2.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/org.springframework.context/2.5.6.SEC01/org.springframework.context-2.5.6.SEC01.jar" sourcepath="/M2_REPO/org/springframework/org.springframework.context/2.5.6.SEC01/org.springframework.context-2.5.6.SEC01-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/org.springframework.aop/2.5.6.SEC01/org.springframework.aop-2.5.6.SEC01.jar" sourcepath="/SPRING_SRC"/>
+	<classpathentry kind="var" path="M2_REPO/org/aopalliance/com.springsource.org.aopalliance/1.0.0/com.springsource.org.aopalliance-1.0.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/org.springframework.core/2.5.6.SEC01/org.springframework.core-2.5.6.SEC01.jar" sourcepath="/SPRING_SRC"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/org.springframework.beans/2.5.6.SEC01/org.springframework.beans-2.5.6.SEC01.jar" sourcepath="/SPRING_SRC"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/org.springframework.test/2.5.6.SEC01/org.springframework.test-2.5.6.SEC01.jar" sourcepath="/SPRING_MOCK_SRC"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/com.springsource.slf4j.api/1.5.0/com.springsource.slf4j.api-1.5.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/com.springsource.slf4j.org.apache.commons.logging/1.5.0/com.springsource.slf4j.org.apache.commons.logging-1.5.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/com.springsource.slf4j.log4j/1.5.0/com.springsource.slf4j.log4j-1.5.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/lifecycle/1.2.1/lifecycle-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/service.listener/1.2.1/service.listener-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/simple.service/1.2.1/simple.service-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sourceforge/cglib/com.springsource.net.sf.cglib/2.1.3/com.springsource.net.sf.cglib-2.1.3.jar" sourcepath="/CGLIB_SRC"/>
+	<classpathentry kind="var" path="M2_REPO/org/junit/com.springsource.junit/3.8.2/com.springsource.junit-3.8.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/felix/org.apache.felix.main/1.4.1/org.apache.felix.main-1.4.1.jar" sourcepath="/FELIX_SRC"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/spring-osgi-core/1.2.1/spring-osgi-core-1.2.1.jar" sourcepath="/OSGI_SRC_ROOT/core"/>
+	<classpathentry kind="var" path="M2_REPO/org/osgi/osgi_R4_compendium/1.0/osgi_R4_compendium-1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/spring-osgi-test/1.2.1/spring-osgi-test-1.2.1.jar" sourcepath="/OSGI_SRC_ROOT/test-support/src/main/java"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/spring-osgi-io/1.2.1/spring-osgi-io-1.2.1.jar" sourcepath="/OSGI_SRC_ROOT/io/src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.4"/>
+	<classpathentry kind="var" path="M2_REPO/org/objectweb/asm/com.springsource.org.objectweb.asm/2.2.3/com.springsource.org.objectweb.asm-2.2.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/log4j.osgi/1.2.15-SNAPSHOT/log4j.osgi-1.2.15-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/scoped.bundle.a/1.2.1/scoped.bundle.a-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/scoped.bundle.b/1.2.1/scoped.bundle.b-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/scoped.bundle.common/1.2.1/scoped.bundle.common-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/cardinality0to1/1.2.1/cardinality0to1-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/tccl/1.2.1/tccl-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/configuration/1.2.1/configuration-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/reference.proxy/1.2.1/reference.proxy-1.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/com.springsource.javax.servlet/2.4.0/com.springsource.javax.servlet-2.4.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/jasper.osgi/5.5.23-SNAPSHOT/jasper.osgi-5.5.23-SNAPSHOT.jar" sourcepath="/JASPER_SRC"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/catalina.osgi/5.5.23-SNAPSHOT/catalina.osgi-5.5.23-SNAPSHOT.jar" sourcepath="/CATALINA_5.5.X"/>
+	<classpathentry kind="var" path="M2_REPO/com/cenqua/clover/clover/2.3.1/clover-2.3.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/spring-osgi-extender/1.2.1/spring-osgi-extender-1.2.1.jar" sourcepath="/OSGI_12_SRC_ROOT/extender/src/main/java"/>
+	<classpathentry kind="output" path="target/test-classes"/>
+</classpath>

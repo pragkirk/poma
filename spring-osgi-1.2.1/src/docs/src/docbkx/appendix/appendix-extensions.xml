@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<appendix id="appendix-extensions">
+    <title>Extensions</title>
+
+	<sidebar>
+	  <title>Spring DM and Spring annotations</title>
+	  <para>This chapter describes the annotations present in Spring DM and how
+	  to enable/disable them. Spring DM annotatations are separate from the <ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/new-in-2.html#new-in-2-ioc-annotations">annotation</ulink> <ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/new-in-2.html#new-in-2-ioc-component-scanning">support</ulink> in Spring
+	  framework; enabling or disabling one does not interfere with the other.</para>
+	</sidebar>
+		
+    <para>This appendix describes extensions to the core functionality that
+    are shipped with the 1.0 distribution, but are not guaranteed to have
+    backwards compatibility across point releases. We anticipate these
+    features migrating into the core specification in future releases.</para>
+
+    <section id="appendix-extensions:annotations">
+      <title>Annotation-Based Injection</title>
+
+      <para>The
+      <literal>org.springframework.osgi.extensions.annotation</literal> bundle
+      that ships with Spring Dynamic Modules provides early access to
+      annotation-based support for injecting references to OSGi services. JDK
+      1.5 or above is required to use this feature.</para>
+
+      <para>Bean class (setter) methods may be annotated with
+      <literal>org.springframework.osgi.extensions.annotation.ServiceReference</literal>.
+      By default the property type of the annotated property is used to look
+      up a service with a matching service interface in the OSGi service
+      registry and inject the result. For example, given the
+      configuration:</para>
+
+      <programlisting language="xml"><![CDATA[<bean id="annotationDriven" class="MyAnnotationDrivenBeanClass"/>
+      ]]></programlisting>
+
+      <para>and the class declaration:</para>
+
+      <programlisting language="java"><![CDATA[public class MyAnnotationDrivenBeanClass {
+
+  @ServiceReference
+  public void setMessageService(MessageService aService) { ... }
+
+}]]></programlisting>
+
+      <para>then a service lookup for services implementing the
+      <interfacename>MessageService</interfacename> interface will be performed, and the
+      best match (using the same algorithm as documented for the
+      <literal>reference</literal> element) will be injected.</para>
+
+      <para>The <classname>ServiceReference</classname> annotation class has a
+      number of attributes that can be used to control the service lookup (for
+      example, to specify a filter string) that mirror the options provided by
+      the <literal>reference</literal> element. See the javadoc for more
+      information.</para>
+      
+      <section id="appendix-extensions:annotations:enable">
+		<title>Enabling/Disabling Annotation Processing</title>
+		
+		<para>By default, as Spring-OSGi is JDK 1.4 compatible, annotation injection is disabled. There are
+		currently two ways for enabling it:</para>
+		
+		<itemizedlist>
+			<listitem><para>through Spring DM extender (see <xref linkend="app-deploy:extender-configuration"/>).</para>
+			  <para>This is an extender wide configuration which means all bundles started by the extender will have annotation injection applied to them.
+			  </para>
+			</listitem>
+			<listitem><para>by specifying a dedicated bean post processor</para>
+			<para>By specifying the Spring DM annotation extension processor, one
+			can enable <emphasis>per-bundle</emphasis> annotation injection. To do that, add the following to your bundle configuration:</para>
+			<programlisting><![CDATA[<!-- annotation processor -->
+<bean class="org.springframework.osgi.extensions.annotation.ServiceReferenceInjectionBeanPostProcessor"/>]]></programlisting>
+			</listitem>
+		</itemizedlist>
+		
+		<para>As a reminder, for the annotations to work, the containing bundle needs to import <literal>org.springframework.osgi.extensions.annotation</literal>
+		package, which is available in the <literal>spring-osgi-annotation</literal> bundle.</para>
+      </section>
+    </section>
+</appendix>

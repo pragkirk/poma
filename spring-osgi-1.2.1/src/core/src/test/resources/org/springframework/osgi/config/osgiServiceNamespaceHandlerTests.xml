@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd		
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+	<!-- osgi:reference -->
+
+
+	<bean name="string" class="java.lang.String">
+		<constructor-arg value="string bean" />
+	</bean>
+
+
+	<!-- osgi:service -->
+
+	<!-- first annonymous service -->
+	<osgi:service interface="java.io.Serializable" id="inlineReference"
+		ref="string" />
+
+	<osgi:service context-class-loader="service-provider"
+		id="manyOptions">
+		<osgi:interfaces>
+			<value>java.io.Serializable</value>
+			<value>java.lang.CharSequence</value>
+		</osgi:interfaces>
+		<osgi:service-properties>
+			<entry key="foo" value="bar" />
+			<entry key="white" value="horse" />
+		</osgi:service-properties>
+		<ref local="string" />
+	</osgi:service>
+
+	<!-- service -->
+	<osgi:service id="nestedService" auto-export="interfaces">
+		<osgi:interfaces>
+			<value>java.lang.Object</value>
+		</osgi:interfaces>
+		<bean class="java.util.HashMap" />
+	</osgi:service>
+
+	<!-- service properties -->
+	<osgi:service interface="java.io.Serializable"
+		id="serviceProperties">
+		<osgi:service-properties>
+			<entry key="string" value="bee@bop" />
+			<entry key="int">
+				<value type="java.lang.Integer">12</value>
+			</entry>
+		</osgi:service-properties>
+		<bean class="java.util.HashMap" />
+	</osgi:service>
+
+	<!-- service properties -->
+	<osgi:service interface="java.io.Serializable"
+		id="serviceProperties2">
+		<osgi:service-properties>
+			<entry key="string" value="myprop" />
+		</osgi:service-properties>
+		<ref local="map"/>
+	</osgi:service>
+
+	<bean id="map" class="java.util.HashMap" />
+	<!-- listeners -->
+	<bean id="listener"
+		class="org.springframework.osgi.config.RegistrationListener" />
+
+	<bean id="customListener"
+		class="org.springframework.osgi.config.CustomRegistrationListener" />
+
+
+	<osgi:service interface="java.io.Serializable"
+		id="exporterWithListener">
+		<osgi:registration-listener>
+			<bean id="inner-listener"
+				class="org.springframework.osgi.config.RegistrationListener" />
+		</osgi:registration-listener>
+		<osgi:registration-listener ref="listener" />
+
+		<bean class="java.util.HashMap" />
+	</osgi:service>
+
+	<osgi:service id="exporterWithCustomListener"
+		interface="java.lang.Comparable" ref="string">
+		<osgi:registration-listener registration-method="onRegistration"
+			unregistration-method="onUnregistration" ref="customListener">
+		</osgi:registration-listener>
+	</osgi:service>
+
+</beans>

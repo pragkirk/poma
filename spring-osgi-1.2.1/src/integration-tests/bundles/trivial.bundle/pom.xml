@@ -1,0 +1,16 @@
+<?xml version="1.0"?><project>
+  <parent>
+    <artifactId>spring-osgi-integration-test-bundles</artifactId>
+    <groupId>org.springframework.osgi.iandt</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi.iandt</groupId>
+  <artifactId>trivial</artifactId>
+  <packaging>jar</packaging>
+  <name>Spring OSGi Test Bundle: Trivial OSGi bundle</name>
+  <description>An OSGi bundle that contains and exports just one class
+  </description>
+  <url>http://www.springframework.org/osgi</url>
+  
+</project>

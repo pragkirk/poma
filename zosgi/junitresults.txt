@@ -1,0 +1,130 @@
+Testsuite: com.extensiblejava.customer.test.CustomerTest
+Tests run: 3, Failures: 0, Errors: 3, Time elapsed: 0.716 sec
+------------- Standard Error -----------------
+log4j:WARN No appenders could be found for logger (org.springframework.context.support.ClassPathXmlApplicationContext).
+log4j:WARN Please initialize the log4j system properly.
+------------- ---------------- ---------------
+
+Testcase: testCustomerLoad took 0.593 sec
+	Caused an ERROR
+Error creating bean with name 'customerService' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]: Cannot resolve reference to bean 'defaultCalculator' while setting bean property 'discounter'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerService' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]: Cannot resolve reference to bean 'defaultCalculator' while setting bean property 'discounter'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:275)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:104)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1245)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1010)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:472)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory$1.run(AbstractAutowireCapableBeanFactory.java:409)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:380)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:264)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:261)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:185)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:164)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:429)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:728)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:380)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83)
+	at com.extensiblejava.customer.test.CustomerTest.setUp(Unknown Source)
+Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1141)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1105)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory$1.run(AbstractAutowireCapableBeanFactory.java:386)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:380)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:264)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:261)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:185)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:164)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:269)
+Caused by: java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:248)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:211)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:385)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1138)
+
+Testcase: testCustomerOrderLoad took 0.06 sec
+	Caused an ERROR
+Error creating bean with name 'customerService' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]: Cannot resolve reference to bean 'defaultCalculator' while setting bean property 'discounter'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerService' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]: Cannot resolve reference to bean 'defaultCalculator' while setting bean property 'discounter'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:275)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:104)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1245)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1010)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:472)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory$1.run(AbstractAutowireCapableBeanFactory.java:409)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:380)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:264)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:261)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:185)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:164)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:429)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:728)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:380)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83)
+	at com.extensiblejava.customer.test.CustomerTest.setUp(Unknown Source)
+Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1141)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1105)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory$1.run(AbstractAutowireCapableBeanFactory.java:386)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:380)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:264)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:261)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:185)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:164)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:269)
+Caused by: java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:248)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:211)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:385)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1138)
+
+Testcase: testPlaceOrder took 0.056 sec
+	Caused an ERROR
+Error creating bean with name 'customerService' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]: Cannot resolve reference to bean 'defaultCalculator' while setting bean property 'discounter'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerService' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]: Cannot resolve reference to bean 'defaultCalculator' while setting bean property 'discounter'; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:275)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:104)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1245)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1010)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:472)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory$1.run(AbstractAutowireCapableBeanFactory.java:409)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:380)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:264)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:261)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:185)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:164)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:429)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:728)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:380)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:83)
+	at com.extensiblejava.customer.test.CustomerTest.setUp(Unknown Source)
+Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.extensiblejava.calculator.impl.DefaultCalculator] for bean with name 'defaultCalculator' defined in URL [jar:file:/Users/kirk/development/apps/poma/zzzosgi/bin/customer-test.jar!/com/extensiblejava/customer/test/customer.xml]; nested exception is java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1141)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1105)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory$1.run(AbstractAutowireCapableBeanFactory.java:386)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:380)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:264)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:261)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:185)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:164)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:269)
+Caused by: java.lang.ClassNotFoundException: com.extensiblejava.calculator.impl.DefaultCalculator
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:248)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:211)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:385)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1138)
+

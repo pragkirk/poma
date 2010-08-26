@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <artifactId>simple-web-app</artifactId>
+    <groupId>org.springframework.osgi.samples.simple-web-app</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi.samples.simple-web-app</groupId>
+  <artifactId>log4j.configuration</artifactId>
+  <name>Spring OSGi Samples: SimpleWebApp - Log4j Fragment</name>
+  <url>http://www.springframework.org/osgi</url>
+  <packaging>jar</packaging>
+
+  <build>
+    <resources>
+		 <resource>
+		   <directory>src/main/resources</directory>
+		   <excludes>
+		     <exclude>META-INF/*</exclude>
+		   </excludes>
+		 </resource>
+    </resources>
+	<plugins>
+	  <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-jar-plugin</artifactId>
+		 <configuration>
+		   <archive>
+			 <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+		   </archive>
+		 </configuration>
+	  </plugin>
+	</plugins>    
+  </build>
+  
+</project>

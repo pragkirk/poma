@@ -1,0 +1,28 @@
+<archetype>
+  <id>spring-osgi-bundle-archetype</id>
+
+  <sources>
+    <source>src/main/java/readme.txt</source>
+    <source>src/main/java/internal/readme.txt</source>
+  </sources>
+   
+  <resources>
+    <resource>META-INF/readme.txt</resource>
+    <resource>readme.txt</resource>
+    <resource>src/main/resources/META-INF/spring/bundle-context.xml</resource>
+    <resource>src/main/resources/META-INF/spring/bundle-context-osgi.xml</resource>
+    <resource>src/main/resources/log4j.properties</resource>
+    <resource>.classpath</resource>
+    <resource>.project</resource>
+    <resource>build.properties</resource>
+    <resource>template.mf</resource>
+  </resources>
+
+  <testSources>
+    <source>src/test/java/readme.txt</source>
+  </testSources>
+  
+  <testResources>
+    <resource>src/test/resources/log4j.properties</resource>
+  </testResources>
+</archetype>

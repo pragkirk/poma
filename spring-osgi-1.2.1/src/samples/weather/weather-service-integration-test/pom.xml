@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<project>
+  <parent>
+    <artifactId>weather</artifactId>
+    <groupId>org.springframework.osgi.samples</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi.samples</groupId>
+  <artifactId>weather-service-integration-test</artifactId>
+  <packaging>jar</packaging>
+  <name>Spring OSGi Samples: Weather Service Integration Test</name>
+  <url>http://www.springframework.org/osgi</url>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.osgi.samples</groupId>
+      <artifactId>weather-dao</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi.samples</groupId>
+      <artifactId>weather-service</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi.samples</groupId>
+      <artifactId>weather-service-test</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi.samples</groupId>
+      <artifactId>weather-extension</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi.samples</groupId>
+      <artifactId>wiring-bundle</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-test</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.context</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+	<dependency>
+	  <groupId>net.sourceforge.mx4j</groupId>
+	  <artifactId>com.springsource.mx4j</artifactId>
+	  <version>3.0.2</version>
+	  <scope>test</scope>
+	</dependency>
+    
+  </dependencies>
+  
+  
+  <build>
+	 <resources>
+      <resource>
+        <targetPath>../test-classes/org/springframework/osgi/samples/weather/test</targetPath>
+        <filtering>true</filtering>
+        <includes>
+          <include>MANIFEST.MF</include>
+        </includes>
+        <directory>src/test/resources/org/springframework/osgi/samples/weather/test</directory>
+      </resource>
+    </resources>
+    <plugins>
+      <!-- run tests during the integration-test phase, not
+           the normal test phase -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>test</phase>
+            <goals></goals>
+          </execution>
+          <execution>
+            <id>integration-test</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+              <forkMode>pertest</forkMode>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

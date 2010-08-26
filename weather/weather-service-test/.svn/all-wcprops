@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/spring-osgi/!svn/ver/2417/trunk/samples/weather/weather-service-test
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/spring-osgi/!svn/ver/2417/trunk/samples/weather/weather-service-test/.classpath
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/spring-osgi/!svn/ver/392/trunk/samples/weather/weather-service-test/.project
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/spring-osgi/!svn/ver/2385/trunk/samples/weather/weather-service-test/pom.xml
+END
+template.mf
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/spring-osgi/!svn/ver/2183/trunk/samples/weather/weather-service-test/template.mf
+END

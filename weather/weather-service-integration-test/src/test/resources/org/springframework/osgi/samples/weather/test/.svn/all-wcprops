@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/svn/spring-osgi/!svn/ver/2121/trunk/samples/weather/weather-service-integration-test/src/test/resources/org/springframework/osgi/samples/weather/test
+END
+MANIFEST.MF
+K 25
+svn:wc:ra_dav:version-url
+V 162
+/svn/spring-osgi/!svn/ver/2121/trunk/samples/weather/weather-service-integration-test/src/test/resources/org/springframework/osgi/samples/weather/test/MANIFEST.MF
+END

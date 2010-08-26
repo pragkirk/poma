@@ -1,0 +1,17 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Spring Dynamic Modules for OSGi&#8482; Service Platforms</title><link rel="stylesheet" href="css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="d0e1"></a>Spring Dynamic Modules for <span class="trademark">OSGi</span>&#8482; Service Platforms</h1></div><div><h2 class="subtitle">Known Issues</h2></div><div><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="authorgroup"><h2>Authors</h2><p></p><span class="author"><span class="firstname">Costin</span> <span class="surname">Leau</span> 
+            (SpringSource)
+            </span></div></div><div><p class="releaseinfo">1.2.1</p></div><div><div class="legalnotice"><a name="d0e20"></a><p>Copies of this document may be made for your own use and for
+      distribution to others, provided that you do not charge any fee for such
+      copies and further provided that each copy contains this Copyright
+      Notice, whether distributed in print or electronically.</p></div></div></div><hr></div><div class="toc"><dl><dt><span class="preface"><a href="#preface">Preface</a></span></dt><dt><span class="chapter"><a href="#known-issues">1. Known Issues</a></span></dt><dd><dl><dt><span class="section"><a href="#OSGI-237">1.1. Publishing prototypes as OSGi services</a></span></dt></dl></dd></dl></div><div class="preface" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="preface"></a>Preface</h2></div></div></div><p>
+	  This document describes known issues (and possible work-arounds). Each issue mentions the section of the reference
+	  documentation that explain the behaviour along with the associated
+	  <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://jira.springframework.org/browse/OSGI" target="_top">JIRA</a> entry which
+	  provides an estimate on when it will be solved.
+	  As a rule, the next release Spring Dynamic Modules aims to solve most, if not all of them.
+	</p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="known-issues"></a>Chapter&nbsp;1.&nbsp;Known Issues</h2></div></div></div><p>As a side note, it worth pointing out that the issues below are not really bugs but rather improvements.</p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="OSGI-237"></a>1.1.&nbsp;Publishing prototypes as OSGi services</h2></div></div></div><p>Due to the way OSGi platform deals with OSGi services (it caches the instance and returns it every time), prototypes are not fully supported.
+      	Spring DM publishes a proxy that on each call, delegates back to the target application context for retrieving the instance. While with other beans
+      	this works, in case of prototypes, this results in one-instance-per-invocation which is incorrect. Additional functionality needs to be added
+      	to fully support prototypes even though, as pointed out, this involves a knowledge between Client/Server regarding the publication contract.</p><p>See <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://jira.springframework.org/browse/OSGI-237" target="_top">OSGI-237</a></p></div></div></div></body></html>

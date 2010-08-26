@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/spring-osgi/!svn/ver/1223/trunk/samples/weather/weather-dao/src/main/resources/META-INF/spring
+END
+weather-dao-context.xml
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/spring-osgi/!svn/ver/1223/trunk/samples/weather/weather-dao/src/main/resources/META-INF/spring/weather-dao-context.xml
+END

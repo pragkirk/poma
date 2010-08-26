@@ -1,0 +1,8 @@
+Bundle-Name: Trivial-Bundle
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.trivial
+Export-Package: org.springframework.osgi.iandt.trivial
+Bundle-Version: 1.0
+Bundle-ClassPath: target/classes/,
+ .
+

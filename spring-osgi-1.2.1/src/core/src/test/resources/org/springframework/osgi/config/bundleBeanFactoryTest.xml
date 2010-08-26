@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/osgi"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	default-lazy-init="true">
+
+	<bundle id="wSymName" symbolic-name="bundleA" />
+
+	<bundle id="wLocation" location="fromServer" />
+
+ 	<!-- start action --> 
+	<bundle id="start" action="start" symbolic-name="startBundle" />
+
+	<bundle id="stop" destroy-action="stop" symbolic-name="startBundle" />
+
+	<!-- install/uninstall action --> 
+	<bundle id="install" action="start" destroy-action="uninstall"
+		location="fromClient" />
+
+	<bundle id="updateFromActualLocation" action="update"
+		destroy-action="uninstall"
+		location="org/springframework/osgi/config/bundleBeanFactoryTest.xml" />
+
+	<!-- update/stop action --> 
+	<bundle id="update" action="update" destroy-action="stop"
+		symbolic-name="updateBundle" />
+
+	<!-- nested declaration -->
+	<bundle id="nested" action="start">
+		<beans:ref bean="createdByTheTest"/>
+	</bundle>
+
+
+</beans:beans>

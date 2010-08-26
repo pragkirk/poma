@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="why-Spring DM">
+    <title>Why Spring Dynamic Modules?</title>
+
+    <para>The Spring Framework is the leading full-stack Java/JEE
+    application framework. It provides a lightweight container and a
+    non-invasive programming model enabled by the use of dependency
+    injection, AOP, and portable service abstractions. The OSGi Service
+    Platform offers a dynamic application execution environment in which
+    modules (bundles) can be installed, updated, or removed on the fly. It
+    also has excellent support for modularity and versioning.</para>
+
+    <para>Spring Dynamic Modules makes it easy to write Spring applications
+    that can be deployed in an OSGi execution environment, and that can take
+    advantage of the services offered by the OSGi framework. Spring's OSGi
+    support also makes development of OSGi applications simpler and more
+    productive by building on the ease-of-use and power of the Spring
+    Framework. For enterprise applications, the combination of Spring
+    Dynamic Modules and the OSGi platform provides:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Better separation of application logic into modules, with
+        runtime enforcement of module boundaries</para>
+      </listitem>
+
+      <listitem>
+        <para>The ability to deploy multiple versions of a module (or
+        library) concurrently</para>
+      </listitem>
+
+      <listitem>
+        <para>The ability to dynamically discover and use services provided
+        by other modules in the system</para>
+      </listitem>
+
+      <listitem>
+        <para>The ability to dynamically install, update and uninstall
+        modules in a running system</para>
+      </listitem>
+
+      <listitem>
+        <para>Use of the Spring Framework to instantiate, configure,
+        assemble, and decorate components within and across modules.</para>
+      </listitem>
+ 
+      <listitem>
+        <para>A simple and familiar programming model for enterprise
+        developers to exploit the features of the OSGi platform.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>We believe that the combination of OSGi and Spring offers a
+    comprehensive model for building enterprise applications.</para>
+</chapter>

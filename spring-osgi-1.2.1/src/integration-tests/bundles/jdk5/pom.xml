@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <artifactId>spring-osgi</artifactId>
+    <groupId>org.springframework.osgi</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>spring-osgi-jdk5-integration-test-bundles</artifactId>
+  <groupId>org.springframework.osgi.iandt</groupId>
+  <packaging>pom</packaging>
+  <name>Spring OSGi JDK5 Integration Testing Bundles</name>
+  <url>http://www.springframework.org/osgi</url>
+  
+  <properties>
+    <!-- root, empty package -->
+    <!-- plugin not yet enabled to avoid further problems -->
+	<spring.osgi.import.pkg>!org.springframework.osgi.iandt, *</spring.osgi.import.pkg>
+	<spring.osgi.export.pkg>${pom.artifactId}*</spring.osgi.export.pkg>
+  </properties>
+  
+  <!-- shared dependencies -->
+  <dependencies>
+     <dependency>
+         <groupId>org.springframework.osgi</groupId>
+         <artifactId>spring-osgi-core</artifactId>
+         <version>${project.parent.version}</version>
+         <type>jar</type>
+         <scope>provided</scope>
+     </dependency>
+     <dependency>
+       <groupId>org.springframework.osgi</groupId>
+       <artifactId>spring-osgi-annotation</artifactId>
+       <version>${project.parent.version}</version>
+       <scope>provided</scope>
+     </dependency>
+        
+  </dependencies>
+  
+  <modules>
+    <module>annotation.dependency.test.bundle</module>
+    <module>annotation.test.bundle</module>
+    <module>component.scan.bundle</module>
+  </modules>
+  
+ 
+	<build>
+	  <plugins>
+		  <plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <configuration>
+				<source>1.5</source>
+				<target>1.5</target>
+				<debug>true</debug>
+			  </configuration>
+		  </plugin>
+		
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<configuration>
+			  <archive>
+				<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+			  </archive>
+			</configuration>
+		  </plugin>
+		</plugins>
+
+	</build>
+ 
+</project>

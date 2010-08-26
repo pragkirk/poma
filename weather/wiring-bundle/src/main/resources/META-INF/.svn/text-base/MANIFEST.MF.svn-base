@@ -1,0 +1,12 @@
+Bundle-Version: 1.0
+Bundle-SymbolicName: org.springframework.osgi.samples.wiring.bundle
+Bundle-Name: wiring-bundle
+Bundle-Vendor: Spring Framework
+Import-Package: org.springframework.osgi.config,
+   org.springframework.osgi.context,
+   org.springframework.osgi.context.support,
+   org.springframework.osgi.service,
+   org.springframework.osgi.service.importer,
+   org.springframework.jmx.export
+DynamicImport-Package: *
+Spring-Context: 

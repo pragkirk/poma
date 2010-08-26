@@ -1,0 +1,8 @@
+Bundle-Version: 1.0
+Bundle-SymbolicName: org.springframework.osgi.iandt.config-opt.sync-wait
+Bundle-Name: sync-wait
+Bundle-Vendor: Spring Framework
+Spring-Context: *;wait-for-dependencies:=true;create-asynchronously:=false;timeout:=2
+Bundle-ManifestVersion: 2
+Bundle-ClassPath: .,
+ target/classes/

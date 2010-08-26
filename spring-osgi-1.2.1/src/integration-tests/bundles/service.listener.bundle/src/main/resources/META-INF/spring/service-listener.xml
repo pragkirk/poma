@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+    <bean id="listener" class="org.springframework.osgi.iandt.service.listener.MyListener">
+        <property name="simpleService" ref="simpleServiceOsgi"/>
+    </bean>
+
+	
+    <osgi:reference id="simpleServiceOsgi" interface="org.springframework.osgi.iandt.simpleservice.MyService">
+		<osgi:listener bind-method="serviceAvailable" unbind-method="serviceUnavailable" ref="listener"/>
+    </osgi:reference> 
+</beans>

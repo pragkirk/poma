@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="bean" class="org.springframework.osgi.iandt.proxycreator.SomeImplementation" />
+
+	<bean name="loggerInterceptor"
+		class="org.springframework.aop.interceptor.SimpleTraceInterceptor" />
+
+	<bean name="jdkProxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="bean" />
+		<property name="proxyInterfaces">
+			<value>org.springframework.osgi.iandt.proxycreator.SomeInterface</value>
+		</property>
+		<property name="interceptorNames">
+			<value>loggerInterceptor</value>
+		</property>
+	</bean>
+
+	<bean name="cglibProxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="bean" />
+		<property name="interceptorNames">
+			<value>loggerInterceptor</value>
+		</property>
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+
+	<bean name="test" class="org.springframework.osgi.iandt.proxycreator.Test" init-method="test">
+		<property name="jdkProxy" ref="jdkProxy" />
+		<property name="cglibProxy" ref="cglibProxy" />
+	</bean>
+</beans>

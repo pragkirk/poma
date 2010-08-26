@@ -1,0 +1,573 @@
+SPRING DYNAMIC MODULES FRAMEWORK CHANGELOG
+==========================================
+http://www.springframework.org/osgi
+
+Changes in version 1.2.1 (2009-12-16)
+-------------------------------------
+
+General
+* the archetype project now saves locally the manifest generated during packaging
+* upgraded to Spring 2.5.6.SEC01
+* improved samples behaviour under Felix 1.4 (with regards to fragment functionality)
+
+Package org.springframework.osgi.config
+* improved further the definition of generated definitions to avoid IDE validation complains
+* promoted nested reference beans are excluded from autowiring
+
+Package org.springframework.osgi.context
+* fixed incorrect logging message regarding context service during shutdown
+* added support for schema handler filtering
+* fixed incorrect transitive dependency between exporters and optional importers
+* fixed cleanup of an internal input stream used for loading property editors
+* added resolveContextualObject method to OsgiBundleScope (for usage with Spring 3.0 EL)
+
+Package org.springframework.osgi.extender
+* added support for schema handler filtering
+* added filtering support for multiple versions of Spring DM namespaces
+* fixed delayed cancelation of bundles being stopped while waiting for mandatory services
+
+Package org.springframework.osgi.service
+* fixed exporter tccl management bug caused by garbaged collected proxies
+
+Package org.springframework.osgi.mock
+* added case insensitive filter comparison to avoid different behaviours between OSGi platforms
+
+Package org.springframework.osgi.web
+* improved encoding of nested context paths
+* added check to prevent deployed WARs from being redeployed (which can cause problems in some containers)
+
+
+Changes in version 1.2.0 final (2009-04-09)
+-------------------------------------------
+
+General
+* improved web-console sample (added more documentation and bundles from the SpringSource Enterprise
+Bundle Repository)
+* updated archetype to support both Bundlor and Felix Bundle plugin
+* increased Spring import range up to version 4
+
+Package org.springframework.osgi.config
+* fixed collection parsing bug that ignored inlined comparators during detection of ordered types
+* improved definition of generated beans for better IDE integration
+
+Package org.springframework.osgi.service
+* fixed conversion of ServiceReferences in ServiceReferenceEditor
+* improved error reporting for importer and exporter listeners configured with non-existing or incorrect custom methods
+* fixed validation bug that prevent ServiceFactory beans from being exported with specified interfaces
+
+Package org.springframework.osgi.test
+* fixed initialization bug in FelixPlatform that ignored custom settings
+* fixed NPE when locating Maven artifacts in repositories mapped as virtual drives
+
+Package org.springframework.osgi.web
+* improved unpacking of war bundles with missing entries
+
+
+Changes in version 1.2.0 RC1 (2009-03-09)
+-----------------------------------------
+
+General
+* various documentation improvements and fixes
+* upgraded to Felix 1.4.1
+* upgraded to Knopflerfish 2.2.0
+
+Package org.springframework.osgi.compendium
+* fixed OSGi service unregistration of <managed-service/> listeners
+* fixed property injection to occur before the initializing method is invoked for <managed-service-factory/> beans
+* renamed <managed-service/> to <managed-properties/> to better reflect the intent
+
+Package org.springframework.osgi.context
+* improved proxying of classes that are boot delegated outside the OSGi environment
+* error handling is delegated to the multicaster unless debug is on
+* improved type filtering for tracked services 
+* improved AbstractOsgiBundleApplicationContext to republish the context OSGi service during #refresh calls
+
+Package org.springframework.osgi.extender
+* changed namespace handlers lifecycle to depend on bundle events STARTED/STOPPED instead of RESOLVED/UNRESOLVED
+* removed type compatibility check for custom namespace handlers as it caused false warnings in some cases
+* added extender configuration setting for controlling the default bundle service dependency wait time
+* added configurable event logger for the managed bundles
+
+Package org.springframework.osgi.io
+* improved OsgiBundleResource#getFile() file detection method
+* eliminated existance check on resolved files for OsgiBundleResource#getFile()
+
+Package org.springframework.osgi.mock
+* added option to set the MockBundle internal class loader
+* changed (slightly) the MockBundleContext default properties
+
+Package org.springframework.osgi.service
+* removed deprecated retryTimes parameter in OsgiServiceProxyFactoryBean
+* improved type filtering for tracked services
+* fixed visibility issue when invoking non-public proxied methods 
+* improved waiting code to deal with spurious or accidental wakeups
+* fixed issue with OsgiServiceProxyFactoryBean that caused autowiring to fail in some cases
+* fixed dynamic iterator race condition triggered by fluctuating collection ends
+* improved logging for mandatory service importers to help diagnose missing required OSGi services
+
+Package org.springframework.osgi.test
+* improved FelixOsgiPlatform to support API changes in Felix 1.4.x
+* improved exception descriptions
+* fixed issue with imported classes in the default package
+
+Package org.springframework.osgi.util
+* fixed minor displaying problem in OsgiStringUtils
+
+Package org.springframework.osgi.web
+* fixed extender configuration race condition
+
+
+Changes in version 1.2.0 M2 (2008-11-24)
+----------------------------------------
+
+General
+* upgraded to Spring Framework 2.5.6
+* raised required Spring Framework version to 2.5.6
+* upgraded to Knopflerfish 2.1.1
+* aligned bundle symbolic names to Spring convention (changed prefix org.springframework.bundle.osgi. to 
+  org.springframework.osgi. )
+* added support for compendium namespace (managed-service, config-properties)
+* incremented version of spring-osgi.xsd and spring-osgi-compendium.xsd
+
+Package org.springframework.osgi.context
+* removed deprecated method AbstractDelegatedExecutionApplicationContext#getContextClassLoader
+* introduced dedicated PostProcessor interfaces aware of DelegatedExecutionOsgiBundleApplicationContext's multi-stage
+  refresh
+
+Package org.springframework.osgi.extender
+* improved shutdown algorithm to deal with self-referenced and transitive service references
+
+Package org.springframework.osgi.io
+* improved existence check for bundle resources
+* fixed manifest headers parsing problem when dealing with nested whitespaces
+* fixed handling of optional required bundles
+* improved OsgiBundlePatternMatchingResolver to return ContextResources
+* changed OsgiBundlePatternMatchingResolver#findResources(String) visibility to protected
+
+Package org.springframework.osgi.service
+* refined single service proxies so that any waiting activity is interrupted on destruction
+* improved single service proxies to allow settings update at runtime
+* deprecated retryTimes parameter in OsgiServiceProxyFactoryBean
+* added a weak cache to prevent the creation of identical proxies when publishing scoped beans with managed context
+  class loader
+* improved the proxy creation (when needed) for bean publishing
+
+
+Changes in version 1.2.0 M1 (2008-09-05)
+----------------------------------------
+
+General
+* added new annotation-based, Spring-MVC sample
+* removed petclinic sample (superseeded by simple-web-app and web-console samples)
+* improved sample wars packaging
+* improved framework behaviour when running in environments with Java 2 security enabled
+
+Package org.springframework.osgi.context
+* added reporting of Errors raised during delegated refresh in AbstractDelegatedExecutionApplicationContext
+
+Package org.springframework.osgi.extender
+* fixed bug related to enabling Spring-DM annotation depedency processing
+* improved annotation injection processing
+* improved extender configuration thread-safety
+* fixed potential race condition in asynchronous waiting for service dependencies
+
+Package org.springframework.osgi.io
+* improved existence check for bundle resources
+* improved jar space pattern matching when the root is not specified
+* fixed classpath pattern matching on certain resources when the default Bundle-ClassPath entry (.) is not specified
+
+Package org.springframework.osgi.service
+* changed the proxying classloader strategy to address package dependency visibility
+* fixed usage of incorrect class loader for imported services with client thread context class loader management
+* fixed intermittent deadlock that appeared in some cases betweem importers and exporters during shutdown
+
+Package org.springframework.osgi.web
+* improved web extender configuration thread-safety
+* improved web extender initialization by using an asynch model for cases with out-of-order dependencies
+
+
+Changes in version 1.1.1 (2008-07-29)
+-------------------------------------
+
+Package org.springframework.osgi.io
+* fixed incorrect parsing of headers specifying version ranges
+* improved handling of Require-Bundle header (with regards to quotes and ranges)
+* fixed handling of required bundles that do not export packages
+* fixed premature failure when searching missing resources in multiple paths
+
+Package org.springframework.osgi.service
+* fixed potential NPE when comparing managed service references
+* improved thread safety for the managed service reference returned to the user
+
+Package org.springframework.osgi.mock
+* improved dependency between MockBundleContext and the bundle it returns
+* added OSGi R4.1 start/stop signatures to MockBundle
+* added OSGi R4.1 compareTo contract to MockServiceReference
+
+Package org.springframework.osgi.mock
+* improved local maven artifact search by adding groupId filtering
+
+Package org.springframework.osgi.web
+* DefaultContextPathStrategy allows "/" contexts to be specified through Web-ContextPath header
+* improved encoding of user defined context paths
+
+
+Changes in version 1.1.0 final (2008-07-04)
+-------------------------------------------
+
+General
+* removed deprecated items
+* improved project Maven dependencies
+* distribution contains Jetty/Tomcat activator sources
+* upgraded to Knopflerfish 2.1.0
+* improved simple-web-app sample
+
+Package org.springframework.osgi.extensions.annotation
+* added attribute for collection greedy-proxying
+
+Package org.springframework.osgi.extender
+* improved shutdown ordering algorithm to consider published ApplicationContext
+* fixed bug that prevented the shutdownTaskExecutor option from being used
+* removed support for extender configuration at META-INF/spring
+* fixed deadlock with failed contexts during shutdown
+* fixed reading of system property for enabling global annotation scanning
+* fixed incomplete initialization of annotation BeanPostProcessor
+
+Package org.springframework.osgi.service
+* removed deprecation from AbstractOsgiServiceImportFactoryBean to maintain backwards compatibility
+* removed package visible methods from AbstractOsgiServiceImportFactoryBean
+* removed deprecated exporter base class AbstractOsgiServiceExporter
+* fixed validation during export of non-singleton beans
+
+Package org.springframework.osgi.test
+* removed deprecated #getPlatformProperties() method from platforms classes
+
+Package org.springframework.osgi.web
+* removed support for extender configuration at META-INF/spring
+* improved war scanner Servlet 2.5 compliance (by considering as WARs only bundles with ".war" extension)
+* extended DefaultWarScanner scanning mechanism by considering as WARs bundles with WEB-INF/ entries
+
+
+Changes in version 1.1.0 RC1 (2008-06-24)
+-----------------------------------------
+
+General
+* removed unused osgi-core.jar from bundle archetype
+* migrated some of the project dependencies to SpringSource Bundle Repository
+* removed internal package org.springframework.osgi.service.dependency (and associated dependencies) from the public 
+  API
+* extenders configuration file changed from META-INF/spring to META-INF/spring/extender to avoid confusion
+
+Package org.springframework.osgi.config
+* fixed localization problem in xml enumeration conversion 
+* fixed listener double invocation caused by JDK 5 bridge methods
+
+Package org.springframework.osgi.context
+* refined AbstractOsgiBundleApplicationContext internal resource loader creation so that subclasses can override it
+* improved internal namespace service handling
+* improved AbstractOsgiBundleApplicationContext handling of ResourceLoader methods
+* introduced ContextClassLoaderProvider interface as a strategy for customizing the application context thread context
+  class loader
+* removed ConfigurableOsgiBundleApplicationContext signature from OsgiBundleApplicationContextEvent
+* introduced new importer waiting event hierarchy (org.springframework.osgi.service.importer.event package)
+* improved handling of OSGi namespaces during shutdown
+* added exporter/importer transitive dependency tracking
+
+Package org.springframework.osgi.extender
+* added support.scanning package to allow custom locations to be used for 'Spring-powered' bundles
+* added setter for delegated application context creator in ConditionalApplicationContextCreator
+* improved ApplicationContextConfiguration internal structure
+* added type filtering behaviour inside the extender so that scanned bundles are Spring-compatible with the extender
+* removed internal usage of Thread.stop as it breaks the VM state
+* improved bundle shutdown by using a simple thread executor (rather then one thread per bundle model) to increase
+  scalability
+* added BootstrappingDependencyEvent for notifying the pre-refresh dependency activities
+* changed extender configuration to META-INF/spring/extender to avoid confusion
+* introduced OsgiServiceDependencyFactory interface to allow third parties to add service dependencies required 
+  before an application context is refreshed
+* added support for local OsgiServiceDependencyFactory declared inside the analyzed application context
+
+Package org.springframework.osgi.io
+* improved OsgiBundleResource#getFile() method when dealing with resources in expanded bundles
+* OsgiBundleResource#lastModified() works even when the underlying bundle cannot be resolved to a File
+* added fallback logic to OsgiBundleResource#lastModified() if the underlying platform doesn't return a valid value
+
+Package org.springframework.osgi.service
+* added descriptive exception when invoking non-public methods on class proxies (caused by classes with final mehtods)
+* added ServiceProxyDestroyedException to indicate the illegal usage of a destroyed proxy
+* refined dynamic proxies (unary cardinality) to throw ServiceProxyDestroyedException instead of IllegalStateException
+* refined static proxies (multi cardinality) to throw ServiceProxyDestroyedException if used after being destroyed
+* introduced ServiceReferenceProxy interface (available through ImportedOsgiServiceProxy) for accessing the native 
+  service reference
+* OsgiServiceFactoryBean performs type check validation on given interfaces at startup
+* removed internal 'dependency' subpackage (and associated implementations) from the public API
+* improved significantly exporter/importer transitive dependency tracking for both single and multi service proxies
+* added default cardinality (1..X) when none is specified for both single and multiple service importers
+* deprecated importer base class AbstractOsgiServiceImportFactoryBean
+* deprecated exporter base class AbstractOsgiServiceExporter
+
+Package org.springframework.osgi.util
+* fixed internal handling of nested beans when discovering transitive dependencies of a bean
+* fixed internal handling of 'depends-on' beans when discovering transitive dependencies of a bean
+
+Package org.springframework.osgi.test
+* removed usage of PackageAdmin for resolving bundles
+* improved testing behaviour so that user-defined properties override the platform default ones
+* deprecated #getPlatformProperties() from existing platforms classes as it was confusing
+
+Package org.springframework.osgi.web
+* improved namespace detection strategy for OsgiBundleXmlWebApplicationContext
+* fixed problem with OsgiBundleXmlWebApplicationContext publishing null namespaces as OSGi properties
+* DefaultContextPathStrategy supports SpringSource Application Platform's Web-ContextPath header
+* introduced configuration property to web extender that allows deployed wars to be undeployed during shutdown
+* improved war undeployment by adding a timeout and better shutdown synchronization
+* improved handling of bundle locations given as URLs in DefaultContextPathStrategy
+* improved DefaultContextPathStrategy structure to allow better subclassing
+* changed extender configuration to META-INF/spring/extender to avoid confusion
+
+
+Changes in version 1.1.0 M2 (2008-04-29)
+----------------------------------------
+
+General
+* Spring 2.5.4+ required
+* upgraded to Felix 1.0.4
+* refined the web deployer API
+* split web functionality into web and web-extender (symbolic name:org.springframework.bundle.osgi.web.extender) bundle
+* added integration with Spring MVC
+* added 'greedy-proxying' attribute to reference collections (spring-osgi.xsd)
+* reduced the number of class loader instances generated internally by Spring-DM
+* improved proxy infrastructure to avoid type leaks or the usage of spring-aop dynamic import
+
+Package org.springframework.osgi.config
+* removed usage of deprecated setSource method in AbstractReferenceDefinitionParser
+* added support for 'greedy-proxying' attribute
+
+Package org.springframework.osgi.context
+* added OSGi import for Spring property editors loaded reflectively
+* improved loading of property editors by using Spring-DM core bundle instead of the target bundle
+* AbstractOsgiBundleApplicationContext uses the raw bundle as the bean class loader to avoid class leaks
+* improved start up NamespaceHandlerResolver look up to avoid class incompatibility problems
+* added getContextClassLoader() method to AbstractDelegatedExecutionApplicationContext for pluggable thread context 
+  class loader strategy
+* improved AbstractOsgiBundleApplicationContext behaviour if the internal resource loader is not set
+* improved bundle class loader creation by using an internal cache
+* refined AbstractOsgiBundleApplicationContext to allow customization of the OSGi service properties
+* AbstractDelegatedExecutionApplicationContext rethrows all exceptions occuring during refresh
+
+Package org.springframework.osgi.service
+* refined weaving process for service importers so that knowledge of org.springframework.osgi package is not required
+* fixed potential infrastructure class leak through the thread context class loader management of imported services
+* improved proxy class loader creation by using an internal cache
+* improved thread-safety of the dynamic service collections
+* introduced InfrastructureProxy interface to imported OSGi service proxies
+
+Package org.springframework.osgi.extender
+* added OsgiApplicationContextCreator interface for handling the extender contexts creation
+* added OsgiBeanFactoryPostProcessor interface for customizing the contexts created by the extender
+* changed package of the internal, private bundle activator
+* added filtering by type for the discovered namespace handler resolvers to avoid usage of classes with incompatible
+  wiring
+* improved listener list creation by reusing the extender bundle class loader
+* ApplicationContextConfiguration is now public
+* improved osgi service dependency logs by including the depedency declaring bean name
+
+Package org.springframework.osgi.io
+* extended OsgiBundleResource to implement ContextResource
+* fixed internal PackageAdminResolver parsing of Require-Bundle entries which specify versions
+
+Package org.springframework.osgi.service
+* refined OsgiServiceCollectionProxyFactoryBean to allow for configurable 'greedy-proxying' behaviour
+* changed service collection behaviour to not perform greedy proxying by default
+* improved the proxy weaving process by providing the aop infrastructure dependencies internally
+
+Package org.springframework.osgi.test
+* improved installed bundles resolving when PackageAdmin service is available
+
+Package org.springframework.osgi.util
+* BundleDelegatingClassLoader constructor visibility changed from private to protected
+* fixed sporadic exception occuring in DebugUtils when analyzing class loading errors
+* fixed parsing exception in DebugUtils when dealing with version ranges
+
+Package org.springframework.osgi.web
+* added OsgiWarDeploymentException to the deployment interfaces
+* added WarDeployment for bundles deployed by the WarDeployer
+* added WarDeploymentContext for accessing the properties associated with a war deployment and the associated
+  BundleContext as a ServletContext attribute
+* improved cleanup in case of exceptions for both TomcatWarDeployer and JettyWarDeployer
+* added OsgiBundleXmlWebApplicationContext as an OSGi aware XML application context
+* refined TomcatDeployer to rely only on Service interface rather the EmbeddedServer class
+* fixed casting problem occurring during war undeployment
+* improved weaving process for imported web container services
+* refined DefaultContextPathStrategy to support folders and encode unsafe characters
+* OsgiBundleXmlWebApplicationContext provides the servlet namespace under 'org.springframework.context.web.namespace'
+  property of its OSGi service
+* moved war deployers outside the extender package
+* WarLoaderListener and its related classes were moved into sprig-osgi-web-extender bundle
+* TomcatWarDeployer Service object can be set directly by the user
+* JettyWarDeployer Server object can be set directly by the user
+* changed package of the internal, private bundle activator
+
+
+Changes in version 1.1.0 M1 (2008-04-07)
+-----------------------------------------
+
+General
+* Knopflerfish 2.0.4+ required
+* Felix 1.0.3+ required
+* introduced new module dedicated to web application running on OSGi platforms
+  (successfully tested on Equinox 3.2.2 and the upcoming Felix 1.0.4)
+
+Package org.springframework.osgi.context
+* AbstractDelegatedExecutionApplicationContext calls "cancelRefresh" if exceptions appear during the delegeted refresh
+* introduced events specific to OSGi application contexts
+* introduced listener interface OsgiBundleApplicationContextListener for OSGi context events
+* added bundle version to the application context OSGi service
+
+Package org.springframework.osgi.extender
+* ContextLoaderListener automatically detects and notifies OSGi services registered as 
+  OsgiBundleApplicationContextListener classes
+* ContextLoaderListener can be configured externally through META-INF/spring/*.xml files from fragments attached to its
+  bundle
+
+Package org.springframework.osgi.io
+* added support for classpath: and classpath*: patterns
+
+Package org.springframework.osgi.test
+* FelixPlatform uses the Felix distribution default system packages
+* KnopflerfishPlatform uses the KF distribution default system packages
+* AbstractOnTheFlyBundleCreatorTests can now generate imports based on all classes available in the jar not just the 
+  test hierarchy
+
+Package org.springframework.osgi.util
+* BundleDelegatingClassLoader exposes the internal Bundle through getBundle() method
+
+
+Changes in version 1.0.2 (2008-03-25)
+-------------------------------------
+
+General
+* adjusted the manifests so internal packages are not exported and the versions for both spring and spring-osgi are
+  present
+
+Package org.springframework.osgi.context
+* AbstractOsgiBundleApplicationContext registers the application context as an OSGi service using just the interfaces
+
+Package org.springframework.osgi.extender
+* raised service dependency waiting logging level to INFO (from DEBUG)
+
+Package org.springframework.osgi.util
+* BundleDelegatingClassLoader relies on default hashCode/equals methods to prevent class caching on bundle updates
+
+Package org.springframework.osgi.test
+* Installed bundles have the location set to the backing resource URL if possible, falling back to the description
+
+
+Changes in version 1.0.1 (2008-02-29)
+-------------------------------------
+
+General
+* fixed nested Eclipse classpath entry in spring-osgi bundle archetype
+* added log4j.properties to spring-osgi bundle archetype
+* added OSGi integration test to the spring-osgi bundle archetype
+
+Package org.springframework.context.support
+* the namespace resolver mechanism first checks the local bundle classpath before using the extender namespace service
+
+Package org.springframework.osgi.context
+* fixed AbstractDelegatedExecutionApplicationContext to log errors that occur during the bean factory startup
+
+Package org.springframework.osgi.io
+* improved OsgiBundleResource handling of jars with missing archive entries for folders
+* improved OsgiBundleResourcePatternResolver performance when checking for jar resources
+* improved detection of relative OSGi URLs
+
+Package org.springframework.osgi.test
+* AbstractOsgiTest provides better error messages for bundle that fail to start
+* custom artifact locators can be used with AbstractDependencyManagerTests
+* removed all internal usage of system properties by the testing infrastructure
+* removed the use of serialization inside the testing framework
+* improved automatic manifest generation by parsing only the test parents that are available in the test bundle
+
+
+Changes in version 1.0 final (2008-01-25)
+-----------------------------------------
+
+Package org.springframework.osgi.extensions.annotation
+* aligned bundle symbolic name with the rest of the bundles
+
+Package org.springframework.osgi.service
+* refined the service proxy returned by OsgiServiceProxyFactoryBean so it doesn't allow usage after being destroyed
+
+Package org.springframework.osgi.test
+* removed deprecated mispelled Platforms#KNOPFLEFISH constant
+* KnopflerfishPlatform exports automatically system packages for JDK 1.4/1.5
+* refined test bundle creation to ignore duplicate META-INF/MANIFEST.MF
+* optimized test bundle creation by using no compression
+* AbstractOnTheFlyBundleCreatorTests automatic manifest generation does not add OSGi import entries for packages
+  contained in the test bundle
+
+Package org.springframework.osgi.util
+* OsgiServiceUtils#getAllServices() deprecated method has been removed
+* OsgiServiceUtils#getService() deprecated method has been removed
+* default artifact locator picks up Maven 2 ~/.m2/settings.xml localRepository configuration
+* DebugUtils uses a degradable logger to properly report error messages when the logging implementation is misconfigured
+* BundleDelegatingClassLoader uses a degradable logger to properly report error messages when the logging implementation
+  is misconfigured or the logging classes are not loaded yet
+
+
+Changes in version 1.0 RC2 (2008-01-11)
+---------------------------------------
+
+General
+* removed deprecated methods
+* circular references between service importers, exporter and listeners are now supported
+* distributable bundles include Apache 2 license (META-INF/license.txt and META-INF/notice.txt)
+* all integration tests have been moved under integration-test/ folder
+* by default, the samples and integration tests are not executed (use Maven profiles to include them)
+* Maven 2.0.7 is required for properly building the project under JDK 1.6
+* Knopflerfish 2.0.3 is required for correctly building and running Spring-DM
+
+Package org.springframework.osgi
+* updated spring-osgi.xsd Tservice type to properly reflect OsgiServiceFactoryBean package
+* updated spring-osgi.xsd list, set elements to properly reflect OsgiServiceCollectionFactoryBean package               
+
+* updated bundles symbolic name to follow Spring bundle conventions (org.springframework.bundle.osgi
+  instead of org.springframework.osgi.bundle)
+
+Package org.springframework.osgi.bundle
+* removed deprecated method BundleFactoryBean#setClassloader
+
+Package org.springframework.osgi.config
+* OsgiConfigDefinitionParser visibility changed from public to default
+* OsgiDefaultsDefinition visibility changed from public to default
+* ParserUtils visibility changed from public to default
+
+Package org.springframework.osgi.context
+* AbstractDelegatedExecutionApplicationContext throws clearer exception when the mandatory BundleContext is not set
+
+Package org.springframework.osgi.extender
+* META-INF/spring.handlers, META-INF/spring.schemas files are searched in the bundle space instead of the class space
+
+Package org.springframework.osgi.service
+* fixed double negation in AutoExport.DISABLED javadoc
+* removed deprecated method AbstractOsgiServiceImportFactoryBean#setInterface 
+* service reference importers receive only one event (that of the best matching service) when registered/unregistered 
+  into the OSGi space rather then events of all existing services
+
+Package org.springframework.osgi.test
+* AbstractOnTheFlyBundleCreatorTests rethrows actual exception when creating/loading MANIFEST.MF
+* fixed mispelled KNOPFLERFISH constant in Platforms class (was KNOPFLEFISH)
+* default settings and properties in AbstractConfigurableBundleCreatorTests are now protected
+* AbstractOsgiTests does not implement any more, internal interface OsgiJUnitTest
+* AbstractConfigurableBundleCreatorTests exposes the default jar creation settings through #getDefaultSettings()
+* removed method AbstractDependencyManagerTests#injectArtifactLocator 
+* AbstractDependencyManagerTests#getLocator visibility changed from public to protected
+* AbstractConfigurableBundleCreatorTests jar content pattern has been changed to **/* (from **/*.class, **/*.xml, 
+  **/*.properties)
+* waitOnContextCreation methods visibility changed from public to protected (to be consistent with the rest of the
+  test methods)
+
+Package org.springframework.osgi.util
+* deprecated OsgiServiceUtils#getAllServices()
+* deprecated OsgiServiceUtils#getService()

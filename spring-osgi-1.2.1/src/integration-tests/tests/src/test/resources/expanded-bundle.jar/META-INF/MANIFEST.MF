@@ -1,0 +1,3 @@
+Bundle-SymbolicName: org.sf.osgi.iandt.io.expanded.bundle
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2

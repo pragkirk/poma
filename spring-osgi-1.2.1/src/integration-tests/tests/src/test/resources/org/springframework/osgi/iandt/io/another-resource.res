@@ -1,0 +1,1 @@
+another local resource

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ctx="http://www.springframework.org/schema/context"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/osgi
+           http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+
+	<ctx:component-scan base-package="org.springframework.osgi.iandt.componentscanning"/>
+
+	<osgi:reference id="shape">
+		<osgi:interfaces>
+			<value>java.awt.Shape</value>
+			<value>java.lang.Cloneable</value>
+		</osgi:interfaces>
+	</osgi:reference>
+
+</beans>

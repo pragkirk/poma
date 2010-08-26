@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="bnd-app-ctx">
+    <title>Bundles and Application Contexts</title>
+
+    <para>The unit of deployment (and modularity) in OSGi is the <emphasis>bundle</emphasis> (see
+    section 3.2 of the OSGi Service Platform Core Specification). A bundle
+    known to the OSGi runtime is in one of three steady states: installed,
+    resolved, or active. Bundles may export services (objects) to the OSGi
+    service registry, and by so doing make these services available for other
+    bundles to discover and to use. Bundles may also export Java packages,
+    enabling other bundles to import the exported types.</para>
+
+    <para>In Spring the primary unit of modularity is an <emphasis>application context</emphasis>,
+    which contains some number of beans (objects managed by the Spring
+    application context). Application contexts can be configured in a
+    hierarchy such that a child application context can see beans defined in a
+    parent, but not vice-versa. The Spring concepts of exporters and factory
+    beans are used to export references to beans to clients outside of the
+    application context, and to inject references to services that are defined
+    outside of the application context.</para>
+
+    <para>There is a natural affinity between an OSGi bundle and a Spring
+    application context. Using Spring Dynamic Modules, an active bundle may
+    contain a Spring application context, responsible for the instantiation,
+    configuration, assembly, and decoration of the objects (beans) within the
+    bundle. Some of these beans may optionally be exported as OSGi services
+    and thus made available to other bundles, beans within the bundle may also
+    be transparently injected with references to OSGi services.</para>
+
+    <section id="bnd-app-ctx:extender">
+      <title>The Spring Dynamic Modules Extender bundle</title>
+
+      <sidebar id="extender-pattern">
+		<title>Extender Pattern</title>
+		<para>A common pattern in OSGi applications is the <emphasis>extender</emphasis>, that 
+		(quoting <ulink url="http://www.aqute.biz/Blog/HomePage">Peter Kriens</ulink>, 
+		OSGi Technical Director), <quote>allows other bundles to extend the functionality in a specific domain</quote>.
+		See <ulink url="http://www.osgi.org/blog/2007/02/osgi-extender-model.html">this</ulink> OSGi Alliance blog
+		entry for an in-depth explanation.
+		</para>
+      </sidebar>
+
+      <para>Spring Dynamic Modules provides an OSGi bundle
+      <literal>org.springframework.osgi.extender</literal>. This
+      bundle is responsible for instantiating the Spring application contexts
+      for your application bundles. It serves the same purpose as the <ulink
+      url="http://static.springframework.org/spring/docs/2.5.x/reference/webintegration.html">ContextLoaderListener</ulink>
+      does for Spring web applications. Once the extender bundle is installed
+      and started it looks for any existing Spring-powered bundles that are
+      already in the <emphasis>ACTIVE</emphasis> state and creates application contexts on their
+      behalf. In addition, it listens for bundle starting events and
+      automatically creates an application context for any Spring-powered
+      bundle that is subsequently started. <xref linkend="app-deploy:headers"/>
+      describes what the extender recognizes as a "Spring-powered bundle" while 
+      <xref linkend="app-deploy:extender-configuration"/> how the extender can be configured.</para>
+      
+    </section>
+
+    <section id="bnd-app-ctx:app-creation">
+      <title>Application Context Creation</title>
+
+      <para>The extender bundle creates applications contexts asynchronously, on a different thread then the one starting the bundle.
+      This behaviour ensures that starting an OSGi Service Platform is fast and that bundles with service inter-dependencies do not 
+      cause deadlock (waiting for each other) on startup, as pictured below: </para>
+      
+      
+      <para><mediaobject>
+        <imageobject role="fo">
+		  <imagedata fileref="../src/docbkx/resources/images/start-diagram.png" format="PNG" align="center"/>
+        </imageobject>
+		<imageobject role="html">
+          <imagedata fileref="images/start-diagram.png" format="PNG" align="center"/>
+        </imageobject>
+        
+          <textobject>
+            <phrase>Application Context Sequence Diagram</phrase>
+          </textobject>
+        
+      </mediaobject></para>
+      
+      <para>The extender considers only bundles successfully started, that is, bundles in 
+      <emphasis>ACTIVE</emphasis> state; bundles in other states are ignored.    
+      Therefore a Spring-powered bundle will have its application context created <emphasis>after</emphasis>
+      it has been started. It is possible to force synchronous/serialized creation of application contexts 
+      for started bundles, on a bundle-by-bundle basis. See <xref linkend="app-deploy:headers"/> for information 
+      on how to specify this behaviour.</para>
+
+      <para>If application context creation fails for any reason then the
+      failure cause is logged. The bundle remains in the ACTIVE state. There
+      will be no services exported to the registry from the application
+      context in this scenario.</para>
+
+      <section id="bnd-app-ctx:app-creation:mandatory-deps">
+        <title>Mandatory Service Dependencies</title>
+
+        <para>If an application context declares mandatory dependencies on the
+        availability of certain OSGi services (see <xref linkend="service-registry"/>) then creation
+        of the application context is blocked until all mandatory dependencies
+        can be satisfied through matching services available in the OSGi
+        service registry. Since a service may come and go at any moment in an
+        OSGi environment, this behaviour only guarantees that all mandatory
+        services were available at the moment creation of the application
+        context began. One or more services may subsequently become
+        unavailable again during the process of application context creation.
+        <xref linkend="service-registry"/> describes what happens when a mandatory service reference
+        becomes unsatisfied. In practice, for most enterprise applications
+        built using Spring Dynamic Modules services, the set of available
+        services and bundles will reach a steady state once the platform and
+        its installed bundles are all started. In such a world the behaviour of
+        waiting for mandatory dependencies simply ensures that bundles A and
+        B, where bundle A depends on services exported by bundle B, may be
+        started in any order.</para>
+
+        <para>A timeout applies to the wait for mandatory dependencies to be
+        satisfied. By default the timeout is set to 5 minutes, but this value
+        can be configured using the <literal>timeout</literal> directive. See
+        <xref linkend="app-deploy:headers"/> for details.</para>
+
+        <para>It is possible to change the application context creation
+        semantics so that application context creation fails if all mandatory
+        services are not immediately available upon startup (see the aformentioned 
+        section for more information).
+        However, regardless of the configuration chosen, the failure of the
+        application context will not change the bundle state.</para>
+      </section>
+
+      <section id="bnd-app-ctx:app-creation:app-ctx-publication">
+        <title>Application Context Service Publication</title>
+
+        <para>Once the application context creation for a bundle has
+        completed, the application context object is automatically exported as
+        a service available through the OSGi Service Registry. The context is
+        published under the interface
+        <interfacename>org.springframework.context.ApplicationContext</interfacename> (and
+        also all of the visible super-interfaces and types implemented by the
+        context). The published service has a service property named
+        <literal>org.springframework.context.service.name</literal> whose
+        value is set to the bundle symbolic name of the bundle hosting the
+        application context. It is possible to prevent publication of the
+        application context as a service using a directive in the bundle's
+        manifest. See <xref linkend="app-deploy:headers"/> for details.</para>
+
+        <para>Note: the application context is published as a service
+        primarily to facilitate testing, administration, and management.
+        Accessing this context object at runtime and invoking
+        <literal>getBean()</literal> or similar operations is discouraged. The
+        preferred way to access a bean defined in another application context
+        is to export that bean as an OSGi service from the defining context,
+        and then to import a reference to that service in the context that
+        needs access to the service. Going via the service registry in this
+        way ensures that a bean only sees services with compatible versions of
+        service types, and that OSGi platform dynamics are respected.</para>
+      </section>
+    </section>
+
+    
+    <section id="bnd-app-ctx:bnd-lifecycle">
+      <title>Bundle Lifecycle</title>
+
+      <para>OSGi is a dynamic platform: bundles may be installed, started,
+      updated, stopped, and uninstalled at any time during the running of the
+      framework.</para>
+
+      <para>When an active bundle is stopped, any services it exported during
+      its lifetime are automatically unregistered and the bundle returns to
+      the resolved state. A stopped bundle should release any resources it has
+      acquired and terminate any threads. Packages exported by a stopped
+      bundle continue to be available to other bundles.</para>
+
+      <para>A bundle in the resolved state may be uninstalled: packages that
+      were exported by an uninstalled bundle continue to be available to
+      bundles that imported them (but not to newly installed bundles).A bundle 
+      in the resolved state may also be updated. The update
+      process migrates from one version of a bundle to another version of the
+      same bundle.</para>
+
+      <para>Finally of course, a resolved bundle can be started, which
+      transitions it to the active state.</para>
+      
+      <para>The diagram below represents the bundle states and its transitions:</para>
+      
+      <para><mediaobject>
+        <imageobject role="fo">
+		  <imagedata fileref="../src/docbkx/resources/images/bundle-states.png" format="PNG" align="center"/>
+        </imageobject>
+		<imageobject role="html">
+          <imagedata fileref="images/bundle-states.png" format="PNG" align="center"/>
+        </imageobject>
+        
+          <textobject>
+            <phrase>Bundle States</phrase>
+          </textobject>
+        
+      </mediaobject></para>
+      
+
+      <para>The OSGi <literal>PackageAdmin</literal>
+      <literal>refreshPackages</literal> operation refreshes packages across
+      the whole OSGi framework or a given subset of installed bundles. During
+      the refresh, an application context in an affected bundle will be
+      stopped and restarted. After a <literal>refreshPackages</literal>
+      operation, packages exported by older versions of updated bundles, or
+      packages exported by uninstalled bundles, are no longer available.
+      Consult the OSGi specifications for full details.</para>
+
+      <para>When a Spring-powered bundle is stopped, the application context
+      created for it is automatically destroyed. All services exported by the
+      bundle will be unregistered (removed from the service registry) and the
+      normal application context tear-down life-cycle is observed
+      (<interfacename>org.springframework.beans.factory.DisposableBean</interfacename> implementors 
+      and <literal>destroy-method</literal>
+      callbacks are invoked on beans in the context).</para>
+
+      <para>If a Spring-powered bundle that has been stopped is subsequently
+      re-started, a new application context will be created for it.</para>
+    </section>
+
+    <section id="bnd-app-ctx:osgi-resource">
+      <title>The Resource Abstraction</title>
+
+      <para>The Spring Framework defines a resource abstraction for loading
+      resources within an application context (see <ulink
+      url="http://static.springframework.org/spring/docs/2.5.x/reference/resources.html">Spring's
+      resource abstraction</ulink>). All resource loading is done through the
+      <interfacename>org.springframework.core.io.ResourceLoader</interfacename> associated with the application
+      context. The <interfacename>org.springframework.core.io.ResourceLoader</interfacename> is also 
+      available to beans wishing to load resources programmatically. Resource paths with
+      explicit prefixes - such as <literal>classpath:</literal> - are treated uniformly
+      across all application context types (for example, web application
+      contexts and classpath-based application contexts). Relative resource
+      paths are interpreted differently based on the type of application
+      context being created. This enables easy integration testing outside
+      the ultimate deployment environment.</para>
+
+	  <para>OSGi 4.0.x specification defines three different spaces from which a
+	  resource can be loaded. Spring DM supports all of them through its dedicated OSGi-specific
+	  application context and dedicated prefixes:</para>
+	  
+	  <table id="osgi-search-strategies" pgwide="1">
+          <title>OSGi resource search strategies</title>
+          <tgroup cols="3">
+            <thead>
+              <row>
+                <entry>OSGi Search Strategy</entry>
+                <entry>Prefix</entry>
+                <entry>Explanation</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Class Space</entry>
+                <entry><literal>classpath:</literal></entry>
+                <entry>Searches the bundle classloader (the bundle, all imported packages and required bundles). Forces the bundle to be resolved.
+                This method has similar semantics to 
+                <ulink url="http://www2.osgi.org/javadoc/r4/org/osgi/framework/Bundle.html#getResource(java.lang.String)"><literal>Bundle#getResource(String)</literal></ulink></entry>
+              </row>
+              
+              <row>
+                <entry>Class Space</entry>
+                <entry><literal>classpath*:</literal></entry>
+                <entry>Searches the bundle classloader (the bundle and all imported packages and required bundles). Forces the bundle to be resolved.
+                This method has similar semantics to 
+                <ulink url="http://www2.osgi.org/javadoc/r4/org/osgi/framework/Bundle.html#getResources(java.lang.String)"><literal>Bundle#getResources(String)</literal></ulink>
+                </entry>
+              </row>
+              
+              <row>
+                <entry>JAR File (or JarSpace)</entry>
+                <entry><literal>osgibundlejar:</literal></entry>
+                <entry>Searches only the bundle jar. Provides low-level access without requiring the bundle to be resolved.</entry>
+              </row>
+              <row>
+                <entry>Bundle Space</entry>
+                <entry><literal>osgibundle:</literal></entry>
+                <entry>Searches the bundle jar and its attached fragments (if there are any). Does not create a class loader or force the bundle to be resolved.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+      </table>
+
+	  <para>Please consult section 4.3.12 of the OSGi specification for an in depth explanation of the differences between them.
+	  </para>
+	  
+	  <note>If no prefix is specified, the bundle space (<literal>osgibundle:</literal>) will be used.</note>
+	  
+	  <note>Due to the OSGi dynamic nature, a bundle classpath can change during its life time (for example when dynamic imports are used). This might cause different
+	  classpath <interfacename>Resource</interfacename>s to be returned when doing pattern matching based on the running environment or target platform.</note>
+	  
+      <para>All of the regular Spring resource prefixes such as <literal>file:</literal> and
+      <literal>http:</literal> are also supported, as are the pattern matching wildcards.
+      Resources loaded using such prefixes may come from any location, they
+      are not restricted to being defined within the resource-loading bundle
+      or its attached fragments.</para>
+
+      <para>OSGi platforms may define their own unique prefixes for accessing
+      bundle contents. For example, Equinox defines the <literal>bundleresource:</literal> and
+      <literal>bundlentry:</literal> prefixes. These platform specific prefixes may also be
+      used with Spring OSGi, at the cost, of course, of tying yourself to a
+      particular OSGi implementation.</para>
+    </section>
+
+    <section id="bnd-app-ctx:access-bnd-ctx">
+      <title>Accessing the BundleContext</title>
+
+      <para>In general there is no need to depend on any OSGi APIs when using
+      the Spring Dynamic Modules support. If you <emphasis>do</emphasis> need
+      access to the OSGi <interfacename>BundleContext</interfacename> object for your
+      bundle, then Spring makes this easy to do.</para>
+
+      <para>The OSGi application context created by the Spring extender will
+      automatically contain a bean of type <interfacename>BundleContext</interfacename>
+      and with name <literal>bundleContext</literal>. You can inject a
+      reference to this bean into any bean in the application context either
+      by-name or by-type. In addition, Spring Dynamic Modules defines the
+      interface
+      <interfacename>org.springframework.osgi.context.BundleContextAware</interfacename>:</para>
+
+      <programlisting language="java">public interface BundleContextAware {
+  public void setBundleContext(BundleContext context);
+}</programlisting>
+
+      <para>Any bean implementing this interface will be injected with a
+      reference to the bundle context when it is configured by Spring. If you
+      wish to use this facility within a bundle, remember to import the
+      package <literal>org.springframework.osgi.context</literal> in your
+      bundle manifest.</para>
+	</section>
+
+    <section id="bnd-app-ctx:app-destruction">
+      <title>Application Context Destruction</title>
+      
+      <para>The application context is bound to the bundle in which it lives. Thus, if the declaring 
+      bundle is being shutdown, the application context will be destroyed as well,
+      all exported services being unregistered and all service imported dispose of.
+      </para>
+      
+      <para>As opposed to the application creation, the application context is destroyed in a synchronized manner,
+      on the same thread that stops the bundle. This is required since once stopped, a bundle can not longer be used
+      (even for class loading) preventing the application context shutdown from executing correctly.
+      </para>
+      
+      <para><mediaobject>
+        <imageobject role="fo">
+		  <imagedata fileref="../src/docbkx/resources/images/stop-diagram.png" format="PNG" align="center"/>
+        </imageobject>
+		<imageobject role="html">
+          <imagedata fileref="images/stop-diagram.png" format="PNG" align="center"/>
+        </imageobject>
+        
+          <textobject>
+            <phrase>Application Context Sequence Diagram</phrase>
+          </textobject>
+        
+      </mediaobject></para>
+      
+      
+      <para>Note that a bundle can be closed individually or as part of a bigger
+      event such as shutting down the entire OSGi platform. In this case or when the extender
+      bundle is being closed down, the application contexts will be closed in a managed
+      manner, based on the service dependencies between them. Please see the next section for more
+      details.</para>
+    </section>
+    
+    <section id="bnd-app-ctx:access-bnd-ctx:stop-extender">
+      <title>Stopping the Extender Bundle</title>
+
+      <para>If the extender bundle is stopped, then all the application
+      contexts created by the extender will be destroyed. Application contexts
+      are shutdown in the following order:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Application contexts that do not export any services, or that
+          export services that are not currently referenced, are shutdown in
+          reverse order of bundle id. (Most recently installed bundles have
+          their application contexts shutdown first).</para>
+        </listitem>
+
+        <listitem>
+          <para>Shutting down the application contexts in step (1) may have
+          released references these contexts were holding such that there are
+          now additional application contexts that can be shutdown. If so,
+          repeat step 1 again.</para>
+        </listitem>
+
+        <listitem>
+          <para>If there are no more active application contexts, we have
+          finished. If there <emphasis>are</emphasis> active application
+          contexts then there must be a cyclic dependency of references. The
+          circle is broken by determining the highest ranking service exported
+          by each context: the bundle with the lowest ranking service in this
+          set (or in the event of a tie, the highest service id), is shut
+          down. Repeat from step (1).</para>
+        </listitem>
+      </orderedlist>
+    </section>
+</chapter>

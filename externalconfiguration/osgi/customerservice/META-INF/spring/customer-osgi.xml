@@ -9,8 +9,8 @@
     interface="com.extensiblejava.customer.Customer">
   </osgi:service>
 
-   <osgi:service id="CustomerService3" ref="customerService3"
+   <!-- <osgi:service id="CustomerService3" ref="customerService3"
 	interface="com.extensiblejava.customer.Customer">
-   </osgi:service>
+   </osgi:service> -->
 
 </beans>

@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/spring-osgi/!svn/ver/2139/trunk/samples/weather/weather-extension/src/main/java/org/springframework/osgi/samples/weather/extension/config
+END
+ExtensionNamespaceHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 173
+/svn/spring-osgi/!svn/ver/2139/trunk/samples/weather/weather-extension/src/main/java/org/springframework/osgi/samples/weather/extension/config/ExtensionNamespaceHandler.java
+END
+VirtualBundleBeanDefinitionParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 181
+/svn/spring-osgi/!svn/ver/2113/trunk/samples/weather/weather-extension/src/main/java/org/springframework/osgi/samples/weather/extension/config/VirtualBundleBeanDefinitionParser.java
+END

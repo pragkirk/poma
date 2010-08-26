@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	osgi:default-timeout="10" osgi:default-cardinality="0..X">
+
+	<!-- osgi:reference -->
+
+	<!-- simple one -->
+	<osgi:reference id="serializable" interface="java.io.Serializable"
+		cardinality="1..1" />
+
+	<!-- more complex -->
+	<osgi:reference id="listeners" interface="java.io.Externalizable" />
+
+	<!-- full options -->
+	<osgi:reference id="full-options" interface="java.lang.Cloneable"
+		cardinality="1..1" context-class-loader="service-provider"
+		timeout="2000" filter="(c=*)">
+
+		<osgi:listener>
+			<bean id="listener"
+				class="org.springframework.osgi.config.DummyListener" />
+		</osgi:listener>
+		<osgi:listener bind-method="bind" unbind-method="unbind">
+			<ref bean="firstListener" />
+		</osgi:listener>
+		<osgi:listener ref="firstListener" />
+		<osgi:listener ref="signature-listener2" bind-method="register"
+			unbind-method="deregister" />
+
+		<osgi:listener ref="signature-listener" bind-method="register"
+			unbind-method="deregister" />
+			 
+	</osgi:reference>
+
+	<bean id="firstListener"
+		class="org.springframework.osgi.config.DummyListener" />
+
+	<bean id="signature-listener"
+		class="org.springframework.osgi.config.DummyListenerServiceSignature" />
+
+	<bean id="signature-listener2"
+		class="org.springframework.osgi.config.DummyListenerServiceSignature2" />
+
+	<osgi:reference id="importerWithBeanName"
+		interface="java.lang.Cloneable" bean-name="someBean" />
+
+	<!-- multiple interfaces -->
+	<osgi:reference id="multi-interfaces">
+		<osgi:interfaces>
+			<value>java.io.Serializable</value>
+			<value>java.io.Externalizable</value>
+		</osgi:interfaces>
+	</osgi:reference>
+</beans>

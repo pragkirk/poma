@@ -1,0 +1,40 @@
+8
+
+dir
+2435
+https://anonsvn.springsource.org/svn/spring-osgi/trunk/samples/weather/weather-service/src/main/resources/META-INF/spring
+https://anonsvn.springsource.org/svn/spring-osgi
+
+
+
+2007-11-23T22:46:01.521435Z
+1223
+costin_leau
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2e8e966d-6415-0410-94b9-dc4e65435d03
+
+weather-service-context.xml
+file
+
+
+
+
+2010-08-26T00:57:33.000000Z
+3b662173bb8537035e26c8f3b8092703
+2007-11-23T22:46:01.521435Z
+1223
+costin_leau
+

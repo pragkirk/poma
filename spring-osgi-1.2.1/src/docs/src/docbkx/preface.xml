@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<preface id="preface">
+	<title>Preface</title>
+	<para>
+	Application development has seen significant changes in the last years, moving towards a simpler, more agile,
+	POJO-based programming model in order to keep a fast pace. Dependency injection and Aspect Oriented Programming,
+	which were once <emphasis>bleeding edge</emphasis> ideas, are used on a daily basis by most developers to manage
+	and simplify the complexity of their applications.</para>
+	
+	<para>However, in terms of deployment, things have remained mainly unchanged. Even though code bases are divided into
+	modules, whether logical, conceptual or physical, at runtime they are seen as one monolithic application in which,
+	making a change (be it large or small), requires a restart. <ulink url="http://www.osgi.org">OSGi</ulink> aims
+	to change this by allowing applications to be divided into <emphasis>modules</emphasis> that can have different
+	life cycles, dependencies and still exist as a whole.</para>
+    
+    <para>Spring Dynamic Modules focuses on integrating Spring Framework powerful, non-invasive programming model and 
+    concepts with the dynamics and modularity of OSGi platform. It allows transparent exporting and importing of OSGi
+    services, life cycle management and control.</para>
+	<para>
+	While every effort has been made to ensure that this documentation is comprehensive and there are no errors, 
+	nevertheless some topics might require more explanation and some typos might have crept in. If you do spot any 
+	mistakes or even more serious errors and you can spare a few cycles during lunch, please do bring the error 
+	to the attention of the Spring Dynamic Modules team by raising an 
+	<ulink url="http://opensource.atlassian.com/projects/spring/browse/OSGI">issue</ulink>. Thank you.
+	</para>
+    
+</preface>

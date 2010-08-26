@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+                 
+	<section id="web:spring-mvc">
+	   <title>Spring-MVC Integration</title>
+	   
+	   <para>Since 1.1, Spring DM integrates closely with 
+	   <ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/mvc.html">Spring-MVC</ulink> framework.
+	   This section details how Spring-MVC applications can be run into OSGi environments (it is assumed the reader 
+	   is familiar with Spring-MVC concepts and APIs).
+	   </para>
+	
+     <para>In order to be properly used inside an OSGi platform, a Spring-MVC application needs to adapt to its new environment.
+     Spring DM provides a dedicated, OSGi-aware, web application context (called <classname>OsgiBundleXmlWebApplicationContext</classname>) 
+     that offers the same functionality and behaviour to its Spring-MVC brethren, <classname>
+     <ulink url="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/web/context/support/XmlWebApplicationContext.html">
+     XmlWebApplicationContext</ulink></classname>. The application context is aware of the web application <interfacename>BundleContext</interfacename>
+     and thus is able to load resources from the OSGi space, import and export OSGi services and support the 
+     <interfacename>BundleContextAware</interfacename> and component scanning across the bundles included in the classpath.</para>
+     
+     <para>To use this application context instead of the default one, use the <literal>contextClass</literal> parameters supported by 
+     Spring's <classname>ContextLoaderListener</classname> and <classname>DispatcherServlet</classname> inside your web application 
+     <literal>WEB-INF/web.xml</literal>:</para>
+     
+     <programlistingco>
+ 		<areaspec>
+	   	  <area id="web:spring-mvc:web.xml.listener.cfg" coords="2 113"/>
+	   	  
+ 		  <areaset id="web:spring-mvc:web.xml.servlet.ctx.class" coords="">
+ 		  	<area id="web:spring-mvc:web.xml.servlet.ctx.class.1" coords="3 113"/>	
+ 		  	<area id="web:spring-mvc:web.xml.servlet.ctx.class.2" coords="16 113"/>
+ 		  </areaset>
+ 		  
+          <area id="web:spring-mvc:web.xml.listener.class" coords="7 113"/>
+          <area id="web:spring-mvc:web.xml.servlet.class" coords="12 113"/>
+          <area id="web:spring-mvc:web.xml.servlet.cfg" coords="15 113"/>
+       </areaspec>
+       <programlisting language="xml"><![CDATA[<context-param>
+  <param-name>contextClass</param-name>
+  <param-value>org.springframework.osgi.web.context.support.OsgiBundleXmlWebApplicationContext</param-value>
+</context-param>
+
+<listener>
+  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+<servlet>
+  <servlet-name>petclinic</servlet-name>
+  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  <load-on-startup>2</load-on-startup>
+  <init-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.osgi.web.context.support.OsgiBundleXmlWebApplicationContext</param-value>
+  </init-param>
+</servlet>
+]]></programlisting>
+       <calloutlist>
+         <callout arearefs="web:spring-mvc:web.xml.listener.cfg">
+            <para>Name of the <literal>context-param</literal> used by Spring's <literal>ContextLoaderListener</literal>
+            to determine the root web application context type</para>
+         </callout>
+       
+         <callout arearefs="web:spring-mvc:web.xml.servlet.ctx.class">
+            <para>Fully qualified name of the OSGi-aware web application context class</para>
+         </callout>
+         <callout arearefs="web:spring-mvc:web.xml.listener.class">
+         	<para>Spring configuration bootstrap listener</para>
+         </callout>
+         <callout arearefs="web:spring-mvc:web.xml.servlet.class">
+         	<para>Spring MVC front controller</para>
+         </callout>
+         <callout arearefs="web:spring-mvc:web.xml.servlet.cfg">
+         	<para>Name of the <literal>init-param</literal> used by Spring's <classname>DispatcherServlet</classname> to determine 
+         	the	web application context type</para>
+         </callout>
+       </calloutlist>
+     </programlistingco>
+     
+     <para>With this configuration, deployed Spring-MVC bundles will be able to look up the existing <interfacename>BundleContext</interfacename> and
+     be aware of the OSGi environment.
+     <note>
+     You still need to add the proper package imports to your Spring-MVC application - the WAR is still a bundle 
+     after all which means without the proper manifest entries, it will have an invalid class path and will not be able to work properly.
+     </note>
+     </para>
+	</section>

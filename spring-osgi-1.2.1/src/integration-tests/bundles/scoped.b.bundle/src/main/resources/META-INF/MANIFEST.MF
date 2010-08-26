@@ -1,0 +1,8 @@
+Bundle-Name: org-springframework-osgi-iandt-scope-b
+Bundle-SymbolicName: org.springframework.osgi.iandt.scope.b
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Import-Package: org.springframework.osgi.iandt.scope.common
+Export-Package: org.springframework.osgi.iandt.scope.b
+Bundle-ClassPath: .,
+ target/classes/

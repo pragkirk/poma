@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+    <osgi:service ref="dependent" interface="org.springframework.osgi.iandt.annotation.dependencies.Dependent"/>
+
+    <osgi:reference id="simpleService2"
+                    interface="org.springframework.osgi.iandt.simpleservice2.MyService2"
+                    filter="(service=2)"/>
+
+    <bean id="dependent" class="org.springframework.osgi.iandt.annotation.dependencies.DependentImpl" lazy-init="false">
+        <property name="service2" ref="simpleService2"/>
+    </bean>
+
+</beans>

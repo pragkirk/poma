@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd		
+		http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+
+	<!-- osgix:managed-service-factory -->
+	<osgix:managed-service-factory id="msf" 
+			factory-pid="org.springframework.osgi.iandt.cm.managedservicefactory.ManagedServiceFactoryTest" 
+			auto-export="interfaces">
+		<osgix:registration-listener ref="listener"/>
+		<bean class="java.util.LinkedHashMap"/>
+	</osgix:managed-service-factory>
+
+	<bean id="listener" class="org.springframework.osgi.iandt.cm.managedservicefactory.Listener"/>
+</beans>

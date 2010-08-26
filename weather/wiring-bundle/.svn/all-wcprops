@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/spring-osgi/!svn/ver/2417/trunk/samples/weather/wiring-bundle
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/spring-osgi/!svn/ver/2417/trunk/samples/weather/wiring-bundle/.classpath
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/spring-osgi/!svn/ver/1119/trunk/samples/weather/wiring-bundle/.project
+END
+pom.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/spring-osgi/!svn/ver/2385/trunk/samples/weather/wiring-bundle/pom.xml
+END

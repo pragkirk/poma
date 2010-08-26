@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <artifactId>simple-web-app</artifactId>
+    <groupId>org.springframework.osgi.samples.simple-web-app</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi.samples.simple-web-app</groupId>
+  <artifactId>integration-test</artifactId>
+  <name>Spring OSGi Samples: SimpleWebApp - Integration Test</name>
+  <url>http://www.springframework.org/osgi</url>
+  <packaging>jar</packaging>
+
+
+  <dependencies>
+	<dependency>
+	  <groupId>org.springframework.osgi.samples.simple-web-app</groupId>
+	  <artifactId>war</artifactId>
+	  <version>${project.version}</version>
+	  <type>war</type>
+	  <scope>test</scope>
+	</dependency>	    
+
+  </dependencies>
+
+</project>

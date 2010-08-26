@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	osgi:default-timeout="10" osgi:default-cardinality="0..X">
+
+
+	<bean id="listener" class="org.springframework.osgi.config.DummyListener"/>
+	
+	<osgi:reference interface="java.io.Serializable">
+		<osgi:listener ref="listener">
+			<ref local="listener"/>
+		</osgi:listener>
+	</osgi:reference>
+</beans>

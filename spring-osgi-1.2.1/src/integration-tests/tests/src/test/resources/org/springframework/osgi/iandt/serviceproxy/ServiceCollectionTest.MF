@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-Name: Integration test for OSGi service collection proxy lookup
+Bundle-SymbolicName: org.springframework.osgi.iandt.serviceproxy.integration
+Bundle-Vendor: Spring Framework
+Bundle-Activator: org.springframework.osgi.test.JUnitTestActivator
+Import-Package: junit.framework,
+  org.osgi.framework,
+  org.apache.commons.logging,
+  org.springframework.aop,
+  org.springframework.aop.framework,
+  org.springframework.aop.target,
+  org.springframework.osgi.service,
+  org.springframework.osgi.service.support,
+  org.springframework.osgi.service.support.cardinality,
+  org.springframework.osgi.service.collection,
+  org.springframework.osgi.test,
+  org.aopalliance.aop,
+  org.aopalliance.intercept,
+  org.springframework.util

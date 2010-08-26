@@ -1,0 +1,6 @@
+digraph G {
+ A -> B [label="0,0"]
+ B -> C [label="0,0"]
+ B -> C [label="3,0"]
+ C -> A [label="2,0"]
+}

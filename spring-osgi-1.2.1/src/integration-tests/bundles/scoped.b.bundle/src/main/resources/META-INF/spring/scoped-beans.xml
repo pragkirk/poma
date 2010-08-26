@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	default-lazy-init="false">
+
+	<bean id="b.service"
+		class="org.springframework.osgi.iandt.scope.common.HashCodeScopeTestService"
+		scope="bundle" />
+
+	<osgi:service ref="b.service" auto-export="all-classes" />
+	
+	
+	<osgi:reference id="serviceFromA"
+		interface="org.springframework.osgi.iandt.scope.common.ScopeTestService"
+		filter="(Bundle-SymbolicName=org.springframework.osgi.iandt.scope.a)"
+		cardinality="0..1" timeout="10"
+	/>
+
+	<bean id="staticReference"
+		class="org.springframework.osgi.iandt.scope.b.BeanReference">
+		<property name="bean" ref="b.service" />
+	</bean>
+
+</beans>

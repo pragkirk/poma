@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="get-started">
+    <title>Getting Started</title>
+
+    <para>Learning a new framework is not always straight forward. In this section, we (the Spring DM team) 
+    tried to provide, what we think is, an easy to follow guide for starting with Spring Dynamic Modules. 
+    Of course, feel free to create your own learning 'path' as you see fit and, if possible, please report back
+    any improvements to the documentation that can help others.</para>
+
+    <section id="get-started:first-steps">
+		<title>First Steps</title>
+		
+		<para>As explained in <xref linkend="why-Spring DM"/>, Spring DM provides integration between
+		Spring framework and OSGi. Thus, it is important to become acquainted with both of these frameworks (libraries or
+		environments depending on how you want to name them). Throughout the Spring DM documentation, each section provides
+		links to resources relevant however, it is best to become familiar with these topics beforehand.</para>
+		  
+		<section id="get-started:first-steps:spring">
+			<title>Knowing Spring</title>
+			<para>Spring DM uses heavily Spring framework's <ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/spring-core.html">core</ulink> functionalty, 
+			such as the <ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html">IoC</ulink> container,
+			<ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/resources.html">resource</ulink> abstract or
+			<ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/aop.html">AOP</ulink> infrastructure. While it is not important
+			to know the Spring APIs, understanding the concepts behind them is. At a minimum, the idea behind IoC should be familiar.
+			These being said, the more knowledge one has about the Spring, the faster she will pick Spring Dynamic Modules.
+			Besides the very comprehensive (and sometimes disarming) documentation that explains in detail the Spring Framework,
+			there are a lot of articles, blog entries and books on the matter - take a look at the Spring framework
+			<ulink url="http://www.springsource.org/documentation">home page</ulink> for more information. In general, this should be the starting point for 
+			OSGi (or Eclipse plugin) developers wanting to try Spring DM.</para>
+		</section>
+		<section id="get-started:first-steps:osgi">
+			<title>Knowing OSGi</title>
+			<para>Java developers, new to OSGi, can start by reading the OSGi Alliance <ulink url="http://www.osgi.org/About/HowOSGi">introduction</ulink>,
+			the OSGi <ulink url="http://www.osgi.org/Specifications/HomePage">specifications</ulink> or one of the articles/blogs 
+			available on the internet (such as the SpringSource <ulink url="http://blog.springsource.com/category/osgi/">blogs</ulink>).
+			Additionally, the Spring DM home <ulink url="http://www.springframework.org/osgi">page</ulink> hosts various links to useful materials.
+			</para>
+		</section>
+		<section id="get-started:first-steps:samples">
+			<title>Trying Out The Samples</title>
+			<para>Once one is familiar with the concepts behind Spring and OSGi, she can start reading the Spring DM reference documentation (this document) and
+			take the Spring DM samples for a spin. The samples are available either in the .zip distribution or from the Spring DM repository.
+			The samples are a convenient way to get started quickly with Spring DM as they show various features of Spring DM and help one get pass the 
+			initial struggles with OSGi. However, they are not meant as the definitive guide in using OSGi rather, they aim to be a launching pad 
+			for "newbies" trying out OSGi in Spring.
+			</para>
+			<para>The current distribution contains:</para>
+			<itemizedlist>
+				<listitem>
+					<para>Simple Service Sample</para>
+					<para>A simple example that illustrates OSGi service publication and consumption through Spring DM. This is a good starting point
+					for users learning the basics.</para>
+				</listitem>
+				<listitem>
+					<para>Weather Sample</para>
+					<para>A demo that shows more advanced features of Spring DM and OSGi. The application creates a very simple weather information services 
+					presenting some best practices in designing an application to take advantage of the modularity offered by OSGi.</para>
+				</listitem>
+				<listitem>
+					<para>Simple Web App Sample</para>
+					<para>As the name implies, this is a simple web application, containing Servlets, JSPs and JSP tags, that runs inside OSGi through Spring DM.</para>
+				</listitem>
+				<listitem>
+					<para>Web Console Sample</para>
+					<para>A more complicated sample that demos a Spring MVC annotation based, web application that runs inside OSGi through Spring DM, featuring 
+					class path scanning and various Spring taglib. Additionally, the web application interacts with the OSGi environment through the web UI.</para>
+				</listitem>
+			</itemizedlist> 
+			<para>Each project contains instructions regarding its content and startup procedure. Users are encouraged to experiment with the samples to get a better
+			understanding of the technologies used.</para>
+		</section>
+	</section>
+    
+    <section id="get-started:help">
+		<title>Need Help?</title>
+		
+		<para>If you encounter issues or you are just looking for an advice, feel free to use one of the links below:</para>
+		
+		<section id="get-started:help:community">
+  		    <title>Community Support</title>
+			<para>The Spring DM <ulink url="http://forum.springframework.org/forumdisplay.php?f=43">forum</ulink> is a message board for all Spring DM users to
+			share information and help each other. Note that registration is needed <emphasis>only</emphasis> for posting.
+			</para>
+		</section>
+		<section id="get-started:help:professional">
+  		    <title>Professional Support</title>
+			<para>Professional, from-the-source support, with guaranteed response time, is available from <ulink url="http://www.springsource.com">SpringSource</ulink>,
+			the company behind Spring Dynamic Modules and Spring.  
+			</para>
+		</section>
+    </section>
+    
+    <section id="get-started:up-to-date">
+		<title>Following Development</title>
+		
+		<para>For information on the Spring DM source code repository, nightly builds and snapshot artifacts please see the Spring DM home 
+		<ulink url="http://www.springsource.org/osgi">page</ulink>.   
+		</para>
+		<para>You can help make Spring DM best serve the needs of the Spring community by interacting with developers through the Spring Community 
+		<ulink url="http://forum.springsource.org">forums</ulink>.</para>
+		<para>If you encounter a bug or want to suggest an improvement, 
+		please create a ticket on the Spring DM issue <ulink url="http://jira.springframework.org/">tracker</ulink>.</para>
+		<para>To stay up to date with the latest news and announcements in the Spring eco system, subscribe to the 
+		Spring Community <ulink url="http://www.springframework.org/">Portal</ulink>.</para>
+	</section>
+    
+</chapter>

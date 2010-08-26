@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>weather</artifactId>
+		<groupId>org.springframework.osgi.samples</groupId>
+		<version>1.2.1</version>
+	</parent>
+	<groupId>org.springframework.osgi.samples</groupId>
+	<artifactId>weather-service-test</artifactId>
+	<packaging>bundle</packaging>
+	<name>Spring OSGi Samples: Weather Service Client</name>
+	<url>http://www.springframework.org/osgi</url>
+  
+    <properties>
+   	    <spring.osgi.license.loc>../../..</spring.osgi.license.loc>
+    
+		<spring.osgi.export.pkg>org.springframework.osgi.samples.weather.test</spring.osgi.export.pkg>
+    </properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.osgi.samples</groupId>
+			<artifactId>weather-service</artifactId>
+			<version>${project.parent.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.osgi</groupId>
+			<artifactId>spring-osgi-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		   <groupId>org.junit</groupId>
+		   <artifactId>com.springsource.junit</artifactId>
+		   <scope>provided</scope>
+        </dependency>
+	</dependencies>
+
+</project>

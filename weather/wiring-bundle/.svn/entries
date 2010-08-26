@@ -1,0 +1,68 @@
+8
+
+dir
+2435
+https://anonsvn.springsource.org/svn/spring-osgi/trunk/samples/weather/wiring-bundle
+https://anonsvn.springsource.org/svn/spring-osgi
+
+
+
+2010-01-07T11:18:45.123134Z
+2417
+cleau
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2e8e966d-6415-0410-94b9-dc4e65435d03
+
+.classpath
+file
+
+
+
+
+2010-08-26T00:57:32.000000Z
+cf51d474b7db9d19cf0cbc93eea092e2
+2010-01-07T11:18:45.123134Z
+2417
+cleau
+
+.project
+file
+
+
+
+
+2010-08-26T00:57:32.000000Z
+1ce67bde6be1811576b916d92629521e
+2007-10-23T14:34:22.932469Z
+1119
+costin_leau
+
+src
+dir
+
+pom.xml
+file
+
+
+
+
+2010-08-26T00:57:32.000000Z
+66b9dc822aa274cf38c610432f84db91
+2009-09-28T09:20:59.701706Z
+2385
+cleau
+has-props
+

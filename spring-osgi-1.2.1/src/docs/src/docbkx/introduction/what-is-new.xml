@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="what-is-new">
+    <title>What is new?</title>
+
+    <para>While a relatively young project, each version of Spring Dynamic Modules (even minor ones) offers new functionality. This chapter is a guide to the new
+    and improved feature and intended as a high-level, short summary. Please follow the appropriate links for more in-depth information.</para>
+
+    <section id="dm-1.2.x">
+		<title>1.2.x</title>
+		
+		<section id="dm-1.2.x:security">
+			<title>Java 2 Security Integration</title>
+			<para>Since 1.2.x, Spring Dynamic Modules is aware of <ulink url="http://java.sun.com/javase/technologies/security/#overview">secured</ulink> 
+			environments by making use of dedicated <ulink url="http://java.sun.com/j2se/1.4.2/docs/guide/security/doprivileged.html">privileged blocks</ulink> 
+			for executing security sensitive code. Thus, Spring DM can run as a <emphasis>trusted</emphasis> library without requiring escalated 
+			permissions for its managed bundles. See <xref linkend="appendix-security"/> for more information.</para>
+		</section>
+		<section id="dm-1.2.x:compendium">
+			<title>Compendium Services Support</title>
+			<para>1.2.x provides integration with the <ulink url="http://www.osgi.org/javadoc/r4v401/org/osgi/service/cm/package-summary.html">Configuration Admin</ulink>, 
+			part of the OSGi compendium services. <xref linkend="compendium"/> provides more details on the topic.</para>
+		</section>
+		<section id="dm-1.2.x:sym-name-change">
+			<title>Changed Spring DM Symbolic Names</title>
+			<para>Since 1.2.0 M2, the Spring DM bundles symbolic names have been aligned with Spring's 2.5.6+. Thus the prefix 
+			<literal>org.springframework.bundle.osgi</literal> has been changed to <literal>org.springframework.osgi</literal>; for example
+			Spring DM extender symbolic name was changed from <literal>org.springframework.bundle.osgi.extender</literal> to <literal>org.springframework.osgi.extender</literal> 
+			(notice the missing <literal>bundle</literal> word). Additionally, the documentation has been updated to reflect Spring 2.5.6+ symbolic names.</para>
+		</section>
+        <section id="dm-1.2.x:ebr-usage">
+			<title>Usage of SpringSource Enterprise Bundle Repository (EBR)</title>
+			<para>To minimize the number of repositories used and the confusion caused by OSGified vs non-OSGified artifacts especially to users using Spring dm Server,
+			after 1.2.0 RC1, Spring Dynamic Modules aligned as many of its dependencies as possible with SpringSource <ulink url="http://www.springsource.com/repository">EBR</ulink>.
+			In practice this means that Spring framework artifacts, such as <literal>spring-aop.jar</literal> can be now found as <literal>org.springframework.aop.jar</literal>;
+			We apologize for any inconvenience created to users relying on these naming conventions.</para>
+		</section>
+	</section>
+    
+    <section id="dm-1.1.x">
+		<title>1.1.x</title>
+		
+		<section id="dm-1.1.x:web">
+  		    <title>Web Support</title>
+			<para>The biggest feature in Spring Dynamic Modules 1.1.x is the transparent support for web applications on OSGi platforms. By integrating
+			directly with web containers (such as Apache Tomcat and Jetty), Spring DM allows WARs using Servlet, JSP and taglib technologies to 
+			be used with little or no effort at all. 
+			Please see <xref linkend="web"/> for details.
+			</para>
+			<section id="dm-1.1.x:web:spring-mvc">
+				<title>Spring-MVC Integration</title>
+				<para>Additionally, with 1.1.x it is possible to run Spring-MVC applications inside OSGi environments. See <xref linkend="web:spring-mvc"/>
+				for more information.</para>
+			</section>
+		</section>
+		<section id="dm-1.1.x:io">
+  		    <title>Classpath Resource Abstraction</title>
+			<para>1.1.x adds support for <literal>classpath:</literal> and <literal>classpath*:</literal> prefixes to the OSGi <interfacename>Resource</interfacename>
+			abstraction. This allows the discovery of classpath resources (such as Spring's 
+			<ulink url="http://static.springframework.org/spring/docs/2.5.x/reference/new-in-2.html#new-in-2-ioc-component-scanning">component scanning</ulink>) to
+			work out-of-the-box across multiple bundles on the supported OSGi platforms. See <xref linkend="bnd-app-ctx:osgi-resource"/> for more information.
+			</para>
+		</section>
+		<section id="dm-1.1.x:configuration">
+  		    <title>Pluggable Extender Configuration</title>
+			<para>1.1.x makes it easy to change the default configuration for the various <link linkend="extender-pattern">extender</link>s used by Spring DM. By using
+			<link linkend="appendix-tips:fragments">fragments</link>, users can customize the way application contexts are started, the web container used 
+			for web deployment or the thread-pool for running Spring applications. Additionally, it is possible to receive events 
+			regarding the OSGi Spring application contexts lifecycle. <xref linkend="bnd-app-ctx:extender"/> lists the available options and explains them in detail.  
+			</para>
+		</section>
+		<section id="dm-1.1.x:improved-class-loading">
+  		    <title>Improved Class Loading</title>
+			<para>In 1.1.x, the proxy creation has been improved, leading to better package wiring for the managed bundles. See the FAQ for more information.  
+			</para>
+		</section>
+    </section>
+    
+</chapter>

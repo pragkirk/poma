@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.springframework.org/schema/osgi/samples/weather"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.springframework.org/schema/osgi/samples/weather"
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+
+	<xsd:import namespace="http://www.springframework.org/schema/beans"/>
+    
+    <xsd:annotation>
+        <xsd:documentation>
+            Sample schema extension based on the existing Spring OSGi namespace.
+        </xsd:documentation>
+    </xsd:annotation>
+    
+    <!-- virtual-bundle -->
+    <xsd:element name="virtual-bundle" type="TvirtualBundle"/>
+
+    <xsd:complexType name="TvirtualBundle">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:all>
+                    <xsd:element name="imports" type="TpackageList" minOccurs="0"/>
+                    <xsd:element name="exports" type="TpackageList" minOccurs="0"/>
+                    <xsd:element name="dynamic-imports" type="TpackageList" minOccurs="0"/>
+                </xsd:all>
+
+                <xsd:attribute name="depends-on" type="xsd:string" use="optional">
+					<xsd:annotation>
+						<xsd:documentation><![CDATA[
+							Used to refer to the name of another bean that this bean depends on. Ensures that the
+							service registry look-up does not happen until after the dependent bean has been created 
+							(most commonly used to refer to a bundle bean).
+						]]></xsd:documentation>
+					</xsd:annotation>                
+                </xsd:attribute>
+                <xsd:attribute name="location" type="xsd:string" use="optional">
+                	<xsd:annotation>
+                		<xsd:documentation><![CDATA[
+                			Bundle location.
+                		]]></xsd:documentation>
+                	</xsd:annotation>
+                </xsd:attribute>
+                
+                <xsd:attribute name="version" type="xsd:string" use="optional"/>
+                <xsd:attribute name="group-id" type="xsd:string" use="optional"/>
+                <xsd:attribute name="artifact-id" type="xsd:string" use="optional"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="TpackageList">
+        <xsd:sequence>
+            <xsd:element name="package" type="Tpackage" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="Tpackage">
+        <xsd:sequence>
+            <xsd:element name="uses" type="TpackageList" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="version" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+    
+</xsd:schema>

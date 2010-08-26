@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/spring-osgi/!svn/ver/1236/trunk/samples/weather/weather-extension/src/main/resources/META-INF
+END
+spring.handlers
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/spring-osgi/!svn/ver/913/trunk/samples/weather/weather-extension/src/main/resources/META-INF/spring.handlers
+END
+spring.schemas
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/spring-osgi/!svn/ver/913/trunk/samples/weather/weather-extension/src/main/resources/META-INF/spring.schemas
+END

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+		http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+
+	<!-- simple -->
+	<osgix:managed-service-factory id="simple" factory-pid="my.pid" interface="java.lang.Object" auto-export="all-classes">
+		<bean class="java.lang.Object"/>
+    </osgix:managed-service-factory>
+
+	<!-- ccl specified -->
+	<osgix:managed-service-factory id="ccl" factory-pid="my.pid" context-class-loader="service-provider">
+		<osgix:interfaces>
+			<value>java.util.Map</value>
+			<value>java.io.Serializable</value>
+		</osgix:interfaces>
+		<bean class="java.util.HashMap"/>
+    </osgix:managed-service-factory>
+
+	<!-- update strategy specified --> 
+	<osgix:managed-service-factory id="container-update" factory-pid="my.pid" update-strategy="container-managed" auto-export="all-classes">
+		<bean class="java.lang.Object"/>
+    </osgix:managed-service-factory>
+
+	<osgix:managed-service-factory id="bean-update" factory-pid="my.pid" update-strategy="bean-managed" update-method="update" auto-export="all-classes">
+		<bean class="java.lang.Object"/>
+    </osgix:managed-service-factory>
+   
+</beans>

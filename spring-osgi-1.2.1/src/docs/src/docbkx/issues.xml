@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book xmlns:xi="http://www.w3.org/2001/XInclude">
+  <bookinfo>
+    <title>Spring Dynamic Modules for <trademark>OSGi</trademark> Service Platforms</title>
+    <subtitle>Known Issues</subtitle>
+	<releaseinfo>&version;</releaseinfo>
+
+    <authorgroup>
+      <author>
+        <firstname>Costin</firstname>
+        <surname>Leau</surname>
+		<affiliation>SpringSource</affiliation>        
+      </author>
+    </authorgroup>
+
+    <legalnotice>
+      <para>Copies of this document may be made for your own use and for
+      distribution to others, provided that you do not charge any fee for such
+      copies and further provided that each copy contains this Copyright
+      Notice, whether distributed in print or electronically.</para>
+    </legalnotice>
+  </bookinfo>
+
+  <toc />
+
+  <preface id="preface">
+	<title>Preface</title>
+	<para>
+	  This document describes known issues (and possible work-arounds). Each issue mentions the section of the reference
+	  documentation that explain the behaviour along with the associated
+	  <ulink url="http://jira.springframework.org/browse/OSGI">JIRA</ulink> entry which
+	  provides an estimate on when it will be solved.
+	  As a rule, the next release Spring Dynamic Modules aims to solve most, if not all of them.
+	</para>
+  </preface>
+  
+  <chapter id="known-issues">
+    <title>Known Issues</title>
+
+	<para>As a side note, it worth pointing out that the issues below are not really bugs but rather improvements.</para>		
+
+	<section id="OSGI-237">
+      <title>Publishing prototypes as OSGi services</title>
+      	<para>Due to the way OSGi platform deals with OSGi services (it caches the instance and returns it every time), prototypes are not fully supported.
+      	Spring DM publishes a proxy that on each call, delegates back to the target application context for retrieving the instance. While with other beans
+      	this works, in case of prototypes, this results in one-instance-per-invocation which is incorrect. Additional functionality needs to be added
+      	to fully support prototypes even though, as pointed out, this involves a knowledge between Client/Server regarding the publication contract.</para>
+      	<para>See <ulink url="http://jira.springframework.org/browse/OSGI-237">OSGI-237</ulink></para> 
+	</section>	
+
+  </chapter>
+</book>

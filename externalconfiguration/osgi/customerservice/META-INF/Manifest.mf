@@ -3,4 +3,4 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Customer Service
 Bundle-SymbolicName: customerservice
 Bundle-Version: 1.0.0
-Export-Package: com.extensiblejava.customer,com.extensiblejava.order
+Export-Package: com.extensiblejava.customer,com.extensiblejava.customer.impl,com.extensiblejava.order,com.extensiblejava.order.impl,com.extensiblejava.calculator

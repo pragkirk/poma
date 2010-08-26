@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-Name: Functional testing of Spring lifecycle
+Bundle-SymbolicName: org.springframework.osgi.iandt.lifecycle.functional
+Bundle-Vendor: Spring Framework
+Bundle-Activator: org.springframework.osgi.test.JUnitTestActivator
+Import-Package: junit.framework,
+ org.osgi.framework,
+ org.springframework.aop,
+ org.springframework.core.io,
+ org.springframework.osgi.test

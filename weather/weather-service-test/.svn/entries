@@ -1,0 +1,80 @@
+8
+
+dir
+2435
+https://anonsvn.springsource.org/svn/spring-osgi/trunk/samples/weather/weather-service-test
+https://anonsvn.springsource.org/svn/spring-osgi
+
+
+
+2010-01-07T11:18:45.123134Z
+2417
+cleau
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2e8e966d-6415-0410-94b9-dc4e65435d03
+
+.classpath
+file
+
+
+
+
+2010-08-26T00:57:33.000000Z
+e33ffb9900bd6e99a7fbf236c6dc3946
+2010-01-07T11:18:45.123134Z
+2417
+cleau
+
+.project
+file
+
+
+
+
+2010-08-26T00:57:33.000000Z
+2a4ce5fdb56a1441922a6c359610cde2
+2006-12-14T17:12:58.186787Z
+392
+adrian-colyer
+
+src
+dir
+
+pom.xml
+file
+
+
+
+
+2010-08-26T00:57:33.000000Z
+1f42828dd7b3edc9906fa1f083176507
+2009-09-28T09:20:59.701706Z
+2385
+cleau
+has-props
+
+template.mf
+file
+
+
+
+
+2010-08-26T00:57:33.000000Z
+d41d8cd98f00b204e9800998ecf8427e
+2009-06-03T10:00:26.345738Z
+2183
+cleau
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean name="discounterService" class="com.extensiblejava.calculator.better.BetterCalculator"/>
+  <!-- <bean name="customerService2" class="com.extensiblejava.customer.impl.DefaultCustomer">
+	<constructor-arg type="java.lang.String" value="Sally Doe"/>
+	<constructor-arg><ref bean="orderBuilder1"/></constructor-arg>
+	<constructor-arg><ref bean="betterCalculator"/></constructor-arg>
+  </bean> -->
+
+  <!-- <bean name="orderBuilder1" class="com.extensiblejava.order.impl.DefaultOrderBuilder"/> -->
+  <!-- <bean name="defaultCalculator1" class="com.extensiblejava.calculator.impl.DefaultCalculator"/> -->
+  <!-- <bean name="betterCalculator" class="com.extensiblejava.calculator.better.BetterCalculator"/> -->
+
+<!-- <bean name="customerService3" class="com.extensiblejava.customer.impl.DefaultCustomer">
+	<constructor-arg type="java.lang.String" value="Bill Doe"/>
+	<constructor-arg><ref bean="orderBuilder3"/></constructor-arg>
+  </bean>
+
+  <bean name="orderBuilder3" class="com.extensiblejava.order.impl.SpecialOrderBuilder"/> -->
+
+</beans>

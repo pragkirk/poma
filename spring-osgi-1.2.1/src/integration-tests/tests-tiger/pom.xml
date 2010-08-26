@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<project>
+    <parent>
+        <artifactId>spring-osgi</artifactId>
+        <groupId>org.springframework.osgi</groupId>
+        <version>1.2.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.springframework.osgi</groupId>
+    <artifactId>spring-osgi-integration-tests-tiger</artifactId>
+    <packaging>jar</packaging>
+    <name>Spring OSGi Integration Tests (Java 5)</name>
+    <url>http://www.springframework.org/osgi</url>
+    
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.osgi</groupId>
+            <artifactId>spring-osgi-core</artifactId>
+            <version>${project.parent.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.osgi</groupId>
+            <artifactId>spring-osgi-test</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+      
+        <!-- Configuration Admin -->
+        <dependency>
+            <groupId>org.knopflerfish.bundles</groupId>
+            <artifactId>cm_all</artifactId>
+            <version>2.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.knopflerfish.bundles</groupId>
+            <artifactId>log_all</artifactId>
+            <version>2.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.osgi</groupId>
+            <artifactId>spring-osgi-annotation</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.osgi.iandt</groupId>
+            <artifactId>simple.service</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.osgi.iandt</groupId>
+            <artifactId>simple.service2</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.osgi.iandt</groupId>
+            <artifactId>annotation.proxy</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.osgi.iandt</groupId>
+            <artifactId>component.scan.bundle</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+		  <plugin>
+			<artifactId>maven-deploy-plugin</artifactId>
+			<configuration>
+			  <skip>true</skip>
+			</configuration>
+		  </plugin>
+        
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+					<debug>true</debug>
+				</configuration>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+		    <childDelegation>false</childDelegation>
+                    <forkMode>perTest</forkMode>
+                    <!--argLine>-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=2111,server=y,suspend=y</argLine-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd		
+		http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd">
+
+	<!-- osgix:managed-properties -->
+	<bean id="simple" class="org.springframework.osgi.compendium.OneSetter">
+		<osgix:managed-properties persistent-id="simple"/>
+		<property name="clz" value="java.lang.Object"/>
+	</bean>
+	
+	<bean class="org.springframework.osgi.compendium.OneSetter">
+		<osgix:managed-properties persistent-id="non-name"/>
+	</bean>
+	
+	<bean id="simpleWUpdate" class="org.springframework.osgi.compendium.OneSetter">
+		<osgix:managed-properties persistent-id="simple" update-strategy="container-managed"/>
+	</bean>
+	
+	<bean id="multipleWUpdate" class="org.springframework.osgi.compendium.MultipleSetters">
+		<osgix:managed-properties persistent-id="multiple" update-strategy="container-managed"/>
+		<property name="integer" value="23"/>
+	</bean>
+
+	<bean id="beanManaged" class="org.springframework.osgi.compendium.BeanManaged">
+		<osgix:managed-properties persistent-id="bean-managed" update-strategy="bean-managed" update-method="update"/>
+		<property name="integer" value="23"/>
+	</bean>
+	
+</beans>

@@ -1,0 +1,7 @@
+Spring-Version: ${spring.version}
+Bundle-Name: Spring-DM-Extender
+Bundle-SymbolicName: org.springframework.osgi.extender
+Bundle-Version: ${spring.osgi.bundle.version}
+Bundle-ManifestVersion: 2
+Bundle-Vendor: Spring Framework
+Bundle-Activator: org.springframework.osgi.extender.internal.activator.ContextLoaderListener

@@ -1,0 +1,9 @@
+Bundle-Name: org-springframework-osgi-iandt-lifecycle
+Bundle-SymbolicName: org.springframework.osgi.iandt.lifecycle
+Bundle-Version: 2.0
+Bundle-ManifestVersion: 2
+Bundle-ClassPath: . 
+Import-Package: org.springframework.beans.factory,
+ org.springframework.osgi.context,
+ org.osgi.framework
+  

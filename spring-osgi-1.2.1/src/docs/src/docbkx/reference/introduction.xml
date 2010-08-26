@@ -1,0 +1,44 @@
+      <partintro>
+      <title>Document structure</title>
+
+	  <para>This part of the reference documentation explains the core functionality
+	  offered by Spring Dynamic Modules.</para>
+      
+      <para><xref linkend="bnd-app-ctx"/> describes the relationship between an OSGi Bundle and a 
+      Spring Application Context,
+      and introduces the Spring Extender Bundle support for instantiating
+      application contexts automatically.</para>
+
+      <para><xref linkend="app-deploy"/> describes how to deploy the Spring Framework jar files in
+      an OSGi environment, and how to reference external APIs from your
+      application bundles should you need to do so. This chapter also explains
+      some of the issues to be aware of when using existing enterprise
+      libraries not designed for OSGi in an OSGi environment.</para>
+
+      <para><xref linkend="service-registry"/> describes how to export Spring
+      beans as services in the OSGi service registry, and how to inject
+      references to OSGi services into beans. This chapter also defines how
+      the dynamic life-cycle of OSGi services and bundles is supported.</para>
+
+      <para><xref linkend="bundles"/> describes how to declare a bean
+      that represents an OSGi bundle, including support for installing new
+      bundles into the OSGi platform.</para>
+
+      <para><xref linkend="web"/> explains how to run web applications inside
+      an OSGi environment using Spring DM.</para>
+      
+      <para><xref linkend="compendium"/> describes the support provided
+      for the <ulink url="http://www2.osgi.org/Release4/Download">OSGi
+      Compendium Services</ulink>, specifically the Configuration Admin
+      service.</para>
+      
+      <para><xref linkend="testing"/> explains the
+      integration testing support provided by Spring Dynamic Modules. This
+      support enables you to write simple JUnit integration tests that can
+      start up an OSGi environment, install the bundles needed for the
+      integration test, execute the test case(s) inside of OSGi, and return
+      the results to the runner. This makes it easy to integrate OSGi
+      integration testing into any environment that can work with
+      JUnit.</para>
+
+      </partintro>

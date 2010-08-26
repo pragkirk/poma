@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<appendix id="appendix-pde-integration">
+    <title>Eclipse Plug-in Development integration</title>
+
+    <para>Eclipse <ulink url="http://www.eclipse.org/pde/">PDE</ulink> <quote>provides comprehensive OSGi tooling, which makes it 
+    an ideal environment for component programming, not just Eclipse plug-in development</quote>.
+    In fact, Eclipse IDE is built on top of OSGi and uses at its core the Equinox OSGi implementation. Moreover, all the Eclipse 
+    plug-ins are OSGi bundles. This makes Eclipse with PDE a very attractive tool for creating OSGi bundles.
+    While Spring Dynamic Modules artifacts can be integrated as <emphasis>normal</emphasis> libraries, through 
+    <ulink url="http://www.springide.org">Spring IDE</ulink>, Spring DM can be installed as a 
+    <ulink url="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.pde.doc.user/guide/tools/preference_pages/target_platform.htm">
+    target platform</ulink> ready to be used with PDE.
+   </para>
+   
+   <procedure>
+     <para>The following steps illustrate how to install Spring IDE extension for OSGi and how to use it in your project. Please see 
+     <ulink url="http://springide.org/project/wiki/SpringideInstall">Spring IDE installation page</ulink> for information on its requirement
+     and install process.</para>
+   
+   	 <step>
+   	 	<title>Set Up Nightly Update Site</title>
+   	 	<para>At the moment, the OSGi extension is available only on Spring-IDE nightly builds update site. Add it to the Eclipse configuration by
+   	 	opening the software update menu:
+   	 	</para>
+   	 	<para>
+		  <mediaobject>
+            <imageobject role="fo">
+              <imagedata align="left"
+                         fileref="../src/docbkx/resources/images/pde/find-install.png"
+                         format="PNG" 
+                         width="272" depth="155"
+                         />
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="left" fileref="images/pde/find-install.png"
+                         format="PNG" />
+            </imageobject>
+
+          </mediaobject>
+          
+		  <mediaobject>
+            <imageobject role="fo">
+              <imagedata align="central"
+                         fileref="../src/docbkx/resources/images/pde/springide-site.png"
+                         format="PNG"
+                         width="199" depth="99"/>
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="central" fileref="images/pde/springide-site.png"
+                         format="PNG"/>
+            </imageobject>
+
+          </mediaobject>        
+          
+        </para>
+        
+        <para>and create a new update site pointing to <literal>http://www.springide.org/updatesite_nightly</literal></para>
+   	 </step>
+   	 <step>
+   	 	<title>Select Spring IDE OSGi extension</title>
+   	 	<para>After using the nightly update site and performing the update, Eclipse will show the search results. Unfold the <emphasis>Extension</emphasis> menu and select <literal>Spring IDE OSGi Extension</literal>:</para>
+        <para>
+		  <mediaobject>
+            <imageobject role="fo">
+              <imagedata align="center"
+                         fileref="../src/docbkx/resources/images/pde/spring-osgi-plugin.png"
+                         format="PNG"
+                         width="388" depth="335"/>
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/pde/spring-osgi-plugin.png"
+                         format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <phrase>Select Spring IDE OSGI extension</phrase>
+            </textobject>
+          </mediaobject>        
+        </para>
+        
+        <para>and proceed with the instalation.</para>   	 	
+   	 </step>
+   	 
+   	 <step>
+   	 	<title>Select Spring Dynamic Modules Target Platform</title>
+   	 	<para>Once the plug-in has been installed, Spring Dynamic Modules can be selected as a PDE target platform. Select Window/Preferences/Plug-in Development and then
+   	 	Target Platform.</para>
+        <para>
+		  <mediaobject>
+            <imageobject role="fo">
+              <imagedata align="center"
+                         fileref="../src/docbkx/resources/images/pde/target-select.png"
+                         format="PNG"/>
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/pde/target-select.png"
+                         format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <phrase>Select Spring DM target platform</phrase>
+            </textobject>
+          </mediaobject>
+        </para>
+        
+        <para>Select the Spring DM version that you desire from the Pre-defined Target (1) drop box and press Load Target (2). Eclipse will load the target and all bundles defined
+        by it - this includes Spring DM bundles and all of its dependencies (SLF4J is used for logging). The configuration can be customised appropriately by removing
+        and adding bundles.</para>
+        
+        <para>In its current form, the plug-in offers two predefined targets - one for the stable released versions and one for the SNAPSHOT/nightly Spring DM jars. The latter
+        does not contain any jars as it is expected for the user to download them manually. Simply locate the path where the plug-ins should be located (3), enter that folder 
+        and do a </para>
+        <programlisting><![CDATA[mvn install]]></programlisting> 
+        <para>The latest Spring DM SNAPSHOT will be downloaded along with all of its dependencies.
+        Simply click on the reload button (4) and Eclipse will pick up the bundles. </para>
+   	 </step>
+   	 
+   	 <step>
+   	 	<title>Select PDE Perspective</title>
+   	 	<para>Once the installation is completed just select the PDE perspective:</para>
+        <para>
+		  <inlinemediaobject>
+            <imageobject role="fo">
+              <imagedata align="left"
+                         fileref="../src/docbkx/resources/images/pde/select-pde-1.png"
+                         format="PNG" 
+                         width="173" depth="176"/>
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="left" fileref="images/pde/select-pde-1.png"
+                         format="PNG"/>
+            </imageobject>
+
+          </inlinemediaobject>
+		  <inlinemediaobject>
+            <imageobject role="fo">
+              <imagedata align="central"
+                         fileref="../src/docbkx/resources/images/pde/select-pde-2.png"
+                         format="PNG"
+                         width="157" depth="197"/>
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="central" fileref="images/pde/select-pde-2.png"
+                         format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
+          
+        </para>
+        
+        <para>and the Spring DM and its dependencies should be available in the plug-ins view:</para>
+        <para>
+		  <inlinemediaobject>
+            <imageobject role="fo">
+              <imagedata align="left"
+                         fileref="../src/docbkx/resources/images/pde/select-plugins-view.png"
+                         format="PNG"
+                         width="243" depth="176"/>
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="left" fileref="images/pde/select-plugins-view.png"
+                         format="PNG"/>
+            </imageobject>
+
+          </inlinemediaobject>
+
+		  <inlinemediaobject>
+
+            <imageobject role="fo">
+              <imagedata align="central"
+                         fileref="../src/docbkx/resources/images/pde/show-plugins.png"
+                         format="PNG"
+                         width="266" depth="257"/>
+            </imageobject>
+
+            <imageobject role="html">
+              <imagedata align="central" fileref="images/pde/show-plugins.png"
+                         format="PNG"/>
+            </imageobject>
+
+          </inlinemediaobject>          
+        </para>        
+   	 </step>
+   	 
+   </procedure>
+</appendix>

@@ -1,0 +1,1 @@
+This folder contains .dot language files used for drawing some of the image diagrams.

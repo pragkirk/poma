@@ -1,0 +1,265 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;6.&nbsp;Packaging and Deploying Spring-based OSGi applications</title><link rel="stylesheet" href="css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><link rel="start" href="index.html" title="Spring Dynamic Modules Reference Guide"><link rel="up" href="reference.html" title="Part&nbsp;II.&nbsp;Reference Documentation"><link rel="prev" href="bnd-app-ctx.html" title="Chapter&nbsp;5.&nbsp;Bundles and Application Contexts"><link rel="next" href="service-registry.html" title="Chapter&nbsp;7.&nbsp;The Service Registry"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" style="background-color:white;border:none;height:73px;border:1px solid black;"><a style="border:none;" href="http://www.springframework.org/osgi/" title="The Spring Framework - Spring Dynamic Modules"><img style="border:none;" src="images/xdev-spring_logo.jpg"></a><a style="border:none;" href="http://www.SpringSource.com/" title="SpringSource - Spring from the Source"><img style="border:none;position:absolute;padding-top:5px;right:42px;" src="images/s2-banner-rhs.png"></a></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="app-deploy"></a>Chapter&nbsp;6.&nbsp;Packaging and Deploying Spring-based OSGi applications</h2></div></div></div><p>A traditional Spring application uses either a single application
+    context, or a parent context containing service layer, data layer, and
+    domain objects with a child context containing web layer components. The
+    application context may well be formed by aggregating the contents of
+    multiple configuration files.</p><p>When deploying an application to OSGi the more natural structure is
+    to package the application as a set of peer bundles (application contexts)
+    interacting via the OSGi service registry. Independent subsystems should
+    be packaged as independent bundles or sets of bundles (vertical
+    partitioning). A subsystem may be package in a single bundle, or divided
+    into several bundles partitioned by layer (horizontal partitioning). A
+    straightforward web application may for example be divided into four
+    modules (bundles): a web bundle, service layer bundle, data layer bundle,
+    and domain model bundle. Such an application would look like this:</p><div class="mediaobject" align="center"><img src="images/spring-osgi-model.png" align="middle" alt="Bundles and Application Contexts"></div><p>In this example the data layer bundle yields a data layer
+    application context that contains a number of internal components (beans).
+    Two of those beans are made publicly available outside of the application
+    context by publishing them as services in the OSGi service
+    registry.</p><p>The service layer bundle yields a service layer application context
+    that contains a number of internal components (beans). Some of those
+    components depend on data layer services, and import those services from
+    the OSGi service registry. Two of the service layer components are made
+    externally available as services in the OSGi service registry.</p><p>The web component bundle yields a web application context that
+    contains a number of internal components (beans). Some of those components
+    depend on application services, and import those services from the OSGi
+    service registry. Since the domain model bundle contributes only domain
+    model types, but does not need to create any components of its own, it has
+    no associated application context.</p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="app-deploy:headers"></a>6.1.&nbsp;Bundle Format And Manifest Headers</h2></div></div></div><p>Each application module should be packaged as an OSGi bundle. A
+      bundle is essentially a jar file with a
+      <code class="literal">META-INF/MANIFEST.MF</code> file containing a series of
+      headers recognized by the OSGi Service Platform. See the OSGi Service
+      Platform Core Specification section 3.2 for details. Some OSGi
+      implementations may support exploded jar files, but the format remains
+      the same.</p><p>The Spring extender recognizes a bundle as "Spring-powered" and
+      will create an associated application context when the bundle is started
+      and one or both of the following conditions is true:</p><div class="itemizedlist"><ul type="disc"><li><p>The bundle path contains a folder
+          <code class="literal">META-INF/spring</code> with one or more files in that
+          folder with a '.xml' extension.</p></li><li><p><code class="literal">META-INF/MANIFEST.MF</code> contains a manifest
+          header <code class="literal">Spring-Context</code>.</p></li></ul></div><p>In addition, if the optional
+      <code class="literal">SpringExtender-Version</code> header is declared in the
+      bundle manifest, then the extender will only recognize bundles where the
+      specified version constraints are satisfied by the version of the
+      extender bundle (<code class="literal">Bundle-Version</code>). The value of the
+      <code class="literal">SpringExtender-Version</code> header must follow the syntax
+      for a version range as specified in section 3.2.5 of the OSGi Service
+      Platform Core Specification.</p><p>In the absence of the <code class="literal">Spring-Context</code> header the
+      extender expects every ".xml" file in the
+      <code class="literal">META-INF/spring</code> folder to be a valid Spring
+      configuration file, and all directives (see below) take on their default
+      values.</p><p>An application context is constructed from this set of files. A
+      suggested practice is to split the application context configuration
+      into at least two files, named by convention
+      <span class="emphasis"><em>modulename</em></span>-context.xml and
+      <span class="emphasis"><em>modulename</em></span>-osgi-context.xml. The
+      <span class="emphasis"><em>modulename</em></span>-context.xml file contains regular bean
+      definitions independent of any knowledge of OSGi. The
+      <span class="emphasis"><em>modulename</em></span>-osgi-context.xml file contains the bean
+      definitions for importing and exporting OSGi services. It may (but is
+      not required to) use the Spring Dynamic Modules OSGi schema as the
+      top-level namespace instead of the Spring 'beans' namespace.</p><p>The <code class="literal">Spring-Context</code> manifest header may be used
+      to specify an alternate set of configuration files. The resource paths
+      are treated as relative resource paths and resolve to entries defined in
+      the bundle and the set of attached <a href="appendix-tips.html#appendix-tips:fragments" title="E.1.&nbsp;OSGi Fragments">fragments</a>. 
+      When the
+      <code class="literal">Spring-Context</code> header defines at least one
+      configuration file location, any files in
+      <code class="literal">META-INF/spring</code> are ignored unless directly
+      referenced from the <code class="literal">Spring-Context</code> header.</p><p>The syntax for the <code class="literal">Spring-Context</code> header value
+      is:</p><pre class="programlisting">Spring-Context-Value ::= context ( ',' context ) *
+context ::= path ( ';' path ) * (';' directive) *
+</pre><p>This syntax is consistent with the OSGi Service Platform common
+      header syntax defined in section 3.2.3 of the OSGi Service Platform Core
+      Specification.</p><p>For example, the manifest entry:</p><pre class="programlisting">Spring-Context: config/account-data-context.xml, config/account-security-context.xml
+</pre><p>will cause an application context to be instantiated using the
+      configuration found in the files
+      <code class="literal">account-data-context.xml</code> and
+      <code class="literal">account-security-context.xml</code> in the bundle jar
+      file.</p><p>A number of directives are available for use with the
+      <code class="literal">Spring-Context</code> header. These directives are:</p><div class="itemizedlist"><ul type="disc"><li><p><span class="emphasis"><em>create-asynchronously</em></span> (false|true):
+          controls whether the application context is created asynchronously
+          (the default), or synchronously.</p><p>For example:</p><pre class="programlisting">Spring-Context: *;create-asynchronously:=false 
+</pre><p>Creates an application context synchronously, using all of the
+      "*.xml" files contained in the <code class="literal">META-INF/spring</code>
+      folder.</p><pre class="programlisting">Spring-Context: config/account-data-context.xml;create-asynchrously:=false
+</pre><p>Creates an application context synchronously using the
+      <code class="literal">config/account-data-context.xml</code> configuration file.
+      Care must be taken when specifying synchronous context creation as the
+      application context will be created on the OSGi event thread, blocking
+      further event delivery until the context is fully initialized. If an
+      error occurs during the synchronous creation of the application context
+      then a <code class="literal">FrameworkEvent.ERROR</code> event is raised. The bundle will still
+      proceed to the <code class="literal">ACTIVE</code> state.</p></li><li><p><span class="emphasis"><em>wait-for-dependencies</em></span> (true|false):
+          controls whether or not application context creation should wait for
+          any mandatory service dependencies to be satisfied before proceeding
+          (the default), or proceed immediately without waiting if
+          dependencies are not satisfied upon startup.</p><p>For example:</p><pre class="programlisting">Spring-Context: config/osgi-*.xml;wait-for-dependencies:=false
+</pre><p>Creates an application context using all the files matching
+      "osgi-*.xml" in the config directory. Context creation will begin
+      immediately even if dependencies are not satisfied. This essentially
+      means that mandatory service references are treated as though they were
+      optional - clients will be injected with a service object that may not
+      be backed by an actual service in the registry initially. See 
+      <a href="service-registry.html#service-registry:refs:singular:dynamics" title="7.2.1.8.&nbsp;reference And OSGi Service Dynamics">Section&nbsp;7.2.1.8, &#8220;<code class="literal">reference</code> And OSGi Service Dynamics&#8221;</a> for more details.</p></li><li><p><span class="emphasis"><em>timeout</em></span> (300): the time to wait (in
+          seconds) for mandatory dependencies to be satisfied before giving up
+          and failing application context creation. This setting is ignored if
+          <code class="literal">wait-for-dependencies:=false</code> is specified. The
+          default is 5 minutes (300 seconds).</p><p>For example:</p><pre class="programlisting">Spring-Context: *;timeout:=60
+</pre><p>Creates an application context that waits up to 1 minute (60 seconds)
+	  for its mandatory dependencies to appear.
+	  </p></li><li><p><span class="emphasis"><em>publish-context</em></span> (true|false): controls
+          whether or not the application context object itself should be
+          published in the OSGi service registry. The default is to publish
+          the context.</p><p>For example:</p><pre class="programlisting">Spring-Context: *;publish-context:=false
+</pre><p>If there is no Spring-Context manifest entry, or no value is
+      specified for a given directive in that entry, then the directive takes
+      on its default value.</p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="app-deploy:extender-configuration"></a>6.2.&nbsp;Extender Configuration Options</h2></div></div></div><p>Aside from bundle-specific configurations, Spring DM allows the core extender generic behaviour be configured. This is useful when
+    	embedding Spring DM inside a managed environment or when a bundles-wide functionality is desired. To allow for extensible configuration,
+    	the extender relies on OSGi <a href="appendix-tips.html#appendix-tips:fragments" title="E.1.&nbsp;OSGi Fragments">fragments</a> to override its defaults. The extender looks for all XML files 
+    	under <code class="literal">META-INF/spring/extender</code> folder in its bundle space and assembled them into an application context 
+    	(of type <code class="classname">OsgiBundleXmlApplicationContext</code>) 
+    	that is used internally as its configuration. To override a default setting of the extender, look up the appropriate bean
+    	name from the table below, define it in a suitable manner and then attach it as a <a href="appendix-tips.html#appendix-tips:fragments" title="E.1.&nbsp;OSGi Fragments">fragment</a> to the 
+    	<code class="literal">spring-osgi-extender.jar</code>, using:</p><pre class="programlisting">Fragment-Host: org.springframework.osgi.extender</pre><p>The following beans are currently recognized by the extender:</p><div class="table"><a name="extender-configuration-options"></a><p class="title"><b>Table&nbsp;6.1.&nbsp;Extender Configuration Options</b></p><div class="table-contents"><table summary="Extender Configuration Options" width="100%" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Bean Name</th><th>Type</th><th>Role</th><th>Default Behaviour/Value</th></tr></thead><tbody><tr><td><code class="literal">taskExecutor</code></td><td><code class="interfacename">TaskExecutor</code>
+                <sup>[<a name="d18e983" href="#ftn.d18e983">a</a>]</sup></td><td>Creates and runs the Spring application contexts associated with each bundle. The task executor is responsible for managing its own pool
+                of threads used by the application contexts</td><td><code class="classname">SimpleAsyncTaskExecutor</code> is used by default which means a new thread will be created for each application contexts. While this
+                is suitable for testing and development, we strongly recommend to use a <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://en.wikipedia.org/wiki/Thread_pool_pattern" target="_top">thread pool</a> 
+                in a production environment</td></tr><tr><td><code class="literal">shutdownTaskExecutor</code></td><td><code class="interfacename">TaskExecutor</code>
+                <sup>[<a name="d18e1005" href="#ftn.d18e1005">b</a>]</sup></td><td>Destroys managed Spring application contexts associated with each bundle. The task executor is responsible for managing its own pool
+                of threads used by the application contexts</td><td><code class="classname">TimerTaskExecutor</code> is used by default which means all application context will be destroyed in a serialized manner (which is
+                desired). Since the shutdown order normally matters, it is recommended to keep the default implementation or, for managed environments, to use a thread-pool
+                that executes only one task at a time (so that contexts are stopped in the given order).</td></tr><tr><td><code class="literal">extenderProperties</code></td><td><code class="classname">java.util.Properties</code></td><td>Defines simple properties such as the maximum time for contexts to gracefully close</td><td>See the <a href="app-deploy.html#extender-configuration-options-properties" title="Table&nbsp;6.2.&nbsp;Available extenderProperties">defaults</a> below</td></tr><tr><td><code class="literal">osgiApplicationEventMulticaster</code></td><td><code class="interfacename">ApplicationEventMulticaster</code>
+                <sup>[<a name="d18e1038" href="#ftn.d18e1038">c</a>]</sup>
+                </td><td><code class="literal"><a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/context/event/ApplicationEventMulticaster.html" target="_top">
+                ApplicationEventMultiCaster</a></code> used for propagating Spring DM <a href="app-deploy.html#app-deploy:extender-configuration:events" title="6.2.1.&nbsp;Listening To Extender Events">events</a>
+                to third parties. 
+                </td><td>An instance of <code class="classname"><a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/context/event/SimpleApplicationEventMulticaster.html" target="_top">
+                SimpleApplicationEventMulticaster</a></code> is used.
+                See <code class="classname">AbstractApplicationContext</code> 
+                <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://static.springframework.org/spring/docs/2.5.x/api/org/springframework/context/support/AbstractApplicationContext.html" target="_top">javadoc</a> 
+                for more information regarding available beans in an application context.</td></tr><tr><td><a name="extender-configuration-options:acc"></a><code class="literal">applicationContextCreator</code></td><td><code class="interfacename">OsgiApplicationContextCreator</code>
+                <sup>[<a name="extender-configuration-options:extender.pkg" href="#ftn.extender-configuration-options:extender.pkg">d</a>]</sup>
+                </td><td>Allows customization of the application context created by the extender. This includes changing the application context class type or additional
+                processing (see <a href="app-deploy.html#extender-configuration-options:obfpp">below</a>).</td><td>The Extender default behaviour applies.</td></tr><tr><td><a name="extender-configuration-options:obfpp"></a><span class="emphasis"><em>(irrelevant)</em></span></td><td><code class="interfacename">OsgiBeanFactoryPostProcessor</code>
+                <sup>[<a href="#ftn.extender-configuration-options:extender.pkg">d</a>]</sup>
+                </td><td>Similar to Spring's <code class="interfacename">BeanFactoryPostProcessor</code> interface, beans of type
+                <code class="interfacename">OsgiBeanFactoryPostProcessor</code> are automatically detected and applied to all contexts created by the
+                extender (whether <a href="app-deploy.html#extender-configuration-options:acc">user-defined</a> or not). This type of post processor
+                is useful as it allows customization of the bean factory such as adding/removing/changing existing bean definitions or adding new bean
+                instances.</td><td>The Extender default behaviour applies.</td></tr><tr><td><a name="extender-configuration-options:contextListener"></a><code class="literal">osgiApplicationContextListener</code></td><td><code class="interfacename">OsgiBundleApplicationContextListener</code>
+                <sup>[<a name="extender-configuration-options:event.pkg" href="#ftn.extender-configuration-options:event.pkg">e</a>]</sup>
+                </td><td>Application context event listener registered automatically by the extender.</td><td>Default implementation provides logging of the managed application contexts lifecycle.</td></tr></tbody><tbody class="footnotes"><tr><td colspan="4"><div class="footnote"><code class="literal"><sup>[<a name="ftn.d18e983" href="#d18e983">a</a>] </sup>org.springframework.core.task</code></div><div class="footnote"><code class="literal"><sup>[<a name="ftn.d18e1005" href="#d18e1005">b</a>] </sup>org.springframework.core.task</code></div><div class="footnote"><code class="literal"><sup>[<a name="ftn.d18e1038" href="#d18e1038">c</a>] </sup>org.springframework.context.event</code></div><div class="footnote"><code class="literal"><sup>[<a name="ftn.extender-configuration-options:extender.pkg" href="#extender-configuration-options:extender.pkg">d</a>] </sup>org.springframework.osgi.extender package</code></div><div class="footnote"><code class="literal"><sup>[<a name="ftn.extender-configuration-options:event.pkg" href="#extender-configuration-options:event.pkg">e</a>] </sup>org.springframework.osgi.context.event package</code></div></td></tr></tbody></table></div></div><br class="table-break"><p>From the <code class="literal">extenderProperties</code> bean, the following properties are recognized:</p><div class="table"><a name="extender-configuration-options-properties"></a><p class="title"><b>Table&nbsp;6.2.&nbsp;Available <code class="literal">extenderProperties</code></b></p><div class="table-contents"><table summary="Available extenderProperties" width="100%" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default Value</th></tr></thead><tbody><tr><td><code class="literal">shutdown.wait.time</code></td><td><code class="classname">java.lang.Long</code></td><td>The amount of time the extender will wait for each application context to shutdown gracefully. Expressed in milliseconds.</td><td>10000 ms (10 s)</td></tr><tr><td><code class="literal">process.annotations</code></td><td><code class="classname">java.lang.Boolean</code></td><td>Flag indicating whether or not, the extender will process Spring DM annotations. Note that this can be enabled in each process bundle
+                by adding the appropriate bean post processor. See <a href="appendix-extensions.html#appendix-extensions:annotations" title="A.1.&nbsp;Annotation-Based Injection">Section&nbsp;A.1, &#8220;Annotation-Based Injection&#8221;</a> for more information.</td><td>false</td></tr><tr><td><code class="literal">dependencies.wait.time</code></td><td><code class="classname">java.lang.Long</code></td><td>The amount of time the newly created application contexts will wait for their mandatory service dependencies during startup. Expressed
+                in milliseconds. This settings is used only if the context owning bundle manifest does <span class="emphasis"><em>not</em></span> define a value. </td><td>300000 ms (300 s or 5 min)</td></tr></tbody></table></div></div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/admons/note.png"></td><th align="left">Note</th></tr><tr><td align="left" valign="top">Since an application context is used, the full power of the Spring IoC container can be used for creating the extender configuration beans</td></tr></table></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="app-deploy:extender-configuration:events"></a>6.2.1.&nbsp;Listening To Extender Events</h3></div></div></div><p>There are cases when the failure or succesful startup of an application context needs to be acknowledged for logging purposes (for example).
+    		For these cases, Spring DM offers a dedicated package <code class="literal">org.springframework.osgi.context.event</code> which defines the events that
+    		OSGi application contexts can send during their lifecycle. At the moment, the following events are available:</p><div class="table"><a name="app-deploy:extender-configuration:events-table"></a><p class="title"><b>Table&nbsp;6.3.&nbsp;Spring DM build-in events</b></p><div class="table-contents"><table summary="Spring DM build-in events" width="100%" border="1"><colgroup><col><col></colgroup><thead><tr><th>Event</th><th>Explanation</th></tr></thead><tbody><tr><td><code class="classname">OsgiBundleContextRefreshedEvent</code></td><td>Published when an OSGi application context has been succesfully initialized or refreshed (e.g. using the 
+	                <code class="methodname">refresh()</code>  method on the <code class="interfacename">ConfigurableApplicationContext</code> interface).
+	                There are no guarantees on how many times this event might be received during the lifecycle of an application context - this is
+	                left up to the used implementation.</td></tr><tr><td><code class="classname">OsgiBundleContextFailedEvent</code></td><td>Published when an OSGi application context is closed due to a failure. This event can appear any time during the lifecycle
+	                of an application context - before, during or after refresh. Usually the cause indicates an error in the configuration - syntax typo,
+	                incorrect wiring, missing bean and so forth.</td></tr><tr><td><code class="classname">OsgiBundleContextClosedEvent</code></td><td>Published when an OSGi application context is closed after a successful refresh (normally issued a Spring bundle is being stopped).
+	                </td></tr></tbody></table></div></div><br class="table-break"><p>Parties interested in receiving these events should implement <code class="interfacename">OsgiBundleApplicationContextListener</code> and
+    		then publish it as an OSGi service. The Spring DM extender will automatically detect the listener and will send the events to it. By taking advantage
+    		of the OSGi service registry, the extender decouples the received from the event publisher and moreover, makes the registration/unregistration process
+    		easier. For example, there is nothing special a client should do to unregister the listener - simply stopping the bundle will automatically 
+    		unregister all its published services (including the listener), an event which will detected by the extender which will remove the listener.
+    		Of course, it is also possible for the client to unregister the listener manually during a bundle lifecycle.
+			    		
+    		</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/admons/note.png"></td><th align="left">Note</th></tr><tr><td align="left" valign="top">The Spring DM events semantics are slightly different then
+    		<a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#context-functionality-events" target="_top">Spring's</a>. The OSGi events are
+    		not sent to beans inside the <span class="emphasis"><em>causing</em></span> application context but to other parties (possible beans in other application contexts)
+    		interested in monitoring its behaviour.</td></tr></table></div><p>
+    		</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="app-deploy:required-libraries"></a>6.3.&nbsp;Required Spring Framework And Spring Dynamic Modules
+      Bundles</h2></div></div></div><p>The Spring Dynamic Modules project provides a number of bundle
+      artifacts that must be installed in your OSGi platform in order for the
+      Spring extender to function correctly:</p><div class="itemizedlist"><ul type="disc"><li><p>The extender bundle itself,
+          <code class="literal">org.springframework.osgi.extender</code></p></li><li><p>The core implementation bundle for the Spring Dynamic Modules
+          support, <code class="literal">org.springframework.osgi.core</code></p></li><li><p>The Spring Dynamic Modules I/O support library bundle,
+          <code class="literal">org.springframework.osgi.io</code></p></li></ul></div><p>In addition the Spring Framework provides a number of bundles that
+      are required to be installed. As of release 2.5 of the Spring Framework,
+      the Spring jars included in the Spring distribution are valid OSGi
+      bundles and can be installed directly into an OSGi platform. The minimum
+      required set of bundles is:</p><div class="itemizedlist"><ul type="disc"><li><p>spring-core.jar (bundle symbolic name
+          <code class="literal">org.springframework.core</code>)</p></li><li><p>spring-context.jar (bundle symbolic name
+          <code class="literal">org.springframework.context</code>)</p></li><li><p>spring-beans.jar (bundle symbolic name
+          <code class="literal">org.springframework.beans</code>)</p></li><li><p>spring-aop.jar (bundle symbolic name
+          <code class="literal">org.springframework.aop</code>)</p></li></ul></div><p>In additional the following supporting library bundles are
+      required. OSGi-ready versions of these libraries are shipped with the
+      Spring Dynamic Modules distribution.</p><div class="itemizedlist"><ul type="disc"><li><p>aopalliance</p></li><li><p>backport-util (when running on JDK 1.4)</p></li><li><p>cglib-nodep (when proxying classes rather then
+          interfaces, needed in most cases)</p></li><li><p>commons-logging API (<a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://www.slf4j.org/" target="_top">SLF4J</a> version <span class="emphasis"><em>highly</em></span> recommended:</p><div class="itemizedlist"><ul type="circle"><li><p>SLF4J API (com.springsource.sfl4j.api.jar)</p></li><li><p>SLF4J Implementation Bridge (such as Log4j - com.springsource.sfl4j.log4j.jar)</p></li><li><p>SLF4J commons logging adapter (com.springsource.sfl4j.org.apache.commons.logging.jar)</p></li></ul></div><p>)</p></li><li><p>logging implementation suitable for commons-logging (such as log4j)</p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="app-deploy:spring-namespaces"></a>6.4.&nbsp;Spring XML Authoring Support</h2></div></div></div><p>Spring 2.0 introduced (among other things) <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://static.springframework.org/spring/docs/2.5.x/reference/xsd-config.html" target="_top">
+    	easier</a> XML configuration and <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://static.springframework.org/spring/docs/2.5.x/reference/extensible-xml.html" target="_top">
+    	extensible</a> XML authoring. The latter gives the ability of creating custom schemas that are discovered automatically (in non-OSGi environment)
+    	by the Spring XML infrastructure by including them in the classpath. Spring DM is aware of this process and supports it in OSGi environments so
+    	that custom schemas are available to bundles that use them without any extra code or manifest declaration.</p><p>All bundles deployed in the OSGi space (whether they are <code class="literal">Spring-powered</code> or not) are scanned by Spring DM for 
+    	custom Spring namespace declaration (by checking the bundle space for<code class="literal">META-INF/spring.handlers</code> and 
+    	<code class="literal">META-INF/spring.schemas</code>). If these are found, Spring DM will make the schemas and the namespaces available through an OSGi
+    	service that will be automatically used by Spring-powered bundles. This mean that if you deploy a bundle that uses a custom schema, all you have to do
+    	is deploy the library that provides the namespace parser and the schema.
+    	Bundles that embedded inside their classpath libraries that provide custom schemas will use these over those available in the OSGi space. However,
+    	the namespaces of the embedded libraries will not shared with other bundles, that is, they will not be seen by any other bundle.</p><p>
+    	In short, with using Spring DM, custom Spring namespaces are supported transparently without any additional work. Embedded namespace providers will
+    	have priority but will not be shared, as opposed to providers deployed as bundles which will be seen (and used) by others.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="app-deploy:imports-exports"></a>6.5.&nbsp;Importing and Exporting Packages</h2></div></div></div><p>Refer to the OSGi Service Platform for details of the
+      <code class="literal">Import-Package</code> and <code class="literal">Export-Package</code>
+      manifest headers. Your bundle will need an
+      <code class="literal">Import-Package</code> entry for every external package that
+      the bundle depends on. If your bundle provides types that other bundles
+      need access to, you will need <code class="literal">Export-Package</code> entries
+      for every package that should be available from outside of the
+      bundle.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="app-deploy:ext-libs"></a>6.6.&nbsp;Considerations When Using External Libraries</h2></div></div></div><div class="sidebar"><p class="title"><b>What is the context class loader?</b></p><p>
+      	The thread context class loader was introduced in J2SE without much fanfare.
+      	Below is a short definition for it, quoted from <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://java.sun.com/products/jndi/tutorial/beyond/misc/classloader.html" target="_top">one
+      	</a> of the tutorials available on <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://java.sun.com/" target="_top">Java</a> site:
+      	</p><p>
+      	The Java 2 platform also introduced the notion of <span class="emphasis"><em>context class loader</em></span>. A thread's context class loader is, by default, 
+      	set to the context class loader of the thread's parent. The hierarchy of threads is rooted at the primordial thread (the one that runs the program). 
+      	The context class loader of the primordial thread is set to the class loader that loaded the application. So unless you explicitly change 
+      	the thread's context class loader, its context class loader will be the application's class loader. That is, the context class loader can 
+      	load the classes that the application can load. This loader is used by the Java runtime such as the RMI (Java Remote Method Invocation) to 
+      	load classes and resources on behalf of the user application. The context class loader, like any Java 2 platform class loader, has a parent 
+      	class loader and supports the same delegation model for class loading described previously.
+      	</p></div><p>Many enterprise application libraries assume that all of the types
+      and resources that comprise the application are accessible through the
+      context class loader. While most developers do not use the context class 
+      loader, the loader is used heavily by application servers, containers or 
+      applications that are multi-threaded.</p><p>		      
+      In OSGi R4, the set of types and resources
+      available through the context class loader is undefined. 
+      This means that the OSGi platform does not make a guarantee of the thread context 
+      class loader value or in other words, it does not manage it.
+      </p><p>
+      Thus code (for example libraries) that performs manual class loading or that generates 
+      new classes dynamically can cause problems when executed inside an OSGi environment.
+      </p><p>Spring Dynamic Modules guarantees that during the creation of an
+      application context on behalf of a given bundle, all of the types and
+      resources on the bundle's classpath are accessible via the context class
+      loader. Spring Dynamic Modules also allows you to control what is
+      accessible through the context class loader when invoking external
+      services and when servicing requests on exported services. See <a href="service-registry.html" title="Chapter&nbsp;7.&nbsp;The Service Registry">Chapter&nbsp;7, <i xmlns:xlink="http://www.w3.org/1999/xlink">The Service Registry</i></a>
+      for details on this.</p><p>Work is underway in the OSGi R5 timeframe to provide standardized
+      support for dealing with generated classes and implicit class path
+      dependencies introduced by third-party libraries. In the interim you may
+      need to rely on workarounds such as the
+      <code class="literal">DynamicImport-Package</code> manifest header, or the
+      facilities provided by specific OSGi implementations such as Equinox's
+      buddy mechanism. The Spring Dynamic Modules documentation contains more
+      details on known issues with common enterprise libraries and the
+      workarounds.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="app-deploy:troubleshooting"></a>6.7.&nbsp;Diagnosing Problems</h2></div></div></div><p>Your chosen OSGi platform implementation should be able to provide
+      you with a good deal of information about the current status of the OSGi
+      environment. For example, starting Equinox with the
+      <code class="literal">-console</code> argument provides a command-line console
+      through which you can determine which bundles are installed and their
+      states, the packages and services exported by bundles, find out why a
+      bundle has failed to resolve, and drive bundles through the
+      lifecycle.</p><p>In addition, Spring itself and the Spring Dynamic Modules bundles
+      contain extensive logging instrumentation that can help you diagnose
+      problems. The recommended approach is to deploy the Simple Logging
+      Facade for Java (<a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://www.slf4j.org/" target="_top">slf4j</a>)
+      slf4j-api.jar and slf4j-log4j13.jar bundles (the jar files distributed
+      by the project are valid OSGi bundles). Then you simply need to create a
+      <code class="literal">log4j.properties</code> file in the root of your bundle
+      classpath.</p><p>Note that Spring Dynamic Modules uses commons-logging API internally
+      which means that its logging implementation is fully pluggable. Please see
+      the FAQ and Resources pages for more information on other logging libraries
+      besides log4j.
+      </p></div></div><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bnd-app-ctx.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="service-registry.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Bundles and Application Contexts&nbsp;</td><td width="20%" align="center"><span style="color:white;font-size:90%;"><a href="http://www.SpringSource.com/" title="SpringSource - Spring from the Source">Sponsored by SpringSource
+                                        </a></span></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;The Service Registry</td></tr></table></div></body></html>

@@ -1,0 +1,8 @@
+K 10
+svn:ignore
+V 32
+target
+log4j.log
+eclipse_config
+
+END

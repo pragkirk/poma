@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/spring-osgi/!svn/ver/2307/trunk/samples/weather/wiring-bundle/src/main/resources/META-INF/spring
+END
+bootstrap.xml
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/spring-osgi/!svn/ver/2307/trunk/samples/weather/wiring-bundle/src/main/resources/META-INF/spring/bootstrap.xml
+END

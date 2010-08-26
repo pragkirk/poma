@@ -1,0 +1,4 @@
+Bundle-ManifestVersion: 2
+Bundle-Name: Log4j configuration bundle
+Bundle-SymbolicName: org.springframework.osgi.samples.simplewebapp.logging.cfg
+Fragment-Host: org.springframework.osgi.log4j.osgi

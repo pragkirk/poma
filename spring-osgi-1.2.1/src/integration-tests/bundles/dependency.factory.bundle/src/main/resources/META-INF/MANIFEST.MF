@@ -1,0 +1,11 @@
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.dependencies.factory
+Bundle-Name: Simple-Service created by factory
+Bundle-Vendor: Spring Framework
+Spring-Context: *;
+Import-Package: org.springframework.beans.factory
+Export-Package: org.springframework.osgi.iandt.simpleservice, org.springframework.osgi.iandt.simpleservice2,
+  org.springframework.osgi.iandt.simpleservice2.impl
+Bundle-ClassPath: .,
+ target/classes/

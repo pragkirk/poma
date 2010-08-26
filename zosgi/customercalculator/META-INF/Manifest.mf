@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Customer Calculator
+Bundle-SymbolicName: customercalculator
+Bundle-Version: 1.0.0
+Export-Package: com.extensiblejava.calculator
+Import-Package: com.extensiblejava.customer,com.extensiblejava.order,com.extensiblejava.calculator

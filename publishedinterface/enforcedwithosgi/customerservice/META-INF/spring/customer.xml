@@ -10,7 +10,6 @@
 
   <bean name="orderBuilder" class="com.extensiblejava.order.impl.DefaultOrderBuilder"/>
 
-<!-- maybe i can't instantiate same DefaultCustomer class twice??? -->
 <bean name="customerService3" class="com.extensiblejava.customer.impl.DefaultCustomer">
 	<constructor-arg type="java.lang.String" value="Bill Doe"/>
 	<constructor-arg><ref bean="orderBuilder3"/></constructor-arg>

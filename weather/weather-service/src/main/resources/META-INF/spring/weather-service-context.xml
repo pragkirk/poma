@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xsi:schemaLocation="
+  http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/osgi
+  http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+	<bean id="weatherService"
+	      class="org.springframework.osgi.samples.weather.service.WeatherServiceImpl">
+		<property name="weatherDao">
+			<osgi:reference interface="org.springframework.osgi.samples.weather.dao.WeatherDao"/>
+		</property>
+	</bean>
+
+
+	<osgi:service ref="weatherService">
+		<osgi:interfaces>
+			<value>org.springframework.osgi.samples.weather.service.WeatherService</value>
+		</osgi:interfaces>
+		<osgi:service-properties>
+            <entry key="foo" value="bar"/>
+            <entry key="baz" value="myprop"/>
+        </osgi:service-properties>
+	</osgi:service>
+
+</beans>
+

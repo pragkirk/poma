@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book xmlns:xi="http://www.w3.org/2001/XInclude">
+  <bookinfo>
+    <title>Spring Dynamic Modules Reference Guide</title>
+	<para><emphasis>for OSGi(tm) Service Platforms.</emphasis></para>
+    <releaseinfo>&version;</releaseinfo>
+    
+    <authorgroup>
+      <author>
+        <firstname>Adrian M</firstname>
+        <surname>Colyer</surname>
+        <affiliation>SpringSource</affiliation>
+      </author>
+      <author>
+        <firstname>Hal</firstname>
+        <surname>Hildebrand</surname>
+        <affiliation>Oracle</affiliation>
+      </author>
+      <author>
+        <firstname>Costin</firstname>
+        <surname>Leau</surname>
+        <affiliation>SpringSource</affiliation>
+      </author>
+      <author>
+        <firstname>Andy</firstname>
+        <surname>Piper</surname>
+        <affiliation>BEA</affiliation>
+      </author>
+    </authorgroup>
+
+
+    <legalnotice>
+      <para>Copies of this document may be made for your own use and for
+      distribution to others, provided that you do not charge any fee for such
+      copies and further provided that each copy contains this Copyright
+      Notice, whether distributed in print or electronically.</para>
+    </legalnotice>
+  </bookinfo>
+
+  <toc />
+
+  <xi:include href="preface.xml"/>
+  
+  <part id="introduction">
+      <title>Introduction</title>
+
+	  <xi:include href="introduction/introduction.xml"/>
+      <xi:include href="introduction/why-spring-dm.xml"/>
+      <xi:include href="introduction/requirements.xml"/>
+      <xi:include href="introduction/getting-started.xml"/>
+      <xi:include href="introduction/what-is-new.xml"/>
+
+      <!-- background on OSGi -->
+  </part>
+  <part id="reference">
+	  <title>Reference Documentation</title>
+
+      <xi:include href="reference/introduction.xml"/>
+      <xi:include href="reference/bundle-app-context.xml"/>
+      <xi:include href="reference/deployment.xml"/>
+	  <xi:include href="reference/service-registry.xml"/>
+	  <xi:include href="reference/bundles.xml"/>
+	  <xi:include href="reference/web/web.xml"/>
+	  <xi:include href="reference/compendium/compendium.xml"/>
+	  <xi:include href="reference/testing.xml"/>
+  </part>
+  <part id="resources">
+      <title>Other Resources</title>
+      <partintro>
+          <para>
+              In addition to this reference documentation, there are a number of
+              other resources that may help you learn how to use OSGi and Spring Dynamic
+              Modules. These additional, third-party resources are enumerated in this 
+              section.
+          </para>
+      </partintro>
+      <xi:include href="links.xml"/>
+      <!-- 
+      <xi:include href="bibliography.xml"/>
+       -->
+  </part>
+  <part id="appendixes">
+      <title>Appendixes</title>
+      <xi:include href="appendix/introduction.xml"/>
+      <xi:include href="appendix/appendix-extensions.xml"/>
+      <xi:include href="appendix/appendix-security.xml"/>
+      <xi:include href="appendix/appendix-pde.xml"/>
+      <xi:include href="appendix/appendix-archetype.xml"/>
+      <xi:include href="appendix/appendix-tips.xml"/>
+      <xi:include href="appendix/appendix-roadmap.xml"/>
+      <xi:include href="appendix/appendix-osgi-repo.xml"/>
+      <xi:include href="appendix/appendix-schema.xml"/>
+      <xi:include href="appendix/appendix-ack.xml"/>
+  </part>
+</book>

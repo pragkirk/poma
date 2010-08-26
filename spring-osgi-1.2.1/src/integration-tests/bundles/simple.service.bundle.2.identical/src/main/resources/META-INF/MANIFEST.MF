@@ -1,0 +1,10 @@
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.simpleservice.identical
+Bundle-Name: Simple-Service-Sample
+Bundle-Vendor: Spring Framework
+Spring-Context: *; eagerly-init-importers:=true
+Import-Package: org.springframework.osgi.iandt.simpleservice
+Export-Package: org.springframework.osgi.samples.simpleservice.impl
+Bundle-ClassPath: .,
+ target/classes/

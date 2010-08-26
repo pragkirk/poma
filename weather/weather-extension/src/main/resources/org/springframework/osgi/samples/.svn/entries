@@ -1,0 +1,31 @@
+8
+
+dir
+2435
+https://anonsvn.springsource.org/svn/spring-osgi/trunk/samples/weather/weather-extension/src/main/resources/org/springframework/osgi/samples
+https://anonsvn.springsource.org/svn/spring-osgi
+
+
+
+2007-11-06T16:33:48.307843Z
+1160
+costin_leau
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2e8e966d-6415-0410-94b9-dc4e65435d03
+
+weather
+dir
+

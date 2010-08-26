@@ -1,0 +1,8 @@
+Bundle-Name: namespace-test
+Bundle-SymbolicName: org.springframework.osgi.iandt.ns.embedded
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Import-Package: org.springframework.beans.factory.config,
+ org.springframework.beans.factory.xml,
+ org.w3c.dom
+

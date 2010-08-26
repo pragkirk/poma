@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>weather</artifactId>
+		<groupId>org.springframework.osgi.samples</groupId>
+		<version>1.2.1</version>
+	</parent>
+	<groupId>org.springframework.osgi.samples</groupId>
+	<artifactId>wiring-bundle</artifactId>
+	
+	<!-- if bundle is used, resource filtering will not work -->
+	<packaging>jar</packaging>
+	<name>Spring OSGi Samples: Weather Service Wiring Bundle</name>
+	<url>http://www.springframework.org/osgi</url>
+
+  <properties>
+	<spring.osgi.export.pkg>!*</spring.osgi.export.pkg>
+	<!-- put the import here since we have no classes and the plugin has nothing to analyze -->
+	<spring.osgi.import.pkg>
+    org.springframework.osgi.config,
+    org.springframework.osgi.context,
+    org.springframework.osgi.context.support,
+    org.springframework.osgi.service,
+    org.springframework.osgi.service.importer,
+    org.springframework.jmx.export
+   </spring.osgi.import.pkg>
+   
+   <!-- used inside the filtered osgi manifest -->
+   <bundle.version>1.0.0.rc1</bundle.version>
+   
+  </properties>
+  
+  <build>
+  	<resources>
+		<resource>
+			<directory>src/main/resources</directory>
+			<filtering>true</filtering>
+		</resource>
+	 </resources>
+	<plugins>
+	<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
+	</plugins>
+	</build>
+</project>

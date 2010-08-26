@@ -1,0 +1,8 @@
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.configuration
+Bundle-Name: Atomic configuration update test
+Bundle-Vendor: Spring Framework
+Export-Package: org.springframework.osgi.iandt.configuration
+Bundle-ClassPath: .,
+ target/classes/

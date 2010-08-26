@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<chapter id="links">
+	<title>Useful Links</title>
+
+	<itemizedlist>
+
+	<listitem><emphasis>Spring DM Home Page</emphasis> - <ulink url="http://www.springframework.org/osgi/">here</ulink></listitem>
+	<listitem><emphasis>SpringSource OSGi blog</emphasis> - <ulink url="http://blog.springsource.com/category/osgi/">here</ulink></listitem>
+	<listitem><emphasis>Spring DM Demos</emphasis> - <ulink url="http://www.springframework.org/osgi/demos">here</ulink></listitem>
+	
+	<listitem><emphasis>Getting Started with OSGi</emphasis> - by Neil Bartlett 
+	<ulink url="http://neilbartlett.name/blog/osgi-articles/">here</ulink> and 
+	<ulink url="http://www.eclipse.org/resources/?author=Neil%20Bartlett">here</ulink>.
+	</listitem>
+	
+	<listitem><emphasis>Equinox Documents</emphasis> - 
+		<ulink url="http://www.eclipse.org/equinox/documents/">here</ulink>
+	</listitem>
+
+	<listitem><emphasis>Felix-related presentations</emphasis> - various 
+		<ulink url="http://felix.apache.org/site/presentations.html">presentations</ulink>
+		hosted by Apache Felix project.
+	</listitem>
+	
+	<listitem><emphasis>Launching Spring Dynamic Modules using pax-runner</emphasis> - 
+		<ulink url="http://wiki.ops4j.org/confluence/display/ops4j/Pax+Runner+-+Screencast+-+Spring+OSGi">
+		screencast</ulink>
+	</listitem>
+	
+	<listitem><emphasis>OSGi Alliance Blog</emphasis> - <ulink url="http://www.osgi.org/blog/">here</ulink></listitem>
+	
+	</itemizedlist>
+</chapter>

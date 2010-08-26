@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <artifactId>spring-osgi</artifactId>
+    <groupId>org.springframework.osgi</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi.samples</groupId>
+  <artifactId>samples</artifactId>
+  <packaging>pom</packaging>
+  <name>Spring OSGi Samples</name>
+  <url>http://www.springframework.org/osgi</url>
+  
+  <modules>
+    <module>simple-service</module>
+    <module>weather</module>
+    <module>simple-web-app</module>
+  </modules>
+  
+  <reporting>
+    <plugins>
+       <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <configuration>
+             <stylesheetfile>${basedir}/../../../docs/src/javadoc/javadoc.css</stylesheetfile>
+          </configuration>
+       </plugin>
+    </plugins>
+  </reporting>
+  <build>
+  <plugins>
+    <plugin>
+      <artifactId>maven-clean-plugin</artifactId>
+      <configuration>
+        <filesets>
+          <fileset>
+            <directory>META-INF</directory>
+            <includes>
+              <include>MANIFEST.MF</include>
+            </includes>
+            <followSymlinks>false</followSymlinks>
+          </fileset>
+        </filesets>
+      </configuration>
+    </plugin>
+
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>jdk-1.5+</id>
+        <activation>
+          <jdk>!1.4</jdk>
+        </activation>
+        <modules>
+          <module>web-console</module>
+        </modules>
+    </profile>
+  </profiles>
+	
+</project>

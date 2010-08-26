@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:extension="http://www.springframework.org/schema/osgi/samples/weather"
+       xsi:schemaLocation="
+  http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/osgi
+  http://www.springframework.org/schema/osgi/spring-osgi.xsd
+  http://www.springframework.org/schema/osgi/samples/weather
+  http://www.springframework.org/schema/osgi/samples/weather/extension-osgi.xsd"
+  >
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="osgi.properties"/>
+	</bean>
+
+	<bean id="initializer" class="java.util.Properties" depends-on="weatherTest"/>
+
+	<osgi:bundle id="weatherTestBundle" depends-on="weatherServiceBundle" symbolic-name="org.springframework.osgi.samples.weather.service.test"
+	             location="file:${localRepository}/org/springframework/osgi/samples/weather-service-test/${pom.version}/weather-service-test-${pom.version}.jar" action="start"/>
+
+	<osgi:bundle id="weatherDaoBundle" symbolic-name="org.springframework.osgi.samples.weather-dao"
+	             location="file:${localRepository}/org/springframework/osgi/samples/weather-dao/${pom.version}/weather-dao-${pom.version}.jar"
+	             action="start"/>
+
+
+
+	<osgi:bundle id="weatherServiceBundle" action="start">
+		<ref local="weatherServiceVirtualBundle"/>
+	</osgi:bundle>
+	
+	<!-- Note that this is not a real bundle - we are creating it on the fly from a regular jar -->
+	<extension:virtual-bundle id="weatherServiceVirtualBundle" depends-on="weatherDaoBundle"
+	                     location="file:${localRepository}/org/springframework/osgi/samples/weather-service/${pom.version}/weather-service-${pom.version}.jar"
+	                     version="${spring.osgi.bundle.version}" group-id="org.springframework.osgi.samples.weather" artifact-id="service">
+		<extension:imports>
+			<extension:package name="org.springframework.osgi.samples.weather.dao" version="${spring.osgi.bundle.version}"/>
+			<extension:package name="org.springframework.osgi.config"/>
+		</extension:imports>
+		<extension:exports>
+			<extension:package name="org.springframework.osgi.samples.weather.service" version="${spring.osgi.bundle.version}"/>
+		</extension:exports>
+	</extension:virtual-bundle>
+	
+	<osgi:reference id="weatherService" interface="org.springframework.osgi.samples.weather.service.WeatherService"
+	                bean-name="weatherService" timeout="2000" depends-on="weatherServiceBundle,weatherTestBundle">
+		<osgi:listener ref="weatherListener"/>
+	</osgi:reference>
+
+	<bean id="weatherListener" class="org.springframework.osgi.samples.weather.test.WeatherListener" lazy-init="true"/>
+	
+	<bean id="weatherTest" class="org.springframework.osgi.samples.weather.test.WeatherServiceTest"
+	      init-method="testSample2" lazy-init="true" depends-on="weatherTestBundle">
+		<property name="weatherService" ref="weatherService"/>
+	</bean>
+
+	<!--bean id="jmxExporter" class="org.springframework.jmx.export.MBeanExporter">
+		<property name="beans">
+			<map>
+				<entry key="weatherService:service=bundle" value-ref="weatherServiceBundle"/>
+			</map>
+		</property>
+		<property name="assembler">
+			<bean class="org.springframework.jmx.export.assembler.InterfaceBasedMBeanInfoAssembler">
+				<property name="interfaceMappings">
+					<props>
+						<prop key="weatherService:service=bundle">org.osgi.framework.Bundle</prop>
+					</props>
+				</property>
+			</bean>
+		</property>
+		<property name="autodetect" value="true"/>
+	</bean-->
+
+</beans>

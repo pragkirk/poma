@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+                 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<appendix id="appendix-archetype">
+    <title>Spring Dynamic Modules Maven Archetype</title>
+    
+
+    <para>As part of the distribution, Spring DM provides a Maven <ulink url="http://maven.apache.org/plugins/maven-archetype-plugin/">archetype</ulink>
+    which creates the basic structure of a Java project that uses Spring DM, especially useful to new users. To run the archetype (and create the new project),
+    simply run the following command line: 
+   	</para>
+
+   <programlisting><![CDATA[mvn archetype:generate]]></programlisting>
+   <para>
+   The maven plugin will display a selection of possible archetype, from which you should pick 
+   <literal>spring-osgi-bundle-archetype (Spring-OSGi archetype)</literal> (currently number 32), and will request input regarding the project about to be created. 
+   A list of all available archetypes included with the plugin and their versions is available <ulink url="http://docs.codehaus.org/display/MAVENUSER/Archetypes+List">here</ulink>.
+   </para>
+   
+   <para>
+   Note that it is still possible to select the osgi archetype directly from the command line (i.e. the old way of using the archetype): 
+   </para>
+   
+   <programlisting>mvn archetype:create \
+-DarchetypeGroupId=org.springframework.osgi \
+-DarchetypeArtifactId=spring-osgi-bundle-archetype \
+-DarchetypeVersion=&version;   \
+<![CDATA[-DgroupId=<your-project-groupId>  \
+-DartifactId=<your-project-artifactId> \
+-Dversion=<your-project-version>]]></programlisting>
+	
+	<note>The command above should be invoked as one line - the <literal>\</literal> is used as a convenience to break the long line into smaller pieces</note>    
+    
+    <para>In both cases, the result of the commands is a Maven 2 project that defines two packages (one public and one private) and two Spring configurations:
+    <literal>src/main/resources/META-INF/spring/bundle-context.xml</literal> and <literal>src/main/resources/META-INF/spring/bundle-context-osgi.xml</literal> 
+    The project is packaged as an OSGi bundle.</para>
+    <para>Notice that by default, the project does not contain a MANIFEST.MF for your project. The Maven infrastructure will generate it, either through SpringSource
+    <ulink url="http://www.springsource.org/bundlor">Bundlor</ulink> (the default) or Apache Felix 
+    <ulink url="http://felix.apache.org/site/maven-bundle-plugin-bnd.html">bundle plug-in</ulink>. 
+    To generate the manifest, run the following (from the project root):</para>
+    
+    <programlisting><![CDATA[mvn package]]></programlisting>
+    
+    <note>To avoid the confusion between the generated artifacts and maintained files, the manifest file resides under <literal>META-INF</literal> folder
+    while Spring configuration files under <literal>src/main/resources/META-INF</literal> directory.</note>
+    
+    <para>This will compile your project, pack it as a jar and create the OSGi manifest based on your classes under <literal>/META-INF</literal> folder (so
+    that users running Eclipse PDE can use it right away.</para>
+    
+   <section id="archetype:generated-content">
+   	<title>Generated Project Features At-A-Glance</title>
+   	
+   	<itemizedlist>
+   		<listitem>Packaged as an OSGi bundle</listitem>
+   		<listitem><literal>META-INF/MANIFEST.MF</literal> automatically generated</listitem>
+   		<listitem><literal>src/main/java/<![CDATA[<package>]]></literal> public package exported by the bundle</listitem>
+   		<listitem><literal>src/main/java/<![CDATA[<package>/internal]]></literal> private package, not exported by the bundle</listitem>
+   		<listitem><literal>src/main/resources/META-INF/spring/bundle-context.xml</literal> is a Spring configuration file that defines the simple bean.</listitem>
+   		<listitem><literal>src/main/resources/META-INF/spring/bundle-context-osgi.xml</literal> is a Spring configuration file ready for you to add bean 
+   		definitions from the osgi namespace (services, references etc.)</listitem>
+   		<listitem><literal>.project</literal>, <literal>.classpath</literal>, and <literal>build.properties</literal> files created to enable use of this 
+   		project directly inside eclipse as a PDE plugin project</listitem>
+   	</itemizedlist>
+   </section>
+</appendix>

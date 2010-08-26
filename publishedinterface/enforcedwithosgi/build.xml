@@ -31,9 +31,9 @@
 		<javac srcdir="${javasrc}:${testsrc}" destdir="${build}">
 			<classpath>
 				<pathelement location="${lib}"/>
-				<pathelement location="${springosgilib}/spring-beans.jar"/>
-				<pathelement location="${springosgilib}/spring-context.jar"/> 
-				<pathelement location="${springosgilib}/spring-core.jar"/>	
+				<pathelement location="${springosgilib}/org.springframework.beans-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.context-2.5.6.SEC01.jar"/> 
+				<pathelement location="${springosgilib}/org.springframework.core-2.5.6.SEC01.jar"/>
 				<pathelement location="${lib}/junit.jar"/>
 			</classpath>
 		</javac>
@@ -52,12 +52,12 @@
 				<pathelement path="${bindist}/customer.jar"/>
 				<pathelement path="${bindist}/customer-test.jar"/>
 				<pathelement path="${lib}/junit.jar"/>
-				<pathelement location="${springosgilib}/spring-beans.jar"/>
-				<pathelement location="${springosgilib}/spring-context.jar"/> 
-				<pathelement location="${springosgilib}/spring-core.jar"/>
-				<pathelement location="${springosgilib}/jcl104-over-slf4j-1.4.3.jar"/>
-				<pathelement location="${springosgilib}/slf4j-api-1.4.3.jar"/>
-				<pathelement location="${springosgilib}/slf4j-log4j12-1.4.3.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.beans-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.context-2.5.6.SEC01.jar"/> 
+				<pathelement location="${springosgilib}/org.springframework.core-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.org.apache.commons.logging-1.5.0.jar"/> 
+				<pathelement location="${springosgilib}/com.springsource.slf4j.api-1.5.0.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.log4j-1.5.0.jar"/>
 				<pathelement location="${springosgilib}/log4j.osgi-1.2.15-SNAPSHOT.jar"/>
 			</classpath>
 			<test name="com.extensiblejava.customer.test.CustomerTest" outfile="junitresults">

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+	<bean id="a" class="java.lang.Object" />
+
+	<bean id="b" class="java.lang.Integer">
+		<constructor-arg value="50" />
+	</bean>
+
+	<bean id="c" class="java.lang.String">
+		<constructor-arg ref="b" />
+	</bean>
+
+	<bean id="int" class="java.lang.Integer">
+		<constructor-arg ref="c" />
+	</bean>
+
+	<bean id="long" class="java.lang.Long">
+		<constructor-arg ref="c" />
+	</bean>
+
+	<bean id="buffer" class="java.lang.StringBuffer">
+		<constructor-arg ref="int" />
+	</bean>
+
+	<bean id="thread" class="java.lang.Thread" depends-on="buffer"/>
+	
+	<bean id="field" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+	   <property name="targetObject" ref="thread"/>
+   	   <property name="targetField" value="MAX_PRIORITY"/>
+	 </bean>
+	
+	<bean id="secondBuffer" class="java.lang.StringBuffer">
+		<constructor-arg ref="field"/>
+	</bean>
+</beans>

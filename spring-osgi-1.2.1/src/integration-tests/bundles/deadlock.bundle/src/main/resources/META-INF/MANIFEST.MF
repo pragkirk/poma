@@ -1,0 +1,8 @@
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.deadlock
+Bundle-Name: Purposeful Deadlock
+Bundle-Vendor: Spring Framework
+Spring-Context: *;
+Bundle-ClassPath: .,
+ target/classes/

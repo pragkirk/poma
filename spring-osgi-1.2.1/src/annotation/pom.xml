@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project>
+  <parent>
+    <artifactId>spring-osgi</artifactId>
+    <groupId>org.springframework.osgi</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi</groupId>
+  <artifactId>spring-osgi-annotation</artifactId>
+  <packaging>bundle</packaging>
+  <name>Spring OSGi Annotations</name>
+  <url>http://www.springframework.org/osgi</url>
+  <description>
+  Provides OSGi service injection via annotations.
+  </description>
+  
+  <properties>
+	<javadoc.loc>${basedir}/../docs/src/javadoc</javadoc.loc>
+	<spring.osgi.export.pkg>org.springframework.osgi.extensions.annotation</spring.osgi.export.pkg>
+	<spring.osgi.symbolic.name>${symName.prefix}.extensions.annotations</spring.osgi.symbolic.name>
+	<spring.osgi.import.pkg>
+		org.apache.commons.logging
+	</spring.osgi.import.pkg>
+
+	<source-jdk>1.5</source-jdk>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-mock</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-extender</artifactId>
+	  <optional>true</optional>
+    </dependency>    
+    <dependency>
+      <groupId>org.aopalliance</groupId>
+      <artifactId>com.springsource.org.aopalliance</artifactId>
+      <scope>test</scope>
+    </dependency>    
+  </dependencies>
+
+</project>

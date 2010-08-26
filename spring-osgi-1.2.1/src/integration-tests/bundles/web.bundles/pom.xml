@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <artifactId>spring-osgi-integration-test-bundles</artifactId>
+    <groupId>org.springframework.osgi.iandt</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi.iandt.web</groupId>
+  <artifactId>web-bundles</artifactId>
+  <packaging>pom</packaging>
+  <name>Spring OSGi Web Integration Testing Bundles</name>
+  <url>http://www.springframework.org/osgi</url>
+  
+  <properties>
+    <!-- root, empty package -->
+    <!-- plugin not yet enabled to avoid further problems -->
+	<spring.osgi.import.pkg>!org.springframework.osgi.iandt, *</spring.osgi.import.pkg>
+	<spring.osgi.export.pkg>${pom.artifactId}*</spring.osgi.export.pkg>
+  </properties>
+  
+  <!-- shared dependencies -->
+  <dependencies>
+        <dependency>
+            <groupId>org.springframework.osgi</groupId>
+            <artifactId>spring-osgi-core</artifactId>
+            <version>${project.parent.version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>com.springsource.javax.servlet</artifactId>
+            <version>2.4.0</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.osgi</groupId>
+            <artifactId>jsp-api.osgi</artifactId>
+            <version>2.0-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+  </dependencies>
+  
+  <modules>
+    <module>static.resource.only.bundle</module>
+    <module>simple.servlet.bundle</module>
+    <module>simple.jsp.bundle</module>    
+	<module>taglib.jsp.bundle</module>
+	<module>web.extender.deployer.fragment.bundle</module>
+  </modules>
+
+ <build>
+    <plugins>
+    	<!--
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
+      -->
+      
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-war-plugin</artifactId>
+         <configuration>
+		   <warSourceExcludes>WEB-INF/lib/*</warSourceExcludes>
+           <archive>
+             <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+           </archive>
+         </configuration>       
+      </plugin>
+      
+    </plugins>
+    
+ </build>
+
+</project>

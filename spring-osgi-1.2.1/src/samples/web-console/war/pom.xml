@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <groupId>org.springframework.osgi.samples.web-console</groupId>
+    <artifactId>web-console</artifactId>    
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi.samples.web-console</groupId>
+  <artifactId>war</artifactId>
+  <name>Spring OSGi Samples: OSGi Web Console - War Bundle</name>
+  <url>http://www.springframework.org/osgi</url>
+  <packaging>war</packaging>
+
+  <build>
+    <resources>
+		 <resource>
+		   <directory>src/main/resources</directory>
+		   <excludes>
+		     <exclude>META-INF/*</exclude>
+		   </excludes>
+		 </resource>
+		 <resource>
+		   <directory>src/main/java</directory>
+		 </resource>
+    </resources>
+    <plugins>
+	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-compiler-plugin</artifactId>
+		<configuration>
+			<compilerVersion>1.5</compilerVersion>
+			<source>1.5</source>
+			<target>1.5</target>
+		</configuration>
+	  </plugin>
+	  <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-war-plugin</artifactId>
+		 <configuration>
+		   <warSourceExcludes>WEB-INF/lib/*</warSourceExcludes>
+		   <archive>
+			 <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+		   </archive>
+		 </configuration>
+	  </plugin>
+	</plugins>
+  </build>
+  
+ 
+  <profiles>
+   <profile>
+    <id>dependencies</id>
+    <build>
+     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>libs</outputDirectory>
+              <excludeTransitive>false</excludeTransitive>
+              <stripVersion>true</stripVersion>
+              <!--
+              <excludeArtifactIds>org.eclipse.osgi</excludeArtifactIds>
+              -->
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+     </plugins>
+    </build>
+   </profile>    
+  </profiles>
+  
+</project>

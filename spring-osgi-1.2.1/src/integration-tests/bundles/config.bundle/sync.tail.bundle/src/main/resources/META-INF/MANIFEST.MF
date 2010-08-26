@@ -1,0 +1,8 @@
+Bundle-Version: 1.0
+Bundle-SymbolicName: org.springframework.osgi.iandt.config-opt.sync-tail
+Bundle-Name: sync-tail
+Bundle-Vendor: Spring Framework
+Spring-Context: *;create-asynchronously:=false;timeout:=5
+Bundle-ManifestVersion: 2
+Bundle-ClassPath: .,
+ target/classes/

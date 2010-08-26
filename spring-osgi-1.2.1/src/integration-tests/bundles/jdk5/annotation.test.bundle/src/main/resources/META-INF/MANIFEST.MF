@@ -1,0 +1,8 @@
+Bundle-Name: org-springframework-osgi-iandt-annotation-proxy
+Bundle-SymbolicName: org.springframework.osgi.iandt.annotation.proxy
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-ClassPath: .
+Import-Package: org.springframework.osgi.iandt.simpleservice,
+  org.springframework.osgi.extensions.annotation
+Export-Package: org.springframework.osgi.iandt.annotation.proxy

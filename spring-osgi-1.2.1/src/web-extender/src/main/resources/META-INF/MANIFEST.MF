@@ -1,0 +1,2 @@
+Bundle-Activator: org.springframework.osgi.web.extender.internal.activator.WarLoaderListener
+

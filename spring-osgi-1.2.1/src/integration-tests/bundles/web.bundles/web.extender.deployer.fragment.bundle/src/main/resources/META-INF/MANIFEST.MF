@@ -1,0 +1,7 @@
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.web.extender.fragment.configuration
+Bundle-Name: WebExtenderDeployerConfigurationFragment
+Bundle-Vendor: Spring Framework
+Fragment-Host: org.springframework.osgi.web.extender
+Import-Package: org.apache.catalina,org.apache.catalina.connector

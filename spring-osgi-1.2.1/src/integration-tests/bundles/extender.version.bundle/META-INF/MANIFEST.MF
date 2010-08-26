@@ -1,0 +1,9 @@
+Bundle-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.springframework.osgi.iandt.extenderversion
+Bundle-Name: Extender Version
+Bundle-Vendor: Spring Framework
+SpringExtender-Version: 19.99.98.not-existing
+Spring-Context: *;
+Bundle-ClassPath: .,
+ target/classes/

@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<project>
+  <parent>
+    <artifactId>spring-osgi</artifactId>
+    <groupId>org.springframework.osgi</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi</groupId>
+  <artifactId>spring-osgi-web</artifactId>
+  <packaging>bundle</packaging>
+  <url>http://www.springframework.org/osgi</url>
+  <name>Spring OSGi Web Support</name>
+  <description>
+  Spring/OSGi web support. Allows web applications to transparently run on OSGi platforms.
+  </description>
+  
+  
+  <properties>
+	<!-- jetty version used in the OSGi manifests -->
+    <jetty.osgi.version>6.1.9</jetty.osgi.version>
+    <catalina.osgi.version>5.5.23</catalina.osgi.version>
+    
+    <!-- jetty artifact version -->
+	<jetty.version>6.1.9</jetty.version>
+	<catalina.version>5.5.23-SNAPSHOT</catalina.version>
+
+
+	<!-- minimal servlet version -->
+	<servlet.version>2.4</servlet.version>
+    <javadoc.loc>${basedir}/../docs/src/javadoc</javadoc.loc>
+	
+
+    <spring.osgi.export>
+      !org.springframework.osgi.web.*internal*,
+      org.springframework.osgi.web*;version=${spring.osgi.export.version}
+    </spring.osgi.export>
+    
+  	<spring.osgi.private.pkg>
+		org.springframework.osgi.test.internal.util.jar*,
+		org.springframework.osgi.io.internal*,
+		org.springframework.osgi.web.*internal*
+	</spring.osgi.private.pkg>
+
+	<spring.osgi.import.pkg>
+		javax.servlet;version=${servlet.version},
+		org.mortbay*;version=${jetty.osgi.version};resolution:=optional,
+		org.apache.catalina*;version=${catalina.osgi.version};resolution:=optional,
+		org.apache.jasper;resolution:=optional,
+		org.apache.jasper.servlet;resolution:=optional,
+		org.osgi.service.packageadmin;version=1.2;resolution:=optional,
+		org.springframework.web*;version=${spring.base.version};resolution:=optional
+	</spring.osgi.import.pkg>
+	
+	<spring.osgi.symbolic.name>${symName.prefix}.web</spring.osgi.symbolic.name>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-core</artifactId>
+    </dependency>
+
+	<!-- required for JarUtils & co. -->
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-test</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>com.springsource.javax.servlet</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+
+	<!-- required for Depedency resolver -->
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-io</artifactId>
+      <optional>true</optional>
+    </dependency>
+    
+   <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>spring-osgi-mock</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+	<dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.web</artifactId>
+	  <optional>true</optional>
+    </dependency>
+
+	<dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.web.servlet</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.aopalliance</groupId>
+      <artifactId>com.springsource.org.aopalliance</artifactId>
+    </dependency>    
+
+    <dependency>
+      <groupId>edu.emory.mathcs.backport</groupId>
+      <artifactId>com.springsource.edu.emory.mathcs.backport</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency> 
+
+   <!-- we add this dependencies so that the BND plugin can determine their versions -->
+   <!-- they are transitive so it makes sense to use a property instead -->
+   <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.aop</artifactId>
+	  <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>org.springframework.core</artifactId>
+    </dependency>    
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi_R4_compendium</artifactId>
+      <scope>provided</scope>
+	  <optional>true</optional>
+    </dependency>
+    
+    <!-- Jetty -->
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty</artifactId>
+      <version>${jetty.version}</version>
+      <scope>provided</scope>
+	  <optional>true</optional>
+      <exclusions>      
+      	<exclusion>
+          <groupId>org.mortbay.jetty</groupId>
+	      <artifactId>servlet-api-2.5</artifactId>
+      	</exclusion>
+      </exclusions>      
+    </dependency>
+
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>${jetty.version}</version>
+      <scope>provided</scope>
+	  <optional>true</optional>
+    </dependency>
+    
+    <!-- Tomcat Catalina -->
+   
+    <dependency>
+      <groupId>org.springframework.osgi</groupId>
+      <artifactId>catalina.osgi</artifactId>
+      <version>${catalina.version}</version>
+      <scope>provided</scope>
+	  <optional>true</optional>
+    </dependency>   
+  </dependencies>
+
+</project>

@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-Name: Functional testing of OSGi service reference listener
+Bundle-SymbolicName: org.springframework.osgi.iandt.serviceListener.functional
+Bundle-Vendor: Spring Framework
+Bundle-Activator: org.springframework.osgi.test.JUnitTestActivator
+Import-Package: junit.framework,
+ org.osgi.framework,
+ org.springframework.aop,
+ org.springframework.core.io,
+ org.springframework.osgi.service,
+ org.springframework.osgi.test,
+ org.springframework.osgi.iandt.simpleservice,
+ org.springframework.osgi.iandt.reference.proxy

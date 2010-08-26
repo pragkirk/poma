@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="firstBean" class="com.extensiblejava.main.FirstBean">
+		<constructor-arg><ref bean="injectedBean"/></constructor-arg>
+	</bean>
+	
+	<!-- can test using a mock if we want -->
+	<!-- <bean id="injectedBean" class="com.extensiblejava.main.test.MockInjection">
+		<property name="uid" value="springuid"/>
+		<property name="pwd" value="springpwd"/>
+	</bean> -->
+	
+	<bean id="injectedBean" class="com.extensiblejava.main.InjectedBean">
+		<property name="uid" value="${app.uid}"/>
+		<property name="pwd" value="${app.pwd}"/>
+	</bean>
+	
+	<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="com/extensiblejava/main/Resource.properties"/>
+	</bean>
+	
+</beans>

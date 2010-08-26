@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <parent>
+    <artifactId>spring-osgi</artifactId>
+    <groupId>org.springframework.osgi</groupId>
+    <version>1.2.1</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.springframework.osgi</groupId>
+  <artifactId>spring-osgi-bundle-archetype</artifactId>
+  <packaging>maven-plugin</packaging>
+  <name>Spring OSGi Archetype</name>
+  <description>Spring OSGi Maven2 Archetype</description>  
+  <url>http://www.springframework.org/osgi</url>
+  
+  <properties>
+    <findbugs.skip>true</findbugs.skip>
+  </properties>
+  
+  <build>
+    <resources>
+      <resource>
+        <filtering>false</filtering>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+  </build>
+</project>

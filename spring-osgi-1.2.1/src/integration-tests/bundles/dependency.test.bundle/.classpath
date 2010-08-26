@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry exported="true" kind="lib" path="target/classes" sourcepath="target/classes"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/simple.service2/1.2-0-m2-SNAPSHOT/simple.service2-1.2-0-m2-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/osgi/iandt/simple.service/1.2-0-m2-SNAPSHOT/simple.service-1.2-0-m2-SNAPSHOT.jar"/>
+</classpath>

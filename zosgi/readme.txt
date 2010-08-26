@@ -1,0 +1,3 @@
+The problem with the existing design is that it places implementations close to the interfaces. The result is a smell. The customerservice project can be compiled independently, but at runtime it is dependent on an implementation of DefaultCalculator, which means it requires either the customerextension or customercalculator project be built and deployed so that a DiscounterService is created.
+
+But if we move the DefaultCalculator to the customerservice project, it cannot be instantiated as a Service and used within the customerservice project. Spring DM doesn't support importing a service from the bundle that exports it.
