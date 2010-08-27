@@ -1,0 +1,54 @@
+8
+
+dir
+75
+https://kcode.googlecode.com/svn/trunk/edcie/eliminated/classes/com/kirkk/base
+https://kcode.googlecode.com/svn
+
+
+
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+Bill.class
+file
+
+
+
+
+2009-11-19T00:48:31.000000Z
+051ee9fbf9a53078e2465a2bb45b13f5
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+DiscountCalculator.class
+file
+
+
+
+
+2009-11-19T00:48:31.000000Z
+8bf966cee297add8c7fe0ab442fda6da
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+

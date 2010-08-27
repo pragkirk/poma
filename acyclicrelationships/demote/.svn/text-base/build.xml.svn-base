@@ -1,0 +1,81 @@
+<project name="Comp" default="analyzer" basedir=".">
+
+	<property name="src" location="${basedir}/src"/>
+	<property name="build" location="${basedir}/build"/>
+	<property name="lib" location="${basedir}/lib"/>
+	<property name="buildstats" location="${basedir}/stats"/>
+	<property name="dist" location="${basedir}/bin"/>
+	<property name="version" value="1.0"/>
+	
+	<path id="project.class.path">
+		<pathelement path="${src}"/>
+		<pathelement path="${lib}/junit.jar"/>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${buildstats}"/>
+		<delete dir="${dist}"/>
+	</target>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${build}"/>
+		<mkdir dir="${buildstats}"/>
+		<mkdir dir="${dist}"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${build}">
+			<classpath refid="project.class.path"/>
+		</javac>
+		
+		<jar jarfile="${dist}/bill.jar" basedir="${build}" includes="com/kirkk/bill/**"/>
+		<jar jarfile="${dist}/cust.jar" basedir="${build}" includes="com/kirkk/cust/**"/>
+		<jar jarfile="${dist}/calc.jar" basedir="${build}" includes="com/kirkk/calc/**"/>
+		<jar jarfile="${dist}/mediator.jar" basedir="${build}" includes="com/kirkk/mediator/**"/>
+		<jar jarfile="${dist}/billtest.jar" basedir="${build}" includes="com/kirkk/test/**"/>
+		
+		<junit printsummary="yes" haltonfailure="yes">
+			<classpath>
+				<pathelement path="${dist}/bill.jar"/>
+				<pathelement path="${dist}/cust.jar"/>
+				<pathelement path="${dist}/calc.jar"/>
+				<pathelement path="${dist}/mediator.jar"/>
+				<pathelement path="${dist}/billtest.jar"/>
+				<pathelement path="${lib}/junit.jar"/>
+			</classpath>
+			<test name="com.kirkk.test.AllTests" outfile="junitresults">
+				<formatter type="plain"/>
+			</test>
+		</junit>
+	</target>
+	
+	<target name="analyzer" depends="compile">
+
+        <taskdef name="jaranalyzer" classname="com.kirkk.analyzer.textui.JarAnalyzerTask">
+            <classpath>
+                <pathelement path="${lib}/jaranalyzer-1.2.jar"/>
+                <pathelement path="${lib}/lib/bcel-5.2.jar"/>
+                <pathelement path="${lib}/lib/jakarta-regexp-1.3.jar"/>
+                <pathelement path="${lib}/lib"/>
+            </classpath>
+        </taskdef>
+
+        <jaranalyzer srcdir="${dist}" destfile="${buildstats}/dependencies.xml" 
+				summaryclass="com.kirkk.analyzer.textui.XMLUISummary" />
+				
+		<style in="${buildstats}/dependencies.xml" 
+		       out="${buildstats}/dependencies.html"
+			style="${lib}/jaranalyzer.xsl">	
+		</style>
+
+		<style in="${buildstats}/dependencies.xml" 
+		    out="${buildstats}/dependencies.grph"
+			style="${lib}/jaranalyzer2dot.xsl">	
+		</style>
+
+		<exec executable="/Applications/Graphviz.app/Contents/MacOS/dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./stats/dependencies.grph -o ./stats/dependencies.png"/></exec>
+
+	</target>
+	
+</project>

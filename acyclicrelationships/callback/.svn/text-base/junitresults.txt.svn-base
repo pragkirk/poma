@@ -1,0 +1,5 @@
+Testsuite: com.kirkk.test.AllTests
+Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.007 sec
+
+Testcase: testPayment took 0.004 sec
+Testcase: testPaymentWithoutCustomer took 0 sec

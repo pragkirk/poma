@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<JarAnalyzer>
+    <Jars>
+
+        <Jar name="bill-test.jar">
+            <Summary>
+                <Statistics>
+                    <ClassCount>1</ClassCount>
+                    <AbstractClassCount>0</AbstractClassCount>
+                    <PackageCount>1</PackageCount>
+                </Statistics>
+
+                <Metrics>
+                    <Abstractness>0.00</Abstractness>
+                    <Efferent>2</Efferent>
+                    <Afferent>0</Afferent>
+                    <Instability>1.00</Instability>
+                    <Distance>0.00</Distance>
+                </Metrics>
+
+                <Packages>
+                    <Package>com.extensiblejava.test</Package>
+                </Packages>
+
+                <OutgoingDependencies>
+                    <Jar>bill.jar</Jar>
+                    <Jar>route.jar</Jar>
+                </OutgoingDependencies>
+
+                <IncomingDependencies>
+                </IncomingDependencies>
+
+                <Cycles>
+                </Cycles>
+
+                <UnresolvedDependencies>
+                    <Package>junit.framework</Package>
+                    <Package>junit.textui</Package>
+                </UnresolvedDependencies>
+            </Summary>
+
+        </Jar>
+
+        <Jar name="bill.jar">
+            <Summary>
+                <Statistics>
+                    <ClassCount>1</ClassCount>
+                    <AbstractClassCount>0</AbstractClassCount>
+                    <PackageCount>1</PackageCount>
+                </Statistics>
+
+                <Metrics>
+                    <Abstractness>0.00</Abstractness>
+                    <Efferent>1</Efferent>
+                    <Afferent>2</Afferent>
+                    <Instability>0.33</Instability>
+                    <Distance>0.67</Distance>
+                </Metrics>
+
+                <Packages>
+                    <Package>com.extensiblejava.bill</Package>
+                </Packages>
+
+                <OutgoingDependencies>
+                    <Jar>route.jar</Jar>
+                </OutgoingDependencies>
+
+                <IncomingDependencies>
+                    <Jar>bill-test.jar</Jar>
+                    <Jar>route.jar</Jar>
+                </IncomingDependencies>
+
+                <Cycles>
+                    <Cycle>route.jar</Cycle>
+                </Cycles>
+
+                <UnresolvedDependencies>
+                </UnresolvedDependencies>
+            </Summary>
+
+        </Jar>
+
+        <Jar name="route.jar">
+            <Summary>
+                <Statistics>
+                    <ClassCount>2</ClassCount>
+                    <AbstractClassCount>1</AbstractClassCount>
+                    <PackageCount>1</PackageCount>
+                </Statistics>
+
+                <Metrics>
+                    <Abstractness>0.50</Abstractness>
+                    <Efferent>1</Efferent>
+                    <Afferent>2</Afferent>
+                    <Instability>0.33</Instability>
+                    <Distance>0.17</Distance>
+                </Metrics>
+
+                <Packages>
+                    <Package>com.extensiblejava.route</Package>
+                </Packages>
+
+                <OutgoingDependencies>
+                    <Jar>bill.jar</Jar>
+                </OutgoingDependencies>
+
+                <IncomingDependencies>
+                    <Jar>bill-test.jar</Jar>
+                    <Jar>bill.jar</Jar>
+                </IncomingDependencies>
+
+                <Cycles>
+                    <Cycle>bill.jar</Cycle>
+                </Cycles>
+
+                <UnresolvedDependencies>
+                </UnresolvedDependencies>
+            </Summary>
+
+        </Jar>
+
+    </Jars>
+</JarAnalyzer>

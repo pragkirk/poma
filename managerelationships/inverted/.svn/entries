@@ -1,0 +1,99 @@
+8
+
+dir
+75
+https://kcode.googlecode.com/svn/trunk/edcie/inverted
+https://kcode.googlecode.com/svn
+
+
+
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+inverted.png
+file
+
+
+
+
+2009-11-19T00:48:29.000000Z
+74c8161b758547352639358577185805
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+lib
+dir
+
+src
+dir
+
+class.png
+file
+
+
+
+
+2009-11-19T00:48:29.000000Z
+daf59de3afe0caff3f0ec4f969201b7c
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+junitresults.txt
+file
+
+
+
+
+2009-11-19T00:48:29.000000Z
+de99be7dd4a7de511bbd34b4660d5da9
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+build.xml
+file
+
+
+
+
+2009-11-19T00:48:29.000000Z
+d15b3ce0484f6422bd180841c8c805c1
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+package.png
+file
+
+
+
+
+2009-11-19T00:48:29.000000Z
+2598907056ad17cc95a780727c6ef7f6
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+

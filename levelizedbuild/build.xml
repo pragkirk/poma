@@ -1,0 +1,22 @@
+<project name="Comp" default="clean.all" basedir=".">
+
+	<property name="build" location="${basedir}/build"/>
+	<property name="buildstats" location="${basedir}/stats"/>
+	<property name="dist" location="${basedir}/bin"/>
+	
+	<target name="clean.all">
+		<ant antfile="./full/build.xml" target="clean" inheritall="false" />
+		<ant antfile="./level/build.xml" target="clean" inheritall="false"/>
+	</target>
+	
+	<target name="usage">
+	
+		<echo message=""/>
+		<echo message="Master LevelizedBuild Clean Script"/>
+		<echo message="-----------------------------------------"/>
+		<echo message=""/>
+		<echo message="  clean.all    --> Clean the spec, service, service2, and client project directories"/>
+		<echo message="-----------------------------------------"/>
+	
+	</target>
+</project>

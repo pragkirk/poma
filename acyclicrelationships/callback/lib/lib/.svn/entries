@@ -1,0 +1,70 @@
+8
+
+dir
+75
+https://kcode.googlecode.com/svn/trunk/edcie/callback/lib/lib
+https://kcode.googlecode.com/svn
+
+
+
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+jakarta-regexp-1.3.jar
+file
+
+
+
+
+2009-11-19T00:48:32.000000Z
+6dcdc325850e40b843cac2a25fb2121e
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+bcel-5.2.jar
+file
+
+
+
+
+2009-11-19T00:48:32.000000Z
+43d54687362fc2991d61201c453a8286
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+junit.jar
+file
+
+
+
+
+2009-11-19T00:48:32.000000Z
+3aa45be8fd3f5ae8c69b73959a7fa57c
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+com
+dir
+

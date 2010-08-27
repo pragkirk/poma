@@ -1,0 +1,54 @@
+8
+
+dir
+75
+https://kcode.googlecode.com/svn/trunk/edcie/escalate/src/com/kirkk/test
+https://kcode.googlecode.com/svn
+
+
+
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+AllTests.java
+file
+
+
+
+
+2009-11-19T00:48:30.000000Z
+0749f4cd967d932c37d92f3f0db5ff83
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+PaymentTest.java
+file
+
+
+
+
+2009-11-19T00:48:30.000000Z
+d0ee9937efbd7f4391b00d7ea23219ac
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+

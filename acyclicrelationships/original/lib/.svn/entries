@@ -1,0 +1,81 @@
+8
+
+dir
+75
+https://kcode.googlecode.com/svn/trunk/edcie/originalwithpackage/lib
+https://kcode.googlecode.com/svn
+
+
+
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+jaranalyzer2dot.xsl
+file
+
+
+
+
+2009-11-19T00:48:32.000000Z
+92e0f1c6de989f6e4f8d12b4437b69b1
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+junit.jar
+file
+
+
+
+
+2009-11-19T00:48:32.000000Z
+1f40fb782a4f2cf78f161d32670f7a3a
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+lib
+dir
+
+jaranalyzer.xsl
+file
+
+
+
+
+2009-11-19T00:48:32.000000Z
+46c46f1d046d8269610f93317347255b
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+jaranalyzer-1.2.jar
+file
+
+
+
+
+2009-11-19T00:48:32.000000Z
+4de2308511173d24ee0746eeb8326816
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+

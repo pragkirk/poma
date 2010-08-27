@@ -1,0 +1,99 @@
+8
+
+dir
+75
+https://kcode.googlecode.com/svn/trunk/edcie/demote
+https://kcode.googlecode.com/svn
+
+
+
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a668f8b4-1848-0410-b2fa-1f034b7baa63
+
+lib
+dir
+
+src
+dir
+
+binary.png
+file
+
+
+
+
+2009-11-19T00:48:33.000000Z
+6887d06ab26e75b682d84214401e7aa3
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+class.png
+file
+
+
+
+
+2009-11-19T00:48:33.000000Z
+324c3e3e064c5ec34e895afb89ab622c
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+junitresults.txt
+file
+
+
+
+
+2009-11-19T00:48:33.000000Z
+43e762529098835a1af2c9c365c7f5d8
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+build.xml
+file
+
+
+
+
+2009-11-19T00:48:33.000000Z
+b05bf7fca56c5ee0489d2d779200d5ba
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+
+package.png
+file
+
+
+
+
+2009-11-19T00:48:33.000000Z
+12deea36f43651feb15c4987e72cd323
+2009-11-19T00:47:33.941008Z
+75
+pragkirk
+has-props
+

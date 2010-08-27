@@ -1,0 +1,6 @@
+com.kirkk.analyzer
+com.kirkk.analyzer.framework
+com.kirkk.analyzer.framework.bcel
+com.kirkk.analyzer.framework.bcelbundle
+com.kirkk.analyzer.framework.jar
+com.kirkk.analyzer.textui
