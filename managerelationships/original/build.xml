@@ -16,6 +16,7 @@
 		<delete dir="${build}"/>
 		<delete dir="${buildstats}"/>
 		<delete dir="${dist}"/>
+		<delete file="junitresults.txt"/>
 	</target>
 	
 	<target name="init" depends="clean">
