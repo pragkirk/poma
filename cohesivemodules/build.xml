@@ -16,7 +16,7 @@
 		<echo message="Master CohesiveModules Clean Script"/>
 		<echo message="-----------------------------------------"/>
 		<echo message=""/>
-		<echo message="  clean.all    --> Clean the project sub-directories"/>
+		<echo message="  clean.all    --> Clean the project sub-directories and files created by build script."/>
 		<echo message="-----------------------------------------"/>
 	
 	</target>

@@ -17,7 +17,7 @@
 		<echo message="Master AcyclicRelationships Clean Script"/>
 		<echo message="-----------------------------------------"/>
 		<echo message=""/>
-		<echo message="  clean.all    --> Clean the spec, service, service2, and client project directories"/>
+		<echo message="  clean.all    --> Clean the project sub-directories and files created by build script."/>
 		<echo message="-----------------------------------------"/>
 	
 	</target>
