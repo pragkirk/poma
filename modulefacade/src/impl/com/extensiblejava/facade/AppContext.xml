@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<bean id="loan" class="com.extensiblejava.loan.impl.LoanImpl">
+		<constructor-arg><ref bean="loanCalculator"/></constructor-arg>
+	</bean>
+	
+	<bean id="loanCalculator" class="com.extensiblejava.calculator.MinimumPaymentScheduleCalculator">
+		<!-- <constructor-arg type="java.math.BigDecimal" value="15000.00"/>
+		<constructor-arg type="java.math.BigDecimal" value="12.0"/>
+		<constructor-arg type="int" value="60"/> -->
+	</bean>
+	
+</beans>
