@@ -1,9 +1,0 @@
-Bundle-Name: org-springframework-osgi-iandt-dependencies
-Bundle-SymbolicName: org.springframework.osgi.iandt.dependencies
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-ClassPath: .
-Spring-Context: *; eagerly-init-importers:=true
-Import-Package: org.springframework.osgi.iandt.simpleservice,
-  org.springframework.osgi.iandt.simpleservice2
-Export-Package: org.springframework.osgi.iandt.dependencies

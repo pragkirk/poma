@@ -1,9 +1,0 @@
-digraph G{
-	A -> {B; C; D};
-	B -> C;
-	D -> {B; E};
-	E -> {F; G};
-	F -> G;
-	H -> G;
-	I -> {H; J};
-}

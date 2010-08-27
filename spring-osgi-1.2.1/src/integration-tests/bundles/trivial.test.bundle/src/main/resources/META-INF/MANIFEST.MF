@@ -1,7 +1,0 @@
-Bundle-Name: Trivial-Bundle-Tests
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.springframework.osgi.iandt.trivial.tests
-Import-Package: org.springframework.osgi.iandt.trivial,junit.framework
-Bundle-Version: 1.0
-Bundle-ClassPath: target/classes/,
- .

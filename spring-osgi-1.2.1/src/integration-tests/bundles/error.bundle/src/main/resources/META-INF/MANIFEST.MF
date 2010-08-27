@@ -1,6 +1,0 @@
-Bundle-Name: org-springframework-osgi-iandt-error
-Bundle-SymbolicName: org.springframework.osgi.iandt.error
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-ClassPath: .
-Spring-Context: *; eagerly-init-importers:=true

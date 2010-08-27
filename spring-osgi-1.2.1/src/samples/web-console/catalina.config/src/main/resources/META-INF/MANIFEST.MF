@@ -1,4 +1,0 @@
-Bundle-ManifestVersion: 2
-Bundle-Name: Apache Catalina Configuration Bundle
-Bundle-SymbolicName: org.springframework.osgi.samples.webconsole.catalina.cfg
-Fragment-Host: com.springsource.org.apache.catalina;bundle-version="[6.0.16,7.0.0)"

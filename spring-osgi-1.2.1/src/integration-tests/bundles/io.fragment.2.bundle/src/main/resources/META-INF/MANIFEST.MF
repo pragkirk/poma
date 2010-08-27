@@ -1,5 +1,0 @@
-Bundle-Name: io-fragment-2
-Bundle-SymbolicName: org.springframework.osgi.iandt.io.fragment.2
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Fragment-Host: org.springframework.osgi.iandt.io.functional.fragments

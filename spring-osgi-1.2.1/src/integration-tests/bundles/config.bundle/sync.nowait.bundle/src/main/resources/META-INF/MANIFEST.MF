@@ -1,8 +1,0 @@
-Bundle-Version: 1.0
-Bundle-SymbolicName: org.springframework.osgi.iandt.config-opt.sync-nowait
-Bundle-Name: sync-nowait
-Bundle-Vendor: Spring Framework
-Spring-Context: *;wait-for-dependencies:=false;create-asynchronously:=false;timeout:=2
-Bundle-ManifestVersion: 2
-Bundle-ClassPath: .,
- target/classes/

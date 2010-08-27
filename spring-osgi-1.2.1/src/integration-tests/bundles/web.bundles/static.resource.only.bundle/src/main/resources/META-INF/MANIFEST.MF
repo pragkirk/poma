@@ -1,3 +1,0 @@
-Bundle-ManifestVersion: 2
-Bundle-Name: Resource Only War
-Bundle-SymbolicName: org.springframework.osgi.iandt.web.static.resource.only

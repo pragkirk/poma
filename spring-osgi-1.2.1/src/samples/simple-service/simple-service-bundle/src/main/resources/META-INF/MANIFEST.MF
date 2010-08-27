@@ -1,6 +1,0 @@
-Bundle-Version: 1.0
-Bundle-SymbolicName: org.springframework.osgi.samples.simpleservice
-Bundle-Name: Simple-Service-Sample
-Bundle-Vendor: Spring Framework
-Export-Package: org.springframework.osgi.samples.simpleservice
-Bundle-ManifestVersion: 2

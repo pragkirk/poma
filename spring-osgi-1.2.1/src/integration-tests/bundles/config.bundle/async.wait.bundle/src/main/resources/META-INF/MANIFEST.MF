@@ -1,8 +1,0 @@
-Bundle-Version: 1.0
-Bundle-SymbolicName: org.springframework.osgi.iandt.config-opt.async.wait
-Bundle-Name: async-wait
-Bundle-Vendor: Spring Framework
-Spring-Context: *;wait-for-dependencies:=true;create-asynchronously:=true
-Bundle-ManifestVersion: 2
-Bundle-ClassPath: .,
- target/classes/

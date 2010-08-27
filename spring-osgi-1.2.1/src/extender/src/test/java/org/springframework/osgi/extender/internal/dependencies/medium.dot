@@ -1,6 +1,0 @@
-digraph G {
-  	A -> {B; C; D};
-	B -> {C; E};
-	C -> E;
-	D -> B;
-}

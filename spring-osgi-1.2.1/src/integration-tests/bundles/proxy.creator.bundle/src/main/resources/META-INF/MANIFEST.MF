@@ -1,9 +1,0 @@
-Bundle-Name: org-springframework-osgi-iandt-proxy-creator
-Bundle-SymbolicName: org.springframework.osgi.iandt.proxy.creator
-Bundle-ManifestVersion: 2
-Bundle-Version: 1.0
-Import-Package: org.apache.commons.logging,org.springframework.aop.interceptor,
- org.springframework.aop.framework,org.springframework.aop,org.aopalliance.aop,
- net.sf.cglib.proxy,net.sf.cglib.core,net.sf.cglib.reflect
-Export-Package: org.springframework.osgi.iandt.service.listener
-Spring-Context: *; eagerly-init-importers:=true

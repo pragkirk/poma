@@ -1,4 +1,0 @@
-Excluded-Exports: 
- *.internal*
-Unversioned-Imports: 
- *

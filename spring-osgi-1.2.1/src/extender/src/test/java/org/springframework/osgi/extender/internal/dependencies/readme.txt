@@ -1,1 +1,0 @@
-To help with dependency visualization, dot files definitions (useable with AT&T's Graphviz tool) are provided.

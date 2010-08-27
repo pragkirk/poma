@@ -1,5 +1,0 @@
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.springframework.osgi.iandt.dependency.exporter.importer
-Bundle-Name: ExporterImporterDependency
-Bundle-Vendor: Spring Framework

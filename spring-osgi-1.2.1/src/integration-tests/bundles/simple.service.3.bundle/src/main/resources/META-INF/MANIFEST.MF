@@ -1,8 +1,0 @@
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.springframework.osgi.iandt.simpleservice3
-Bundle-Name: Simple-Service-2
-Bundle-Vendor: Spring Framework
-Import-Package: org.springframework.osgi.iandt.simpleservice2, org.springframework.osgi.iandt.simpleservice2.impl 
-Bundle-ClassPath: .,
- target/classes/

@@ -1,5 +1,0 @@
-Bundle-Name: org-springframework-osgi-iandt-jdk-proxy
-Bundle-SymbolicName: org.springframework.osgi.iandt.jdk.proxy
-Bundle-ManifestVersion: 2
-Bundle-Version: 1.0
-Import-Package: org.apache.commons.logging

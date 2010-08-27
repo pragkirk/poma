@@ -1,6 +1,0 @@
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.springframework.osgi.iandt.extenderlistener
-Bundle-Name: ExtenderListener
-Bundle-Vendor: Spring Framework
-Import-Package: org.apache.commons.logging,org.springframework.osgi.context.event

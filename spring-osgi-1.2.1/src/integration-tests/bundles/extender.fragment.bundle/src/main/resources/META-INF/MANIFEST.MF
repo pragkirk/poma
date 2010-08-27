@@ -1,6 +1,0 @@
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.springframework.osgi.iandt.extender.fragment.configuration
-Bundle-Name: ExtenderConfigurationFragment
-Bundle-Vendor: Spring Framework
-Fragment-Host: org.springframework.osgi.extender

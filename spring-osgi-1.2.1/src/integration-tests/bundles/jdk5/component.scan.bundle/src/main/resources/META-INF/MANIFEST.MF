@@ -1,7 +1,0 @@
-Bundle-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.springframework.osgi.iandt.io.component
-Bundle-Name: Component Bundle
-Bundle-Vendor: Spring Framework
-Export-Package: org.springframework.osgi.iandt.io.component
-Import-Package: org.springframework.stereotype,org.springframework.beans.factory.annotation
