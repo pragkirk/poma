@@ -1,1 +1,0 @@
-Dependency was made acyclic by simply changing the Router to route a Routable instead of a Bill.
