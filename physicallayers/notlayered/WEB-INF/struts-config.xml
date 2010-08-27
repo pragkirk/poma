@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.0//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_0.dtd">
+
+<!--
+     This is the Struts configuration file for the example application,
+     using the proposed new syntax.
+
+     NOTE:  You would only flesh out the details in the "form-bean"
+     declarations if you had a generator tool that used them to create
+     the corresponding Java classes for you.  Otherwise, you would
+     need only the "form-bean" element itself, with the corresponding
+     "name" and "type" attributes.
+-->
+
+
+<struts-config>
+
+
+  <!-- ========== Data Source Configuration =============================== -->
+<!--
+  <data-sources>
+    <data-source>
+      <set-property property="autoCommit"
+                       value="false"/>
+      <set-property property="description"
+                       value="Example Data Source Configuration"/>
+      <set-property property="driverClass"
+                       value="org.postgresql.Driver"/>
+      <set-property property="maxCount"
+                       value="4"/>
+      <set-property property="minCount"
+                       value="2"/>
+      <set-property property="password"
+                       value="mypassword"/>
+      <set-property property="url"
+                       value="jdbc:postgresql://localhost/mydatabase"/>
+      <set-property property="user"
+                       value="myusername"/>
+    </data-source>
+  </data-sources>
+-->
+
+  <!-- ========== Form Bean Definitions =================================== -->
+  <form-beans>
+
+    <!-- Index form bean -->
+    <form-bean      name="customerSearchForm"
+                    type="com.extensiblejava.ui.CustomerSearchForm"/>
+                    
+    <form-bean      name="billForm"
+                    type="com.extensiblejava.ui.BillDetailForm"/>
+
+  </form-beans>
+
+
+  <!-- ========== Global Forward Definitions ============================== -->
+  <global-forwards>
+    <forward   name="success"              path="/jsp/index.jsp"/>
+  </global-forwards>
+
+
+  <!-- ========== Action Mapping Definitions ============================== -->
+  <action-mappings>
+
+    <!-- Process the main page -->
+    <action    path="/customerSearch"
+               type="com.extensiblejava.ui.CustomerSearchAction"
+               name="customerSearchForm"
+              scope="request"
+              input="/index.jsp">
+	<forward name="success"              path="/CustomerBills.jsp"/>
+    </action>
+    
+     <action    path="/billDetail"
+               type="com.extensiblejava.ui.BillDetailAction"
+               name="billForm"
+              scope="request"
+              input="/index.jsp">
+	<forward name="success"              path="/BillDetail.jsp"/>
+	</action>
+    
+    <action    path="/audit"
+               type="com.extensiblejava.ui.AuditAction"
+               name="billForm"
+              scope="request"
+              input="/index.jsp">
+	<forward name="success"              path="/BillDetail.jsp"/>
+	</action>
+	
+	 <action    path="/pay"
+               type="com.extensiblejava.ui.PayAction"
+               name="billForm"
+              scope="request"
+              input="/index.jsp">
+	<forward name="success"              path="/BillDetail.jsp"/>
+    </action>
+
+    <!-- The standard administrative actions available with Struts -->
+    <!-- These would be either omitted or protected by security -->
+    <!-- in a real application deployment -->
+    <action    path="/admin/addFormBean"
+               type="org.apache.struts.actions.AddFormBeanAction"/>
+    <action    path="/admin/addForward"
+               type="org.apache.struts.actions.AddForwardAction"/>
+    <action    path="/admin/addMapping"
+               type="org.apache.struts.actions.AddMappingAction"/>
+    <action    path="/admin/reload"
+               type="org.apache.struts.actions.ReloadAction"/>
+    <action    path="/admin/removeFormBean"
+               type="org.apache.struts.actions.RemoveFormBeanAction"/>
+    <action    path="/admin/removeForward"
+               type="org.apache.struts.actions.RemoveForwardAction"/>
+    <action    path="/admin/removeMapping"
+               type="org.apache.struts.actions.RemoveMappingAction"/>
+
+
+  </action-mappings>
+
+</struts-config>

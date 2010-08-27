@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE taglib
+
+  PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+
+  "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+
+
+<taglib>
+
+
+
+  <tlibversion>1.0</tlibversion>
+
+  <jspversion>1.1</jspversion>
+
+  <shortname>Application Tag Library</shortname>
+
+  <uri>http://jakarta.apache.org/taglibs/struts-example-1.0</uri>
+
+  <info>
+
+    This tag library contains functionality specific to the Struts
+
+    Example Application.
+
+  </info>
+
+
+
+
+
+  <tag>
+
+    <name>checkLogon</name>
+
+    <tagclass>org.apache.struts.webapp.example.CheckLogonTag</tagclass>
+
+    <bodycontent>empty</bodycontent>
+
+    <info>
+
+      Validate that there is a currently logged on user, by checking for
+
+      the existence of a session-scope bean under the specified name.
+
+      If there is no such bean, forward control to the specified page,
+
+      which will typically be a logon form.
+
+
+
+      name - Name of the session-scope bean to check for [user]
+
+
+
+      page - Context-relative path to the logon page [/logon.jsp]
+
+    </info>
+
+    <attribute>
+
+      <name>name</name>
+
+      <required>false</required>
+
+      <rtexprvalue>true</rtexprvalue>
+
+    </attribute>
+
+    <attribute>
+
+      <name>page</name>
+
+      <required>false</required>
+
+      <rtexprvalue>true</rtexprvalue>
+
+    </attribute>
+
+  </tag>
+
+
+
+
+
+  <tag>
+
+    <name>linkSubscription</name>
+
+    <tagclass>org.apache.struts.webapp.example.LinkSubscriptionTag</tagclass>
+
+    <info>
+
+      Generate a URL-encoded hyperlink to the a URL made up of the
+
+      specified base value, plus optional query parameters that
+
+      select the specified Subscription object.
+
+
+
+      name     - Name of the attribute containing the specified
+
+                 Subscription.  [subscription]
+
+
+
+      page     - Context-relative URL of the generated link
+
+    </info>
+
+    <attribute>
+
+      <name>name</name>
+
+      <required>false</required>
+
+      <rtexprvalue>true</rtexprvalue>
+
+    </attribute>
+
+    <attribute>
+
+      <name>page</name>
+
+      <required>true</required>
+
+      <rtexprvalue>true</rtexprvalue>
+
+    </attribute>
+
+  </tag>
+
+
+
+
+
+  <tag>
+
+    <name>linkUser</name>
+
+    <tagclass>org.apache.struts.webapp.example.LinkUserTag</tagclass>
+
+    <info>
+
+      Generate a URL-encoded hyperlink to the a URL made up of the
+
+      specified base value, plus optional query parameters that
+
+      select the specified User object.
+
+
+
+      name     - Name of the attribute containing the specified user.
+
+                 [user]
+
+
+
+      href     - Context-relative URL of the generated link
+
+    </info>
+
+    <attribute>
+
+      <name>name</name>
+
+      <required>false</required>
+
+      <rtexprvalue>true</rtexprvalue>
+
+    </attribute>
+
+    <attribute>
+
+      <name>page</name>
+
+      <required>true</required>
+
+      <rtexprvalue>true</rtexprvalue>
+
+    </attribute>
+
+  </tag>
+
+
+
+
+
+</taglib>
+
