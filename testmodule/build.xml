@@ -1,0 +1,26 @@
+<project name="Comp" default="clean.all" basedir=".">
+
+	<property name="build" location="${basedir}/build"/>
+	<property name="buildstats" location="${basedir}/stats"/>
+	<property name="dist" location="${basedir}/bin"/>
+	
+	<target name="clean.all">
+		<echo message="------------- CLEAN SCRIPT ONLY! CLEANING SUB-DIRECTORIES... ------------- "/>
+		<ant antfile="./dependent/build.xml" target="clean" inheritall="false" />
+		<ant antfile="./independent/build.xml" target="clean" inheritall="false"/>
+		<ant antfile="./dependenteliminated/build.xml" target="clean" inheritall="false" />
+		<ant antfile="./independenteliminated/build.xml" target="clean" inheritall="false" />
+		<echo message="------- TO BUILD PROJECT, RUN BUILD SCRIPT FROM PROJECT DIRECTORY! ------- "/>
+	</target>
+	
+	<target name="usage">
+	
+		<echo message=""/>
+		<echo message="Master CohesiveModules Clean Script"/>
+		<echo message="-----------------------------------------"/>
+		<echo message=""/>
+		<echo message="  clean.all    --> Clean the project sub-directories and files created by build script."/>
+		<echo message="-----------------------------------------"/>
+	
+	</target>
+</project>

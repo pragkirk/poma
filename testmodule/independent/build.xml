@@ -58,7 +58,7 @@
 		<jar jarfile="${bindist}/loanfacade-${version}.jar" basedir="${build}" includes="com/extensiblejava/facade/**"/>
 		<jar jarfile="${bindist}/client-${version}.jar" basedir="${build}" includes="com/extensiblejava/client/**"/>
 		 
-		<!-- <delete dir="${build}"/> -->
+		<delete dir="${build}"/>
 		<junit printsummary="yes" haltonfailure="yes">
 			<classpath>
 				<pathelement path="${bindist}/loan-intrfc-${version}.jar"/>
