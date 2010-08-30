@@ -1,0 +1,23 @@
+<project name="Comp" default="clean.all" basedir=".">
+
+	<property name="build" location="${basedir}/build"/>
+	<property name="buildstats" location="${basedir}/stats"/>
+	<property name="dist" location="${basedir}/bin"/>
+	
+	<target name="clean.all">
+		<ant antfile="./reuse/build.xml" target="clean" inheritall="false" />
+		<ant antfile="./noreuse/build.xml" target="clean" inheritall="false"/>
+		<ant antfile="./cohesiveacyclic/build.xml" target="clean" inheritall="false" />
+	</target>
+	
+	<target name="usage">
+	
+		<echo message=""/>
+		<echo message="Master ModuleReuse Clean Script"/>
+		<echo message="-----------------------------------------"/>
+		<echo message=""/>
+		<echo message="  clean.all    --> Clean the project sub-directories and files created by build script."/>
+		<echo message="-----------------------------------------"/>
+	
+	</target>
+</project>
