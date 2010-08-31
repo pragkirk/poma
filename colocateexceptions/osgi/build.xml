@@ -1,0 +1,126 @@
+<project name="Comp" default="dist" basedir=".">
+
+	<property name="javasrc" location="${basedir}/src/impl"/>
+	<property name="testsrc" location="${basedir}/src/factorytests"/>
+	<property name="build" location="${basedir}/build"/>
+	<property name="bindist" location="${basedir}/bin"/>
+	<property name="deploy" location="${basedir}/deploy"/>
+	<property name="lib" location="${basedir}/lib"/>
+	<property name="springosgilib" location="${basedir}/springosgilib"/>
+	<property name="buildstats" location="${basedir}/buildstats"/>
+	<property name="version" value="1.0"/>
+	
+	<path id="project.class.path">
+		<pathelement path="${javasrc}"/>
+		<pathelement path="${testsrc}"/>
+		<pathelement path="${lib}/junit.jar"/>
+		<pathelement path="${springosgilib}/org.springframework.beans-2.5.6.SEC01.jar"/>
+		<pathelement path="${springosgilib}/org.springframework.context-2.5.6.SEC01.jar"/> 
+		<pathelement path="${springosgilib}/org.springframework.core-2.5.6.SEC01.jar"/>
+		<pathelement path="${springosgilib}/org.eclipse.osgi_3.6.0.v20100517.jar"/>
+		<!-- <pathelement path="${lib}/org.springframework.context.support-3.0.0.RELEASE.jar"/> -->
+		<!-- <pathelement path="${lib}/org.springframework.asm-3.0.0.RELEASE.jar"/> -->
+		<!-- <pathelement path="${springosgilib}/org.springframework.aop-2.5.6.SEC01.jar"/> -->
+		<!-- <pathelement path="${lib}/org.springframework.expression-3.0.0.RELEASE.jar"/> -->
+	</path>
+	
+	<target name="clean" description="clean up">
+		<delete dir="${bindist}"/>
+		<delete dir="${deploy}"/>
+		<delete dir="${build}"/>
+		<delete dir="${buildstats}"/>
+		<delete file="junitresults.txt"/>
+	</target>
+	
+	<target name="init" depends="clean">
+		<tstamp/>
+		<mkdir dir="${build}"/>
+		<mkdir dir="${buildstats}"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac srcdir="${javasrc}:${testsrc}" destdir="${build}">
+			<classpath refid="project.class.path"/>
+		</javac>
+	</target>
+	
+	<target name="dist" depends="compile">
+		<mkdir dir="${bindist}"/>
+		<!-- <mkdir dir="${bindist}/com/extensiblejava/facade"/>
+		<mkdir dir="${bindist}/com/extensiblejava/calculator/test"/> -->
+		<!-- <copy file="${javasrc}/com/extensiblejava/facade/AppContext.xml" todir="${bindist}/com/extensiblejava/facade"/> -->
+		<copy file="${javasrc}/com/extensiblejava/facade/META-INF/spring/loanfacade.xml" todir="${build}/META-INF/spring"/>
+		<copy file="${javasrc}/com/extensiblejava/facade/META-INF/spring/loanfacade-osgi.xml" todir="${build}/META-INF/spring"/>
+		<copy file="${javasrc}/com/extensiblejava/dumbclient/META-INF/spring/loanclient.xml" todir="${build}/META-INF/spring"/>
+		<copy file="${javasrc}/com/extensiblejava/dumbclient/META-INF/spring/loanclient-osgi.xml" todir="${build}/META-INF/spring"/>
+		<copy file="${javasrc}/com/extensiblejava/calculator/META-INF/spring/calculator.xml" todir="${build}/META-INF/spring"/>
+		<copy file="${javasrc}/com/extensiblejava/calculator/META-INF/spring/calculator-osgi.xml" todir="${build}/META-INF/spring"/>
+		<copy file="${javasrc}/com/extensiblejava/loan/impl/META-INF/spring/loan.xml" todir="${build}/META-INF/spring"/>
+		<copy file="${javasrc}/com/extensiblejava/loan/impl/META-INF/spring/loan-osgi.xml" todir="${build}/META-INF/spring"/>
+		
+		<copy file="${testsrc}/com/extensiblejava/calculator/test/TestContext.xml" todir="${build}/com/extensiblejava/calculator/test"/>
+		<copy file="${basedir}/run.sh" todir="${bindist}"/>
+		
+		<jar jarfile="${bindist}/loggerconfig.jar" basedir="${javasrc}" includes = "log4j.properties" manifest="${javasrc}/META-INF/Manifest.mf"/>
+		
+		<jar jarfile="${bindist}/loan-impl-${version}.jar" basedir="${build}" includes = "com/extensiblejava/loan/impl/** META-INF/spring/loan.xml META-INF/spring/loan-osgi.xml" manifest="${javasrc}/com/extensiblejava/loan/impl/META-INF/Manifest.mf"/>
+		<jar jarfile="${bindist}/loan-intrfc-${version}.jar" basedir="${build}" excludes="com/extensiblejava/calculator/test/** com/extensiblejava/calculator/** com/extensiblejava/loan/impl/** com/extensiblejava/loan/factory/impl/** com/extensiblejava/applicant/** com/extensiblejava/facade/** com/extensiblejava/client/** com/extensiblejava/test/** META-INF/spring/**" manifest="${javasrc}/com/extensiblejava/loan/META-INF/Manifest.mf"/>
+		<!-- ><jar jarfile="${bindist}/loan-${version}.jar" basedir="${build}" includes = "com/extensiblejava/loan/** com/extensiblejava/calculator/**" excludes="com/extensiblejava/calculator/test/**"/> -->
+		<jar jarfile="${bindist}/calc-test-${version}.jar" basedir="${build}" includes="com/extensiblejava/calculator/test/**"/>
+		<jar jarfile="${bindist}/calc-impl-${version}.jar" basedir="${build}" includes="com/extensiblejava/calculator/** META-INF/spring/calculator.xml META-INF/spring/calculator-osgi.xml" excludes="com/extensiblejava/calculator/test/**" manifest="${javasrc}/com/extensiblejava/calculator/META-INF/Manifest.mf"/>
+		<jar jarfile="${bindist}/loanfacade-${version}.jar" basedir="${build}" includes="com/extensiblejava/facade/** META-INF/spring/loanfacade.xml META-INF/spring/loanfacade-osgi.xml" manifest="${javasrc}/com/extensiblejava/facade/META-INF/Manifest.mf"/>
+		<jar jarfile="${bindist}/client-${version}.jar" basedir="${build}" includes="com/extensiblejava/client/**"/>
+		<jar jarfile="${bindist}/dclient-${version}.jar" basedir="${build}" includes="com/extensiblejava/dumbclient/** META-INF/spring/loanclient.xml META-INF/spring/loanclient-osgi.xml" manifest="${javasrc}/com/extensiblejava/dumbclient/META-INF/Manifest.mf"/>
+		 
+		<!-- <delete dir="${build}"/> -->
+		<junit printsummary="yes" haltonfailure="yes">
+			<classpath>
+				<pathelement path="${bindist}/loan-intrfc-${version}.jar"/>
+				<pathelement path="${bindist}/loan-impl-${version}.jar"/>
+				<pathelement path="${bindist}/applicant-${version}.jar"/>
+				<pathelement path="${bindist}/calc-impl-${version}.jar"/>
+				<pathelement path="${bindist}/calc-test-${version}.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.beans-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.context-2.5.6.SEC01.jar"/> 
+				<pathelement location="${springosgilib}/org.springframework.core-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.org.apache.commons.logging-1.5.0.jar"/> 
+				<pathelement location="${springosgilib}/com.springsource.slf4j.api-1.5.0.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.log4j-1.5.0.jar"/>
+				<pathelement location="${springosgilib}/log4j.osgi-1.2.15-SNAPSHOT.jar"/>
+				<pathelement path="${lib}/junit.jar"/>
+			</classpath>
+			<test name="com.extensiblejava.calculator.test.AllTests" outfile="junitresults">
+				<formatter type="plain"/>
+			</test>
+		</junit>
+	</target>
+	
+	<target name="analyzer" depends="dist">
+
+        <taskdef name="jaranalyzer" classname="com.kirkk.analyzer.textui.JarAnalyzerTask">
+            <classpath>
+                <pathelement path="${lib}/jaranalyzer-1.2.jar"/>
+                <pathelement path="${lib}/lib/bcel-5.2.jar"/>
+                <pathelement path="${lib}/lib/jakarta-regexp-1.3.jar"/>
+                <pathelement path="${lib}/lib"/>
+            </classpath>
+        </taskdef>
+		<delete file="${bindist}/loan-test-${version}.jar"/>
+        <jaranalyzer srcdir="${bindist}" destfile="${buildstats}/dependencies.xml" 
+				summaryclass="com.kirkk.analyzer.textui.XMLUISummary" />
+				
+		<style in="${buildstats}/dependencies.xml" 
+		       out="${buildstats}/dependencies.html"
+			style="${lib}/jaranalyzer.xsl">	
+		</style>
+
+		<style in="${buildstats}/dependencies.xml" 
+		    out="${buildstats}/dependencies.grph"
+			style="${lib}/jaranalyzer2dot.xsl">	
+		</style>
+
+		<exec executable="/Applications/Graphviz.app/Contents/MacOS/dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./buildstats/dependencies.grph -o ./buildstats/dependencies.png"/></exec>
+
+	</target>
+	
+</project>

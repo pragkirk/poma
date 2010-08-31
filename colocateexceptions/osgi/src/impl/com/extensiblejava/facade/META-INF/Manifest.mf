@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Loan Facade
+Bundle-SymbolicName: loanfacade
+Bundle-Version: 1.0.0
+Export-Package: com.extensiblejava.facade
+Import-Package: com.extensiblejava.loan
+

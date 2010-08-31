@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Loan Interface
+Bundle-SymbolicName: loaninterface
+Bundle-Version: 1.0.0
+Export-Package: com.extensiblejava.loan
+Spring-Context: *;timeout:=30
+

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Loan Client
+Bundle-SymbolicName: loanclient
+Bundle-Version: 1.0.0
+Export-Package: com.extensiblejava.client
+Import-Package: com.extensiblejava.loan,com.extensiblejava.facade
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	
+	<bean name="loanCalculator" class="com.extensiblejava.calculator.MinimumPaymentScheduleCalculator">
+		<constructor-arg ref="paymentFactory"/>
+	</bean>
+	
+	
+</beans>

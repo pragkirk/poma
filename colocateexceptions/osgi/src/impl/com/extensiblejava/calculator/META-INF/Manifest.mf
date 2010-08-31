@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Calculator
+Bundle-SymbolicName: calculator
+Bundle-Version: 1.0.0
+Import-Package: com.extensiblejava.loan
+
