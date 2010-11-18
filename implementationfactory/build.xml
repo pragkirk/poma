@@ -88,7 +88,7 @@
                 <pathelement path="${lib}/lib"/>
             </classpath>
         </taskdef>
-		<delete file="${bindist}/loan-test-${version}.jar"/>
+		<!-- <delete file="${bindist}/loan-test-${version}.jar"/> -->
         <jaranalyzer srcdir="${bindist}" destfile="${buildstats}/dependencies.xml" 
 				summaryclass="com.kirkk.analyzer.textui.XMLUISummary" />
 				
