@@ -21,7 +21,7 @@ public class MinimumPaymentScheduleCalculator implements LoanCalculator {
 		BigDecimal cumulativeInterest = new BigDecimal("0");
 		try {
 			PaymentSchedule paymentSchedule = this.paymentFactory.createPaymentSchedule();
-			BigDecimal adjustedRate = rate.divide(new BigDecimal("1200"), 2, BigDecimal.ROUND_UNNECESSARY);
+			BigDecimal adjustedRate = rate.divide(new BigDecimal("1200"), 2, BigDecimal.ROUND_HALF_UP);
 			MonthlyPaymentCalculator paymentCalculator = new MonthlyPaymentCalculator();
 			BigDecimal monthlyPayment = paymentCalculator.calculatePayment(presentValue, rate, term);
 			BigDecimal loanBalance = new BigDecimal(presentValue.toString());

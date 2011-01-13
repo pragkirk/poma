@@ -1,0 +1,116 @@
+<project name="Comp" default="dist" basedir=".">
+
+	<property environment="env"/>
+	<property name="scala.src" location="${basedir}/src"/>
+	<property name="scala.build" location="${basedir}/build"/>
+	<property name="scala.bin" location="${basedir}/bin"/>
+	<property name="scala.dir" location="${env.SCALA_HOME}"/>
+	<property name="scala.library.jar" location="${scala.dir}/lib/scala-library.jar"/>
+	<property name="scala.compiler.jar" location="${scala.dir}/lib/scala-compiler.jar"/>
+	<property name="java.bin" location="${basedir}/../bin"/>
+	<property name="buildstats" location="${basedir}/buildstats"/>
+	<property name="version" value="1.0"/>
+	
+	<echo message="scala.dir = ${scala.dir}"/>
+	<echo message="scala.bin = ${scala.bin}"/>
+	<echo message="scala.src = ${scalasrc}"/>
+	<echo message="java.bin = ${java.bin}"/>
+	
+	<path id="project.class.path">
+		<pathelement path="${scala.src}"/>
+		<pathelement path="${java.bin}/loan-intrfc-1.0.jar"/>
+		<pathelement path="${java.bin}/loan-impl-1.0.jar"/>
+		<pathelement path="${scala.library.jar}"/>
+		<!-- <pathelement path="${lib}/junit.jar"/> -->
+	</path>
+	
+	<path id="scala.class.path">
+		<pathelement path="${scala.library.jar}"/>
+		<pathelement path="${scala.compiler.jar}"/>
+	</path>
+	
+	<taskdef resource="scala/tools/ant/antlib.xml" classpathref="scala.class.path"/>
+	
+	<target name="clean" description="clean up">
+		<delete dir="${scala.bin}"/>
+		<delete dir="${scala.build}"/>
+		<delete dir="${buildstats}"/>
+		<!-- <delete file="junitresults.txt"/> -->
+	</target>
+	
+	<target name="init" depends="clean">
+		<tstamp/>
+		<mkdir dir="${scala.build}"/>
+		<mkdir dir="${buildstats}"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<scalac srcdir="${scala.src}" destdir="${scala.build}">
+			<classpath refid="project.class.path"/>
+		</scalac>
+	</target>
+	
+	<target name="dist" depends="compile">
+		<mkdir dir="${scala.bin}"/>
+		
+		<copy file="${scala.src}/com/extensiblejava/calculator/scala/META-INF/spring/calculator.xml" todir="${scala.build}/META-INF/spring"/>
+		<copy file="${scala.src}/com/extensiblejava/calculator/scala/META-INF/spring/calculator-osgi.xml" todir="${scala.build}/META-INF/spring"/>
+		<copy file="${basedir}/run.sh" todir="${scala.bin}"/>
+		
+		<!-- <jar jarfile="${bindist}/loggerconfig.jar" basedir="${javasrc}" includes = "log4j.properties" manifest="${javasrc}/META-INF/Manifest.mf"/> -->
+		
+		<jar jarfile="${scala.bin}/calc-impl-scala-${version}.jar" basedir="${scala.build}" includes = "com/extensiblejava/calculator/scala/** META-INF/spring/calculator.xml META-INF/spring/calculator-osgi.xml" manifest="${scala.src}/com/extensiblejava/calculator/scala/META-INF/Manifest.mf"/>
+		
+		<!-- <jar jarfile="${bindist}/loan-intrfc-${version}.jar" basedir="${build}" excludes="com/extensiblejava/calculator/test/** com/extensiblejava/calculator/** com/extensiblejava/loan/impl/** com/extensiblejava/loan/factory/impl/** com/extensiblejava/applicant/** com/extensiblejava/facade/** com/extensiblejava/client/** com/extensiblejava/dumbclient/** com/extensiblejava/test/** META-INF/spring/**" manifest="${javasrc}/com/extensiblejava/loan/META-INF/Manifest.mf"/>
+		 
+		<junit printsummary="yes" haltonfailure="yes">
+			<classpath>
+				<pathelement path="${bindist}/loan-intrfc-${version}.jar"/>
+				<pathelement path="${bindist}/loan-impl-${version}.jar"/>
+				<pathelement path="${bindist}/applicant-${version}.jar"/>
+				<pathelement path="${bindist}/calc-impl-${version}.jar"/>
+				<pathelement path="${bindist}/calc-test-${version}.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.beans-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.context-2.5.6.SEC01.jar"/> 
+				<pathelement location="${springosgilib}/org.springframework.core-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.org.apache.commons.logging-1.5.0.jar"/> 
+				<pathelement location="${springosgilib}/com.springsource.slf4j.api-1.5.0.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.log4j-1.5.0.jar"/>
+				<pathelement location="${springosgilib}/log4j.osgi-1.2.15-SNAPSHOT.jar"/>
+				<pathelement path="${lib}/junit.jar"/>
+			</classpath>
+			<test name="com.extensiblejava.calculator.test.AllTests" outfile="junitresults">
+				<formatter type="plain"/>
+			</test>
+		</junit> -->
+	</target>
+	
+	<target name="analyzer" depends="dist">
+
+        <taskdef name="jaranalyzer" classname="com.kirkk.analyzer.textui.JarAnalyzerTask">
+            <classpath>
+                <pathelement path="${lib}/jaranalyzer-1.2.jar"/>
+                <pathelement path="${lib}/lib/bcel-5.2.jar"/>
+                <pathelement path="${lib}/lib/jakarta-regexp-1.3.jar"/>
+                <pathelement path="${lib}/lib"/>
+            </classpath>
+        </taskdef>
+		<delete file="${bindist}/loan-test-${version}.jar"/>
+        <jaranalyzer srcdir="${bindist}" destfile="${buildstats}/dependencies.xml" 
+				summaryclass="com.kirkk.analyzer.textui.XMLUISummary" />
+				
+		<style in="${buildstats}/dependencies.xml" 
+		       out="${buildstats}/dependencies.html"
+			style="${lib}/jaranalyzer.xsl">	
+		</style>
+
+		<style in="${buildstats}/dependencies.xml" 
+		    out="${buildstats}/dependencies.grph"
+			style="${lib}/jaranalyzer2dot.xsl">	
+		</style>
+
+		<exec executable="/Applications/Graphviz.app/Contents/MacOS/dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./buildstats/dependencies.grph -o ./buildstats/dependencies.png"/></exec>
+
+	</target>
+	
+</project>

@@ -1,3 +1,36 @@
 SAME AS TESTMODULE/INDEPENDENT.
 
 If I put the exception in the same package as MonthlyPaymentScheduleCalculator, it will create a cyclic dependency between calc-impl.jar and loan-intrfc.jar.
+
+To run this sample…
+
+Compile using the build.xml in the osgi directory.
+Navigate to the equinox directory and execute the following commands:
+sh ./start.sh
+
+Once the OSGi console appears, execute the following:
+install file:../bin/loggerconfig.jar
+install file:../bin/loan-intrfc-1.0.jar
+install file:../bin/loan-impl-1.0.jar
+install file:../bin/calc-impl-1.0.jar
+install file:../bin/loanfacade-1.0.jar
+install file:../bin/dclient-1.0.jar
+
+Now start each of the bundles using the bundle id with the following command (start the dclient-1.0.jar bundle last):
+start <bundle-id>
+
+To get the bundle-id, use the following command:
+ss
+
+To see the scala implementation:
+install file:../../scala/lib/org.scala-ide.scala.library_2.8.0.final-p0002.jar
+install file:../../scala/bin/calc-iompl-scala-1.0.jar
+
+Either uninstall or stop the calc-impl-1.0.jar.
+start the calc-impl-scala-1.0.jar using the start <bundle-id> command.
+
+Issue the following commands using the bundle id of dclient-1.0.jar
+stop <bundle-id>
+start<bundle-id>
+
+
