@@ -23,6 +23,7 @@ To get the bundle-id, use the following command:
 ss
 
 To see the scala implementation:
+Navigate to the scala directory and build the sample (the root OSGi sample code must be built first).
 install file:../../scala/lib/org.scala-ide.scala.library_2.8.0.final-p0002.jar
 install file:../../scala/bin/calc-iompl-scala-1.0.jar
 
@@ -32,5 +33,17 @@ start the calc-impl-scala-1.0.jar using the start <bundle-id> command.
 Issue the following commands using the bundle id of dclient-1.0.jar
 stop <bundle-id>
 start<bundle-id>
+
+To see the Groovy implementation:
+Navigate to the groovy directory and build the sample (the root OSGi sample code must be built first).
+install file:../../groovy/lib/groovy-all-2.7.6.jar
+install file:../../groovy/bin/calc-impl-groovy-1.0.jar
+
+Either uninstall or stop both of the other calc-impl JAR files (calc-impl-1.0.jar and the calc-impl-scala-1.0.jar)
+start the calc-impl-groovy-1.0.jar using the start <bundle-id> command.
+
+Issue the following commands using the bundle id of dclient-1.0.jar
+start <bundle-id>
+stop <bundle-id>
 
 
