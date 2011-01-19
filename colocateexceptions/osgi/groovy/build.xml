@@ -1,0 +1,120 @@
+<project name="Comp" default="dist" basedir=".">
+
+	<property environment="env"/>
+	<property name="groovy.src" location="${basedir}/src"/>
+	<property name="groovy.build" location="${basedir}/build"/>
+	<property name="groovy.bin" location="${basedir}/bin"/>
+	<property name="groovy.dir" location="${env.GROOVY_HOME}"/>
+	<property name="groovy.library.jar" location="${groovy.dir}/lib/groovy-1.7.6.jar"/>
+	<property name="java.bin" location="${basedir}/../bin"/>
+	<property name="buildstats" location="${basedir}/buildstats"/>
+	<property name="version" value="1.0"/>
+	
+	<echo message="groovy.dir = ${groovy.dir}"/>
+	<echo message="groovy.bin = ${groovy.bin}"/>
+	<echo message="groovy.src = ${groovy.src}"/>
+	<echo message="groovy lib jar = ${groovy.library.jar}"/>
+	<echo message="java.bin = ${java.bin}"/>
+	
+	<path id="project.class.path">
+		<pathelement path="${groovy.src}"/>
+		<pathelement path="${java.bin}/loan-intrfc-1.0.jar"/>
+		<pathelement path="${java.bin}/loan-impl-1.0.jar"/>
+		<pathelement path="${groovy.library.jar}"/>
+		<pathelement path="${groovy.dir}/lib/asm-3.2.jar"/>
+		<pathelement path="${groovy.dir}/lib/antlr-2.7.7.jar"/>
+		<!-- <pathelement path="${lib}/junit.jar"/> -->
+	</path>
+	
+	<path id="groovy.class.path">
+		<pathelement path="${groovy.library.jar}"/>
+		<pathelement path="${groovy.dir}/lib/commons-cli-1.2.jar"/>
+		<pathelement path="${groovy.dir}/lib/asm-3.2.jar"/>
+		<pathelement path="${groovy.dir}/lib/antlr-2.7.7.jar"/>
+	</path>
+	
+	<taskdef name="groovyc" classname="org.codehaus.groovy.ant.Groovyc" classpathref="groovy.class.path"/>
+	
+	<target name="clean" description="clean up">
+		<delete dir="${groovy.bin}"/>
+		<delete dir="${groovy.build}"/>
+		<delete dir="${buildstats}"/>
+		<!-- <delete file="junitresults.txt"/> -->
+	</target>
+	
+	<target name="init" depends="clean">
+		<tstamp/>
+		<mkdir dir="${groovy.build}"/>
+		<mkdir dir="${buildstats}"/>
+	</target>
+	
+	<target name="compile" depends="init">
+		<groovyc srcdir="${groovy.src}" destdir="${groovy.build}">
+			<classpath refid="project.class.path"/>
+		</groovyc>
+	</target>
+	
+	<target name="dist" depends="compile">
+		<mkdir dir="${groovy.bin}"/>
+		
+		<copy file="${groovy.src}/com/extensiblejava/calculator/groovy/META-INF/spring/calculator.xml" todir="${groovy.build}/META-INF/spring"/>
+		<copy file="${groovy.src}/com/extensiblejava/calculator/groovy/META-INF/spring/calculator-osgi.xml" todir="${groovy.build}/META-INF/spring"/>
+		<copy file="${basedir}/run.sh" todir="${groovy.bin}"/>
+		
+		<!-- <jar jarfile="${bindist}/loggerconfig.jar" basedir="${javasrc}" includes = "log4j.properties" manifest="${javasrc}/META-INF/Manifest.mf"/> -->
+		
+		<jar jarfile="${groovy.bin}/calc-impl-groovy-${version}.jar" basedir="${groovy.build}" includes = "com/extensiblejava/calculator/groovy/** META-INF/spring/calculator.xml META-INF/spring/calculator-osgi.xml" manifest="${groovy.src}/com/extensiblejava/calculator/groovy/META-INF/Manifest.mf"/>
+		
+		<!-- <jar jarfile="${bindist}/loan-intrfc-${version}.jar" basedir="${build}" excludes="com/extensiblejava/calculator/test/** com/extensiblejava/calculator/** com/extensiblejava/loan/impl/** com/extensiblejava/loan/factory/impl/** com/extensiblejava/applicant/** com/extensiblejava/facade/** com/extensiblejava/client/** com/extensiblejava/dumbclient/** com/extensiblejava/test/** META-INF/spring/**" manifest="${javasrc}/com/extensiblejava/loan/META-INF/Manifest.mf"/>
+		 
+		<junit printsummary="yes" haltonfailure="yes">
+			<classpath>
+				<pathelement path="${bindist}/loan-intrfc-${version}.jar"/>
+				<pathelement path="${bindist}/loan-impl-${version}.jar"/>
+				<pathelement path="${bindist}/applicant-${version}.jar"/>
+				<pathelement path="${bindist}/calc-impl-${version}.jar"/>
+				<pathelement path="${bindist}/calc-test-${version}.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.beans-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/org.springframework.context-2.5.6.SEC01.jar"/> 
+				<pathelement location="${springosgilib}/org.springframework.core-2.5.6.SEC01.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.org.apache.commons.logging-1.5.0.jar"/> 
+				<pathelement location="${springosgilib}/com.springsource.slf4j.api-1.5.0.jar"/>
+				<pathelement location="${springosgilib}/com.springsource.slf4j.log4j-1.5.0.jar"/>
+				<pathelement location="${springosgilib}/log4j.osgi-1.2.15-SNAPSHOT.jar"/>
+				<pathelement path="${lib}/junit.jar"/>
+			</classpath>
+			<test name="com.extensiblejava.calculator.test.AllTests" outfile="junitresults">
+				<formatter type="plain"/>
+			</test>
+		</junit> -->
+	</target>
+	
+	<target name="analyzer" depends="dist">
+
+        <taskdef name="jaranalyzer" classname="com.kirkk.analyzer.textui.JarAnalyzerTask">
+            <classpath>
+                <pathelement path="${lib}/jaranalyzer-1.2.jar"/>
+                <pathelement path="${lib}/lib/bcel-5.2.jar"/>
+                <pathelement path="${lib}/lib/jakarta-regexp-1.3.jar"/>
+                <pathelement path="${lib}/lib"/>
+            </classpath>
+        </taskdef>
+		<delete file="${bindist}/loan-test-${version}.jar"/>
+        <jaranalyzer srcdir="${bindist}" destfile="${buildstats}/dependencies.xml" 
+				summaryclass="com.kirkk.analyzer.textui.XMLUISummary" />
+				
+		<style in="${buildstats}/dependencies.xml" 
+		       out="${buildstats}/dependencies.html"
+			style="${lib}/jaranalyzer.xsl">	
+		</style>
+
+		<style in="${buildstats}/dependencies.xml" 
+		    out="${buildstats}/dependencies.grph"
+			style="${lib}/jaranalyzer2dot.xsl">	
+		</style>
+
+		<exec executable="/Applications/Graphviz.app/Contents/MacOS/dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./buildstats/dependencies.grph -o ./buildstats/dependencies.png"/></exec>
+
+	</target>
+	
+</project>

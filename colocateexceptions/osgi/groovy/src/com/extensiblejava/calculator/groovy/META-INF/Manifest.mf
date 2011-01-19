@@ -1,0 +1,56 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Groovy Calculator
+Bundle-SymbolicName: groovy calculator
+Bundle-Version: 1.0.0
+Import-Package: com.extensiblejava.loan,groovy.xml.streamingmarkupsupport;version="1.7.6",groo
+ vy.text;version="1.7.6",groovy.util.slurpersupport;version="1.7.6",or
+ g.codehaus.groovy.tools.groovydoc.gstringTemplates.topLevel;version="
+ 1.7.6",org.codehaus.groovy.tools.gse;version="1.7.6",org.codehaus.gro
+ ovy.tools.shell.util;version="1.7.6",org.codehaus.groovy.syntax;versi
+ on="1.7.6",org.codehaus.groovy.vmplugin;version="1.7.6",groovy.swing.
+ factory;version="1.7.6",groovy.inspect.swingui;version="1.7.6",groovy
+ .io;version="1.7.6",org.codehaus.groovy.runtime.typehandling;version=
+ "1.7.6",groovy.swing.impl;version="1.7.6",groovy.servlet;version="1.7
+ .6",org.codehaus.groovy.control.io;version="1.7.6",org.codehaus.groov
+ y.tools.ast;version="1.7.6",org.codehaus.groovy.ast;version="1.7.6",g
+ roovy.ui;version="1.7.6",org.codehaus.groovy.binding;version="1.7.6",
+ groovy.xml.dom;version="1.7.6",org.codehaus.groovy.tools.groovydoc;ve
+ rsion="1.7.6",groovy.swing;version="1.7.6",org.codehaus.groovy.transf
+ orm.powerassert;version="1.7.6",groovy.beans;version="1.7.6",org.code
+ haus.groovy.runtime.metaclass;version="1.7.6",org.codehaus.groovy.cla
+ ssgen;version="1.7.6",org.codehaus.groovy.runtime.callsite;version="1
+ .7.6",org.codehaus.groovy.reflection.stdclasses;version="1.7.6",groov
+ y.ui.view;version="1.7.6",groovy.jmx.builder;version="1.7.6",org.code
+ haus.groovy.runtime.dgmimpl;version="1.7.6",groovy.grape;version="1.7
+ .6",org.codehaus.groovy.jsr223;version="1.7.6",groovy.sql;version="1.
+ 7.6",org.codehaus.groovy.groovydoc;version="1.7.6",org.codehaus.groov
+ y;version="1.7.6",groovy.swing.binding;version="1.7.6",org.codehaus.g
+ roovy.control.messages;version="1.7.6",org.codehaus.groovy.ast.expr;v
+ ersion="1.7.6",groovy.ui.icons;version="1.7.6",org.codehaus.groovy.as
+ t.stmt;version="1.7.6",org.codehaus.groovy.ant;version="1.7.6",org.co
+ dehaus.groovy.bsf;version="1.7.6",groovy.transform;version="1.7.6",or
+ g.codehaus.groovy.runtime.dgmimpl.arrays;version="1.7.6",org.codehaus
+ .groovy.antlr.java;version="1.7.6",org.codehaus.groovy.ast.builder;ve
+ rsion="1.7.6",groovy.xml;version="1.7.6",org.codehaus.groovy.transfor
+ m;version="1.7.6",groovy.lang;version="1.7.6",groovy.util;version="1.
+ 7.6",org.codehaus.groovy.tools.shell;version="1.7.6",org.codehaus.gro
+ ovy.runtime.wrappers;version="1.7.6",org.codehaus.groovy.tools;versio
+ n="1.7.6",org.codehaus.groovy.vmplugin.v5;version="1.7.6",org.codehau
+ s.groovy.vmplugin.v4;version="1.7.6",org.codehaus.groovy.vmplugin.v6;
+ version="1.7.6",org.codehaus.groovy.tools.xml;version="1.7.6",org.cod
+ ehaus.groovy.antlr.parser;version="1.7.6",groovy.mock.interceptor;ver
+ sion="1.7.6",org.codehaus.groovy.antlr;version="1.7.6",org.codehaus.g
+ roovy.reflection;version="1.7.6",org.codehaus.groovy.tools.groovydoc.
+ gstringTemplates.classLevel;version="1.7.6",org.codehaus.groovy.antlr
+ .treewalker;version="1.7.6",groovy.ui.text;version="1.7.6",org.codeha
+ us.groovy.tools.groovydoc.gstringTemplates.packageLevel;version="1.7.
+ 6",org.codehaus.groovy.control;version="1.7.6",groovy.security;versio
+ n="1.7.6",org.codehaus.groovy.tools.shell.commands;version="1.7.6",or
+ g.codehaus.groovy.runtime;version="1.7.6",groovy.model;version="1.7.6
+ ",groovy.time;version="1.7.6",groovy.inspect;version="1.7.6",org.code
+ haus.groovy.tools.javac;version="1.7.6",org.codehaus.groovy.tools.gro
+ ovydoc.gstringTemplates;version="1.7.6",org.codehaus.groovy.util;vers
+ ion="1.7.6"
+
+
