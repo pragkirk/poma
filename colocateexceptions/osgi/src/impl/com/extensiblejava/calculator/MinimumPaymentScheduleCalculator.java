@@ -17,6 +17,7 @@ public class MinimumPaymentScheduleCalculator implements LoanCalculator {
 	}
 
 	public Loan calculateLoan(BigDecimal presentValue, BigDecimal rate, int term) throws CalculationException {
+		System.out.println("---** IN JAVA CALCULATOR **---");
 		BigDecimal cumulativePrincipal = new BigDecimal("0");
 		BigDecimal cumulativeInterest = new BigDecimal("0");
 		try {

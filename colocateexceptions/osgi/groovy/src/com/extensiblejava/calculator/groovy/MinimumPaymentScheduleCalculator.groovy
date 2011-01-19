@@ -10,6 +10,8 @@ class MinimumPaymentScheduleCalculator implements LoanCalculator {
 	}
 	
 	def Loan calculateLoan(BigDecimal presentValue, BigDecimal rate, int term) {
+	
+		println("---** IN GROOVY CALCULATOR **---")
 
 		def cumulativePrincipal = new BigDecimal("0.00")
 		def cumulativeInterest = new BigDecimal("0.00")
