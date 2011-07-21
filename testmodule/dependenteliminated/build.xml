@@ -21,7 +21,7 @@
 		<mkdir dir="${dist}"/>
 	</target>
 	
-	<target name="basecompile" depends="init">
+	<!-- <target name="basecompile" depends="init">
 		<mkdir dir="${build}"/>
 		<mkdir dir="${buildsrc}"/>
 		<copy todir="${buildsrc}">
@@ -42,27 +42,31 @@
 
 		<delete dir="${buildsrc}"/>
 		<delete dir="${build}"/>
-	</target>
+	</target> -->
 	
-	<target name="billcompile" depends="basecompile">
+	<!-- if building base.jar, depends must be on basecompile, not init -->
+	<target name="billcompile" depends="init">
 		<mkdir dir="${build}"/>
 		<mkdir dir="${buildsrc}"/>
 		<copy todir="${buildsrc}">
 			<fileset dir="${src}">
 				<include name="com/kirkk/bill/**"/>
+				<!-- remove following include to create base.jar module -->
+				<include name="com/kirkk/base/**"/>
 				<exclude name="com/kirkk/cust/**"/>
-				<exclude name="com/kirkk/base/**"/>
+				<!-- exclude these packages to create separate base.jar module -->
+				<!-- <exclude name="com/kirkk/base/**"/> -->
 			</fileset>
 		</copy>
 		
 		<javac srcdir="${buildsrc}" destdir="${build}">
 			<classpath>
 				<pathelement path="${buildsrc}"/>
-				<pathelement path="${dist}/base.jar"/>
+				<!-- <pathelement path="${dist}/base.jar"/> -->
 			</classpath>
 		</javac>
 		
-		<jar jarfile="${dist}/bill.jar" basedir="${build}" includes="com/kirkk/bill/**"/>
+		<jar jarfile="${dist}/billing.jar" basedir="${build}" includes="com/kirkk/bill/** com/kirkk/base/**"/>
 		
 		<delete dir="${buildsrc}"/>
 		<delete dir="${build}"/>
@@ -82,11 +86,11 @@
 		<javac srcdir="${buildsrc}" destdir="${build}">
 			<classpath>
 				<pathelement path="${buildsrc}"/>
-				<pathelement path="${dist}/base.jar"/>
+				<pathelement path="${dist}/billing.jar"/>
 			</classpath>
 		</javac>
 		
-		<jar jarfile="${dist}/cust.jar" basedir="${build}" includes="com/kirkk/cust/**"/>
+		<jar jarfile="${dist}/customer.jar" basedir="${build}" includes="com/kirkk/cust/**"/>
 
 		<delete dir="${buildsrc}"/>
 		<delete dir="${build}"/>
@@ -108,8 +112,8 @@
 			<classpath>
 				<pathelement path="${buildsrc}"/>
 				<pathelement path="${dist}/base.jar"/>
-				<pathelement path="${dist}/cust.jar"/>
-				<pathelement path="${dist}/bill.jar"/>
+				<pathelement path="${dist}/customer.jar"/>
+				<pathelement path="${dist}/billing.jar"/>
 				<pathelement path="${lib}/junit.jar"/>
 			</classpath>
 		</javac>
@@ -118,9 +122,10 @@
 		
 		<junit printsummary="yes" haltonfailure="yes">
 			<classpath>
-				<pathelement path="${dist}/bill.jar"/>
-				<pathelement path="${dist}/cust.jar"/>
-				<pathelement path="${dist}/base.jar"/>
+				<pathelement path="${dist}/billing.jar"/>
+				<pathelement path="${dist}/customer.jar"/>
+				<!-- Can create a base.jar to eliminate dependency between customer.jar and billing.jar -->
+				<!-- <pathelement path="${dist}/base.jar"/> -->
 				<pathelement path="${dist}/billtest.jar"/>
 				<pathelement path="${lib}/junit.jar"/>
 			</classpath>
@@ -156,7 +161,7 @@
 			style="${lib}/jaranalyzer2dot.xsl">	
 		</style>
 
-		<exec executable="/Applications/Graphviz.app/Contents/MacOS/dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./stats/dependencies.grph -o ./stats/dependencies.png"/></exec>
+		<exec executable="dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./stats/dependencies.grph -o ./stats/dependencies.png"/></exec>
 
 	</target>
 	
