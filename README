@@ -1,1 +1,13 @@
 Patterns of Modular Architecture code samples.
+
+You can run the build for each of the pattern samples using ant. Just type the following at command line:
+
+ant -f <nameofbuildfile.xml>
+
+If the name of the build file is build.xml, you can just type ant.
+
+A JarAnalyzer target is included in each of the build scripts, but is not invoked by default. To use JarAnalyzer, you'll need to install GraphVix dot. (www.graphfix.org).
+
+Once GraphVix is installed, you'll need to modify the build script you want to execute to point to dot. After you've done that, you can use the following command:
+
+ant <jaranalyzertarget> -f <nameof buildfile.xml>
