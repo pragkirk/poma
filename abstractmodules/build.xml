@@ -30,7 +30,7 @@
 	</target>
 	
 	<target name="compile" depends="init">
-		<javac srcdir="${javasrc}:${testsrc}" destdir="${build}">
+		<javac srcdir="${javasrc}:${testsrc}" destdir="${build}" includeantruntime="true">
 			<classpath refid="project.class.path"/>
 		</javac>
 	</target>

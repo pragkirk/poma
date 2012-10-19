@@ -11,9 +11,10 @@
 	<property name="buildstats" location="${basedir}/buildstats"/>
 	<property name="version" value="1.0"/>
 	
+	<echo message="scala.home = ${env.SCALA_HOME}"/>
 	<echo message="scala.dir = ${scala.dir}"/>
 	<echo message="scala.bin = ${scala.bin}"/>
-	<echo message="scala.src = ${scalasrc}"/>
+	<echo message="scala.src = ${scala.src}"/>
 	<echo message="java.bin = ${java.bin}"/>
 	
 	<path id="project.class.path">
