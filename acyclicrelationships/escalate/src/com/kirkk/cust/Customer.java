@@ -7,6 +7,14 @@ import com.kirkk.bill.*;
 public class Customer {
 	private List bills;
 
+	public BigDecimal getDiscountAmount() {
+		if (bills.size() > 5) {
+			return new BigDecimal(0.1);
+		} else {
+			return new BigDecimal(0.03);
+		}
+	}
+
 	public List getBills() {
 		return this.bills;
 	}
