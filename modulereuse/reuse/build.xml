@@ -75,7 +75,7 @@
 			style="${lib}/jaranalyzer2dot.xsl">	
 		</style>
 
-		<exec executable="/Applications/Graphviz.app/Contents/MacOS/dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./buildstats/dependencies.grph -o ./buildstats/dependencies.png"/></exec>
+		<exec executable="dot" ><arg line="-Tpng -Nshape=box -Nfontsize=30 -Nwidth=1.5 -Nheight=1.25 ./buildstats/dependencies.grph -o ./buildstats/dependencies.png"/></exec>
 
 	</target>
 	
